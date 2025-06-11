@@ -120,7 +120,7 @@ export class EmailProcessor implements NodeProcessor {
 
     return {
       to: inputs.to,
-      from: inputs.from || nodeData.from || 'noreply@flowsyai.com',
+      from: inputs.from || nodeData.from || 'noreply@example.com',
       subject: inputs.subject,
       body: inputs.body,
       html: inputs.html || this.convertToHtml(inputs.body),

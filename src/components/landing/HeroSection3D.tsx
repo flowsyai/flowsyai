@@ -1,5 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  useScroll,
+  useTransform,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play, Pause, ChevronDown, Sparkles } from 'lucide-react';
 import { useMagneticEffect } from '@/hooks/useMousePosition';
@@ -116,14 +128,14 @@ const HeroSection3D: React.FC = () => {
       </div>
 
       {/* Hero Content */}
-      <motion.div
+      <MotionDiv
         style={{ opacity }}
         className="hero-content max-w-5xl px-6 py-12 md:py-16 z-20 relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, ease: 'easeOut' }}
       >
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
@@ -136,9 +148,9 @@ const HeroSection3D: React.FC = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
 
-        <motion.h1
+        <MotionH1
           ref={headingRef}
           className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold mb-6 md:mb-8 tracking-tight text-center font-serif"
           initial={{ opacity: 0, y: 30 }}
@@ -147,9 +159,9 @@ const HeroSection3D: React.FC = () => {
         >
           <span className="block">Elevate Your</span>
           <span className="premium-gradient-text">Intelligence Integration</span>
-        </motion.h1>
+        </MotionH1>
 
-        <motion.p
+        <MotionP
           ref={subheadingRef}
           className="text-lg sm:text-xl md:text-2xl mb-10 text-muted-foreground max-w-3xl mx-auto leading-relaxed text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -158,9 +170,9 @@ const HeroSection3D: React.FC = () => {
         >
           Experience the sophistication of our premium platform that seamlessly unifies multiple AI
           bots into a single powerful solution, transforming your digital capabilities.
-        </motion.p>
+        </MotionP>
 
-        <motion.div
+        <MotionDiv
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -183,7 +195,7 @@ const HeroSection3D: React.FC = () => {
           >
             View Exclusive Demo
           </Button>
-        </motion.div>
+        </MotionDiv>
 
         {/* Scroll Indicator */}
         <div
@@ -197,7 +209,7 @@ const HeroSection3D: React.FC = () => {
             <ChevronDown className="h-5 w-5 text-gold" />
           </div>
         </div>
-      </motion.div>
+      </MotionDiv>
     </section>
   );
 };

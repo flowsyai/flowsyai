@@ -16,7 +16,7 @@ const randRange = (n: number) => n - rand(2 * n);
 const fadeIn = (t: number, m: number) => t / m;
 const fadeOut = (t: number, m: number) => (m - t) / m;
 const fadeInOut = (t: number, m: number) => {
-  let hm = 0.5 * m;
+  const hm = 0.5 * m;
   return abs((t + hm) % m - hm) / hm;
 };
 
@@ -55,7 +55,7 @@ const PipelineBackground: React.FC<PipelineBackgroundProps> = ({ className = '' 
     const rangeHue = 60;
     const backgroundColor = 'hsla(150,80%,1%,0.95)'; // More transparent
 
-    let center: number[] = [];
+    const center: number[] = [];
     let tick = 0;
     let pipeProps: Float32Array;
 
@@ -75,16 +75,14 @@ const PipelineBackground: React.FC<PipelineBackgroundProps> = ({ className = '' 
     };
 
     const initPipe = (i: number) => {
-      let x, y, direction, speed, life, ttl, width, hue;
-
-      x = rand(canvasA.width);
-      y = center[1];
-      direction = round(rand(1)) ? HALF_PI : TAU - HALF_PI;
-      speed = baseSpeed + rand(rangeSpeed);
-      life = 0;
-      ttl = baseTTL + rand(rangeTTL);
-      width = baseWidth + rand(rangeWidth);
-      hue = baseHue + rand(rangeHue);
+      const x = rand(canvasA.width);
+      const y = center[1];
+      const direction = round(rand(1)) ? HALF_PI : TAU - HALF_PI;
+      const speed = baseSpeed + rand(rangeSpeed);
+      const life = 0;
+      const ttl = baseTTL + rand(rangeTTL);
+      const width = baseWidth + rand(rangeWidth);
+      const hue = baseHue + rand(rangeHue);
 
       pipeProps.set([x, y, direction, speed, life, ttl, width, hue], i);
     };
@@ -121,11 +119,11 @@ const PipelineBackground: React.FC<PipelineBackgroundProps> = ({ className = '' 
       let x = pipeProps[i];
       let y = pipeProps[i2];
       let direction = pipeProps[i3];
-      let speed = pipeProps[i4];
+      const speed = pipeProps[i4];
       let life = pipeProps[i5];
-      let ttl = pipeProps[i6];
-      let width = pipeProps[i7];
-      let hue = pipeProps[i8];
+      const ttl = pipeProps[i6];
+      const width = pipeProps[i7];
+      const hue = pipeProps[i8];
 
       drawPipe(x, y, life, ttl, width, hue);
 

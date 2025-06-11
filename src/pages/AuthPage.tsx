@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -294,7 +304,7 @@ const AuthPage: React.FC = () => {
             </div>
 
             {/* Password Field */}
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <Label htmlFor="password" className="text-foreground font-medium">
                 Password
               </Label>
@@ -321,7 +331,7 @@ const AuthPage: React.FC = () => {
 
               {/* Password Strength Indicator - Only for Register */}
               {!isLogin && password && (
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   className="mt-2"
@@ -337,13 +347,13 @@ const AuthPage: React.FC = () => {
                       {getPasswordStrengthText(passwordStrength)}
                     </span>
                   </div>
-                </motion.div>
+                </MotionDiv>
               )}
-            </motion.div>
+            </MotionDiv>
 
             {/* Confirm Password Field - Only for Register */}
             {!isLogin && (
-              <motion.div
+              <MotionDiv
                 variants={itemVariants}
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
@@ -380,7 +390,7 @@ const AuthPage: React.FC = () => {
 
                 {/* Password Match Indicator */}
                 {confirmPassword && (
-                  <motion.div
+                  <MotionDiv
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="mt-2 flex items-center gap-2"
@@ -396,26 +406,26 @@ const AuthPage: React.FC = () => {
                         <span className="text-xs">Passwords don't match</span>
                       </div>
                     )}
-                  </motion.div>
+                  </MotionDiv>
                 )}
-              </motion.div>
+              </MotionDiv>
             )}
 
             {/* Error Message */}
             {error && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-lg"
               >
                 <AlertCircle className="h-4 w-4 text-red-500" />
                 <span className="text-sm text-red-500">{error}</span>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {/* Terms Checkbox - Only for Register */}
             {!isLogin && (
-              <motion.div
+              <MotionDiv
                 variants={itemVariants}
                 className="flex items-start space-x-3"
                 initial={{ opacity: 0, height: 0 }}
@@ -448,11 +458,11 @@ const AuthPage: React.FC = () => {
                     Privacy Policy
                   </Link>
                 </Label>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {/* Submit Button */}
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <Button
                 type="submit"
                 disabled={isSubmitting || authLoading || (!isLogin && !acceptTerms)}
@@ -464,7 +474,7 @@ const AuthPage: React.FC = () => {
               >
                 <span className="relative z-10 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                   {isSubmitting || authLoading ? (
-                    <motion.div
+                    <MotionDiv
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                       className="w-5 h-5 border-2 border-background border-t-transparent rounded-full"
@@ -487,10 +497,10 @@ const AuthPage: React.FC = () => {
                   )}
                 </span>
               </Button>
-            </motion.div>
+            </MotionDiv>
 
             {/* Additional Links */}
-            <motion.div variants={itemVariants} className="space-y-4">
+            <MotionDiv variants={itemVariants} className="space-y-4">
               {isLogin && (
                 <div className="text-center">
                   <Link
@@ -501,12 +511,12 @@ const AuthPage: React.FC = () => {
                   </Link>
                 </div>
               )}
-            </motion.div>
+            </MotionDiv>
           </form>
         </div>
 
         {/* Footer */}
-        <motion.div variants={itemVariants} className="text-center mt-8">
+        <MotionDiv variants={itemVariants} className="text-center mt-8">
           <p className="text-xs text-muted-foreground">
             By {isLogin ? 'signing in' : 'creating an account'}, you agree to our{' '}
             <Link to="/terms" className="text-primary hover:text-primary/80 transition-colors">
@@ -517,7 +527,7 @@ const AuthPage: React.FC = () => {
               Privacy Policy
             </Link>
           </p>
-        </motion.div>
+        </MotionDiv>
       </div>
     </div>
   );

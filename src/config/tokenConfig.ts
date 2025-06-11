@@ -44,21 +44,21 @@ export interface TokenConfig {
 
 // Main token configuration
 export const FLOWSY_TOKEN_CONFIG: TokenConfig = {
-  // Contract Information (UPDATE WHEN TOKEN IS DEPLOYED)
-  contractAddress: 'DEMO_TOKEN', // Replace with actual Solana token address
+  // Contract Information - REAL TOKEN ADDRESS
+  contractAddress: 'GzfwLWcTyEWcC3D9SeaXQPvfCevjh5xce1iWsPJGpump',
   name: 'FlowsyAI Token',
   symbol: 'FLOWSY',
   decimals: 9,
 
   // Visual Assets
-  logoUrl: '/flowsy-new-logo.png', // Updated to use custom logo from Downloads
+  logoUrl: '/flowsy-new-logo.png',
   bannerImageUrl: '/flowsy-new-logo.png',
 
-  // Trading Links (UPDATE WITH ACTUAL TOKEN ADDRESS)
-  dexScreenerUrl: 'https://dexscreener.com/solana/DEMO_TOKEN',
-  raydiumUrl: 'https://raydium.io/swap/?inputCurrency=sol&outputCurrency=DEMO_TOKEN',
-  jupiterUrl: 'https://jup.ag/swap/SOL-DEMO_TOKEN',
-  solscanUrl: 'https://solscan.io/token/DEMO_TOKEN',
+  // Trading Links - UPDATED WITH REAL TOKEN ADDRESS
+  dexScreenerUrl: 'https://dexscreener.com/solana/GzfwLWcTyEWcC3D9SeaXQPvfCevjh5xce1iWsPJGpump',
+  raydiumUrl: 'https://raydium.io/swap/?inputCurrency=sol&outputCurrency=GzfwLWcTyEWcC3D9SeaXQPvfCevjh5xce1iWsPJGpump',
+  jupiterUrl: 'https://jup.ag/swap/SOL-GzfwLWcTyEWcC3D9SeaXQPvfCevjh5xce1iWsPJGpump',
+  solscanUrl: 'https://solscan.io/token/GzfwLWcTyEWcC3D9SeaXQPvfCevjh5xce1iWsPJGpump',
 
   // Social Links
   website: 'https://flowsyai.com',
@@ -67,19 +67,19 @@ export const FLOWSY_TOKEN_CONFIG: TokenConfig = {
   discord: 'https://discord.gg/FlowsyAI',
 
   // Launch Information
-  launchDate: '2025-02-01', // Update with actual launch date
-  isLaunched: false, // Set to true when token is live
-  isPreLaunch: true, // Set to false after launch
+  launchDate: '2025-01-01', // Updated launch date
+  isLaunched: true, // Token is now live
+  isPreLaunch: false, // No longer pre-launch
 
   // Display Settings
   showInBanner: true,
   showTransactions: true,
   autoRefresh: true,
-  refreshInterval: 60000, // 60 seconds
+  refreshInterval: 30000, // 30 seconds for live data
 
   // API Configuration
-  enableLiveData: false, // Set to true when APIs are configured
-  fallbackToDemo: true, // Show demo data when live data fails
+  enableLiveData: true, // Enable live data feeds
+  fallbackToDemo: false, // Use real data only
 };
 
 // Environment-specific overrides
@@ -88,16 +88,16 @@ export const getTokenConfig = (): TokenConfig => {
 
   // Production overrides
   if (import.meta.env.PROD) {
-    // In production, you might want different settings
+    // In production, use live data with real token address
     config.fallbackToDemo = false;
     config.enableLiveData = true;
   }
 
   // Development overrides
   if (import.meta.env.DEV) {
-    // In development, always use demo data
-    config.enableLiveData = false;
-    config.fallbackToDemo = true;
+    // In development, use live data for real token
+    config.enableLiveData = true;
+    config.fallbackToDemo = false;
   }
 
   return config;

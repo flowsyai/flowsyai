@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Link } from 'react-router-dom';
 import { ArrowRight, Bot, Zap, Layers, Code } from 'lucide-react';
 
@@ -23,7 +34,7 @@ const SimpleLandingPage: React.FC = () => {
         {/* Subtle Animated Dots */}
         <div className="absolute inset-0 z-0 opacity-30">
           {[...Array(5)].map((_, i) => (
-            <motion.div
+            <MotionDiv
               key={i}
               className="absolute rounded-full bg-blue-500"
               style={{
@@ -46,11 +57,11 @@ const SimpleLandingPage: React.FC = () => {
         </div>
 
         <div className="container mx-auto max-w-5xl z-10">
-          <AnimatePresence>
+          <SafeAnimatePresence>
             {isLoaded && (
               <>
                 {/* Logo/Icon */}
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
@@ -63,20 +74,20 @@ const SimpleLandingPage: React.FC = () => {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                </motion.div>
+                </MotionDiv>
 
                 {/* Headline */}
-                <motion.h1
+                <MotionH1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="text-4xl md:text-6xl font-bold text-center mb-6"
                 >
                   Unify Your <span className="text-blue-400">AI Experience</span>
-                </motion.h1>
+                </MotionH1>
 
                 {/* Subheadline */}
-                <motion.p
+                <MotionP
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
@@ -84,10 +95,10 @@ const SimpleLandingPage: React.FC = () => {
                 >
                   Seamlessly integrate multiple AI bots into a single powerful solution to enhance
                   your applications.
-                </motion.p>
+                </MotionP>
 
                 {/* CTA Button */}
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.6 }}
@@ -100,37 +111,37 @@ const SimpleLandingPage: React.FC = () => {
                     Get Started
                     <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                   </Link>
-                </motion.div>
+                </MotionDiv>
               </>
             )}
-          </AnimatePresence>
+          </SafeAnimatePresence>
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.5 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
-          <motion.div
+          <MotionDiv
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="w-6 h-10 border-2 border-slate-500 rounded-full flex justify-center"
           >
-            <motion.div
+            <MotionDiv
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
               className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2"
             />
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       </section>
 
       {/* Features Section */}
       <section className="py-20 bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-6xl">
-          <motion.h2
+          <MotionH2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -138,7 +149,7 @@ const SimpleLandingPage: React.FC = () => {
             className="text-3xl md:text-4xl font-bold text-center mb-16"
           >
             Key Features
-          </motion.h2>
+          </MotionH2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -161,7 +172,7 @@ const SimpleLandingPage: React.FC = () => {
                   'Easy-to-use API and interface for seamless integration with your existing systems.',
               },
             ].map((feature, index) => (
-              <motion.div
+              <MotionDiv
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -174,7 +185,7 @@ const SimpleLandingPage: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
                 <p className="text-slate-300">{feature.description}</p>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </div>
@@ -183,7 +194,7 @@ const SimpleLandingPage: React.FC = () => {
       {/* How It Works Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-6xl">
-          <motion.h2
+          <MotionH2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -191,10 +202,10 @@ const SimpleLandingPage: React.FC = () => {
             className="text-3xl md:text-4xl font-bold text-center mb-16"
           >
             How It Works
-          </motion.h2>
+          </MotionH2>
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -211,9 +222,9 @@ const SimpleLandingPage: React.FC = () => {
                   workflows.
                 </p>
               </div>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -232,7 +243,7 @@ const SimpleLandingPage: React.FC = () => {
                   <p className="text-slate-300 pt-2">{step.text}</p>
                 </div>
               ))}
-            </motion.div>
+            </MotionDiv>
           </div>
         </div>
       </section>
@@ -240,7 +251,7 @@ const SimpleLandingPage: React.FC = () => {
       {/* CTA Section */}
       <section className="py-20 bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-4xl">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -259,7 +270,7 @@ const SimpleLandingPage: React.FC = () => {
               Get Started Now
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
     </div>

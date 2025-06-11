@@ -1,5 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { GlassCard } from '@/components/ui/glass-card';
 
 const DashboardSkeleton: React.FC = () => {
@@ -35,7 +45,7 @@ const DashboardSkeleton: React.FC = () => {
     <div className="min-h-screen w-full relative overflow-hidden premium-hero-bg">
       <div className="relative z-20 container mx-auto px-4 py-8 max-w-screen-xl">
         {/* Welcome Header Skeleton */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -51,10 +61,10 @@ const DashboardSkeleton: React.FC = () => {
             </div>
             <SkeletonBox className="w-40" height="h-10" />
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Token Balance Skeleton */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -69,17 +79,17 @@ const DashboardSkeleton: React.FC = () => {
               </div>
             </div>
           </GlassCard>
-        </motion.div>
+        </MotionDiv>
 
         {/* Stats Overview Skeleton */}
-        <motion.div
+        <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
         >
           {[1, 2, 3, 4].map(i => (
-            <motion.div key={i} variants={itemVariants}>
+            <MotionDiv key={i} variants={itemVariants}>
               <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -90,25 +100,20 @@ const DashboardSkeleton: React.FC = () => {
                   <SkeletonBox className="w-24 mt-2" height="h-4" />
                 </div>
               </GlassCard>
-            </motion.div>
+            </MotionDiv>
           ))}
-        </motion.div>
+        </MotionDiv>
 
         {/* Quick Actions Skeleton */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="mb-8"
-        >
-          <motion.div variants={itemVariants} className="mb-6">
+        <MotionDiv variants={containerVariants} initial="hidden" animate="visible" className="mb-8">
+          <MotionDiv variants={itemVariants} className="mb-6">
             <SkeletonBox className="w-32" height="h-6" />
             <SkeletonBox className="w-64 mt-2" height="h-4" />
-          </motion.div>
+          </MotionDiv>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
-              <motion.div key={i} variants={itemVariants}>
+              <MotionDiv key={i} variants={itemVariants}>
                 <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
                   <div className="p-6">
                     <SkeletonBox className="w-12 h-12 mb-4" />
@@ -116,20 +121,20 @@ const DashboardSkeleton: React.FC = () => {
                     <SkeletonBox className="w-32 mt-2" height="h-4" />
                   </div>
                 </GlassCard>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Recent Activity Skeleton */}
-        <motion.div
+        <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
           {/* Recent Workflows Skeleton */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <div className="flex items-center justify-between mb-4">
               <SkeletonBox className="w-40" height="h-6" />
               <SkeletonBox className="w-20" height="h-8" />
@@ -150,10 +155,10 @@ const DashboardSkeleton: React.FC = () => {
                 ))}
               </div>
             </GlassCard>
-          </motion.div>
+          </MotionDiv>
 
           {/* Recent AI Agents Skeleton */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <div className="flex items-center justify-between mb-4">
               <SkeletonBox className="w-32" height="h-6" />
               <SkeletonBox className="w-24" height="h-8" />
@@ -177,8 +182,8 @@ const DashboardSkeleton: React.FC = () => {
                 ))}
               </div>
             </GlassCard>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       </div>
     </div>
   );

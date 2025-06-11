@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Trophy,
   Star,
@@ -62,9 +73,9 @@ const AchievementNotification: React.FC<AchievementNotificationProps> = ({
   };
 
   return (
-    <AnimatePresence>
+    <SafeAnimatePresence>
       {isVisible && (
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -100, scale: 0.8 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -100, scale: 0.8 }}
@@ -103,9 +114,9 @@ const AchievementNotification: React.FC<AchievementNotificationProps> = ({
               </div>
             </div>
           </GlassCard>
-        </motion.div>
+        </MotionDiv>
       )}
-    </AnimatePresence>
+    </SafeAnimatePresence>
   );
 };
 
@@ -332,7 +343,7 @@ const AchievementSystem: React.FC<AchievementSystemProps> = ({ userStats }) => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {unlockedAchievements.map(achievement => (
-              <motion.div
+              <MotionDiv
                 key={achievement.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -376,7 +387,7 @@ const AchievementSystem: React.FC<AchievementSystemProps> = ({ userStats }) => {
                     </div>
                   </div>
                 </GlassCard>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </div>

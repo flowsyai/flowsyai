@@ -1,5 +1,19 @@
 import React, { useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionH3,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  MotionA,
+  MotionSpan,
+} from '@/lib/motion-wrapper';
+import { useTransform } from '@/lib/motion-hooks';
+
 import { useAnimatedScroll } from '@/hooks/useAnimatedScroll';
 import { ArrowRight } from 'lucide-react';
 
@@ -108,7 +122,7 @@ const AnimatedFeatureCard: React.FC<AnimatedFeatureCardProps> = ({
   const colorClasses = getColorClasses();
 
   return (
-    <motion.div
+    <MotionDiv
       ref={ref as React.RefObject<HTMLDivElement>}
       className={`relative rounded-xl overflow-hidden ${colorClasses.border} ${colorClasses.hover} ${colorClasses.bg} backdrop-blur-sm transition-all duration-500 shadow-lg ${colorClasses.shadow} ${colorClasses.hoverShadow}`}
       initial={{ opacity: 0, y: 50 }}
@@ -129,7 +143,7 @@ const AnimatedFeatureCard: React.FC<AnimatedFeatureCardProps> = ({
       }}
     >
       {/* Animated background gradient */}
-      <motion.div
+      <MotionDiv
         className="absolute inset-0 bg-gradient-radial from-transparent to-transparent opacity-0 transition-opacity duration-500"
         animate={{
           opacity: isHovered ? 0.1 : 0,
@@ -144,7 +158,7 @@ const AnimatedFeatureCard: React.FC<AnimatedFeatureCardProps> = ({
         <div
           className={`w-14 h-14 rounded-lg ${colorClasses.iconBg} ${colorClasses.iconBorder} border flex items-center justify-center mb-6 transform-gpu transition-transform duration-500 ${isHovered ? 'scale-110' : ''}`}
         >
-          <motion.div
+          <MotionDiv
             className={`${colorClasses.iconColor}`}
             animate={{
               rotate: isHovered ? [0, 10, -10, 0] : 0,
@@ -153,11 +167,11 @@ const AnimatedFeatureCard: React.FC<AnimatedFeatureCardProps> = ({
             transition={{ duration: 0.5 }}
           >
             {icon}
-          </motion.div>
+          </MotionDiv>
         </div>
 
         {/* Content */}
-        <motion.h3
+        <MotionH3
           className="text-xl md:text-2xl font-semibold mb-3"
           animate={{
             y: isHovered ? -5 : 0,
@@ -165,9 +179,9 @@ const AnimatedFeatureCard: React.FC<AnimatedFeatureCardProps> = ({
           }}
         >
           {title}
-        </motion.h3>
+        </MotionH3>
 
-        <motion.p
+        <MotionP
           className="text-muted-foreground mb-6"
           animate={{
             opacity: isHovered ? 1 : 0.8,
@@ -175,11 +189,11 @@ const AnimatedFeatureCard: React.FC<AnimatedFeatureCardProps> = ({
           }}
         >
           {description}
-        </motion.p>
+        </MotionP>
 
         {/* Link */}
         {link && (
-          <motion.a
+          <MotionA
             href={link}
             className={`inline-flex items-center ${colorClasses.linkColor} transition-colors duration-300`}
             animate={{
@@ -188,20 +202,20 @@ const AnimatedFeatureCard: React.FC<AnimatedFeatureCardProps> = ({
             }}
           >
             <span>{linkText}</span>
-            <motion.span
+            <MotionSpan
               animate={{
                 x: isHovered ? 5 : 0,
                 transition: { duration: 0.3, delay: 0.1 },
               }}
             >
               <ArrowRight className="ml-2 h-4 w-4" />
-            </motion.span>
-          </motion.a>
+            </MotionSpan>
+          </MotionA>
         )}
       </div>
 
       {/* Corner accent */}
-      <motion.div
+      <MotionDiv
         className={`absolute top-0 right-0 w-20 h-20 ${colorClasses.bg} opacity-0`}
         style={{
           clipPath: 'polygon(100% 0, 0 0, 100% 100%)',
@@ -211,7 +225,7 @@ const AnimatedFeatureCard: React.FC<AnimatedFeatureCardProps> = ({
           transition: { duration: 0.3 },
         }}
       />
-    </motion.div>
+    </MotionDiv>
   );
 };
 

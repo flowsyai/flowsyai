@@ -1,10 +1,10 @@
 {
-  "name": "FlowsyAI",
+  "name": "FlowsyAI Workflow Platform",
   "short_name": "FlowsyAI",
-  "description": "Revolutionary AI-powered workflow automation with AR building capabilities and enterprise-grade features",
+  "description": "Create, manage, and optimize AI-powered workflows with FlowsyAI's advanced automation platform. Build intelligent agents and streamline your processes.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0078FF",
+  "background_color": "#1a1a1a",
   "theme_color": "#0078FF",
   "orientation": "portrait-primary",
   "scope": "/",

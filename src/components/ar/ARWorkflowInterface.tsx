@@ -1,5 +1,16 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Camera,
   X,
@@ -204,7 +215,7 @@ const ARWorkflowInterface: React.FC = () => {
     <div className="absolute inset-0 pointer-events-none">
       {/* AR Nodes */}
       {nodes.map(node => (
-        <motion.div
+        <MotionDiv
           key={node.id}
           className="absolute pointer-events-auto"
           style={{
@@ -233,7 +244,7 @@ const ARWorkflowInterface: React.FC = () => {
           <div className="text-xs text-white text-center mt-1 font-medium bg-black/50 rounded px-2 py-1">
             {node.name}
           </div>
-        </motion.div>
+        </MotionDiv>
       ))}
 
       {/* AR Connections */}
@@ -244,7 +255,7 @@ const ARWorkflowInterface: React.FC = () => {
           if (!sourceNode || !targetNode) return null;
 
           return (
-            <motion.line
+            <MotionLine
               key={connection.id}
               x1={sourceNode.position.x + 32}
               y1={sourceNode.position.y + 32}

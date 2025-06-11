@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import { useInView } from 'react-intersection-observer';
 import {
@@ -226,7 +237,7 @@ const EnhancedInteractiveDemo: React.FC = () => {
 
         {/* Puncte animate în fundal */}
         {[...Array(20)].map((_, i) => (
-          <motion.div
+          <MotionDiv
             key={i}
             className="absolute rounded-full bg-primary/10"
             style={{
@@ -250,16 +261,16 @@ const EnhancedInteractiveDemo: React.FC = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <motion.h2
+          <MotionH2
             className="text-3xl md:text-4xl font-medium mb-4"
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
           >
             Demo interactiv
-          </motion.h2>
+          </MotionH2>
 
-          <motion.p
+          <MotionP
             className="text-lg text-muted-foreground max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -267,7 +278,7 @@ const EnhancedInteractiveDemo: React.FC = () => {
           >
             Experimentează cum platforma noastră integrează multiple sisteme AI pentru a oferi
             răspunsuri comprehensive și inteligente.
-          </motion.p>
+          </MotionP>
         </div>
 
         {/* Interfața demo */}
@@ -295,7 +306,7 @@ const EnhancedInteractiveDemo: React.FC = () => {
                 { id: 'output', label: 'Output', icon: <Sparkles className="w-5 h-5" /> },
               ].map((step, index) => (
                 <React.Fragment key={step.id}>
-                  <motion.button
+                  <MotionButton
                     className={`flex flex-col items-center relative z-10 ${
                       currentStep >= index ? 'text-foreground' : 'text-muted-foreground'
                     }`}
@@ -313,11 +324,11 @@ const EnhancedInteractiveDemo: React.FC = () => {
                       {step.icon}
                     </div>
                     <span className="text-sm">{step.label}</span>
-                  </motion.button>
+                  </MotionButton>
 
                   {index < 4 && (
                     <div className="flex-1 h-1 bg-muted relative z-0">
-                      <motion.div
+                      <MotionDiv
                         className="h-full bg-primary"
                         initial={{ width: 0 }}
                         animate={{ width: currentStep > index ? '100%' : '0%' }}
@@ -331,10 +342,10 @@ const EnhancedInteractiveDemo: React.FC = () => {
 
             {/* Vizualizare demo */}
             <div className="bg-background/50 rounded-lg p-6 mb-8 min-h-[400px]">
-              <AnimatePresence mode="wait">
-                {/* Pasul 1: Input utilizator */}
+              {/* Pasul 1: Input utilizator */}
+              <SafeAnimatePresence>
                 {currentStep >= 0 && (
-                  <motion.div
+                  <MotionDiv
                     key="user-input"
                     className="mb-8"
                     initial={{ opacity: 0, y: 20 }}
@@ -383,12 +394,14 @@ const EnhancedInteractiveDemo: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 )}
+              </SafeAnimatePresence>
 
-                {/* Pasul 2-3: Procesare boți */}
+              {/* Pasul 2-3: Procesare boți */}
+              <SafeAnimatePresence>
                 {currentStep >= 2 && showBotResponses && (
-                  <motion.div
+                  <MotionDiv
                     key="bot-responses"
                     className="mb-8"
                     initial={{ opacity: 0 }}
@@ -397,7 +410,7 @@ const EnhancedInteractiveDemo: React.FC = () => {
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {Object.values(detailedBotResponses).map((bot, idx) => (
-                        <motion.div
+                        <MotionDiv
                           key={bot.name}
                           className={`bg-card/50 border border-border rounded-lg p-4 transition-all duration-300 ${
                             expandedBot === bot.name ? 'col-span-2' : ''
@@ -415,23 +428,25 @@ const EnhancedInteractiveDemo: React.FC = () => {
                             </div>
                             <span className="font-medium">{bot.name}</span>
                             <div className="flex-1"></div>
-                            <motion.div
+                            <MotionDiv
                               animate={{ rotate: expandedBot === bot.name ? 180 : 0 }}
                               transition={{ duration: 0.3 }}
                             >
                               <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                            </motion.div>
+                            </MotionDiv>
                           </div>
                           <p className="text-sm text-muted-foreground">{bot.response}</p>
-                        </motion.div>
+                        </MotionDiv>
                       ))}
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 )}
+              </SafeAnimatePresence>
 
-                {/* Pasul 4-5: Răspuns final integrat */}
+              {/* Pasul 4-5: Răspuns final integrat */}
+              <SafeAnimatePresence>
                 {currentStep >= 4 && showFinalResponse && (
-                  <motion.div
+                  <MotionDiv
                     key="final-response"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -464,9 +479,9 @@ const EnhancedInteractiveDemo: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 )}
-              </AnimatePresence>
+              </SafeAnimatePresence>
             </div>
 
             {/* Controale demo */}

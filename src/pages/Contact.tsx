@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -61,50 +71,50 @@ const Contact: React.FC = () => {
       icon: <Mail className="w-6 h-6" />,
       title: 'Email Support',
       description: 'Get help from our support team',
-      contact: 'support@aiflow.com',
-      action: 'Send Email',
-    },
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: 'Phone Support',
-      description: 'Speak directly with our team',
-      contact: '+1 (555) 123-4567',
-      action: 'Call Now',
+      contact: 'Use the contact form below',
+      action: 'Send Message',
     },
     {
       icon: <MessageSquare className="w-6 h-6" />,
       title: 'Live Chat',
       description: 'Chat with us in real-time',
-      contact: 'Available 24/7',
+      contact: 'Available during business hours',
       action: 'Start Chat',
     },
     {
       icon: <Users className="w-6 h-6" />,
-      title: 'Sales Team',
+      title: 'Business Inquiries',
       description: 'Discuss enterprise solutions',
-      contact: 'sales@aiflow.com',
-      action: 'Contact Sales',
+      contact: 'Use the contact form for business matters',
+      action: 'Contact Team',
+    },
+    {
+      icon: <Globe className="w-6 h-6" />,
+      title: 'Community Support',
+      description: 'Join our community channels',
+      contact: 'Discord & Telegram available',
+      action: 'Join Community',
     },
   ];
 
-  const offices = [
+  const supportChannels = [
     {
-      city: 'San Francisco',
-      address: '123 Innovation Drive, Suite 100',
-      zipCode: 'San Francisco, CA 94105',
-      phone: '+1 (555) 123-4567',
+      name: 'Documentation',
+      description: 'Comprehensive guides and tutorials',
+      availability: 'Available 24/7',
+      icon: <Building className="w-5 h-5" />,
     },
     {
-      city: 'New York',
-      address: '456 Tech Avenue, Floor 25',
-      zipCode: 'New York, NY 10001',
-      phone: '+1 (555) 987-6543',
+      name: 'Community Forum',
+      description: 'Connect with other users',
+      availability: 'Community moderated',
+      icon: <Users className="w-5 h-5" />,
     },
     {
-      city: 'London',
-      address: '789 AI Street, Level 10',
-      zipCode: 'London, UK EC1A 1BB',
-      phone: '+44 20 1234 5678',
+      name: 'Video Tutorials',
+      description: 'Step-by-step video guides',
+      availability: 'On-demand access',
+      icon: <Globe className="w-5 h-5" />,
     },
   ];
 
@@ -125,7 +135,7 @@ const Contact: React.FC = () => {
 
       {/* Main Content */}
       <div className="relative z-10 w-full">
-        <motion.div
+        <MotionDiv
           className="w-full px-4 sm:px-6 lg:px-8 py-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -133,15 +143,15 @@ const Contact: React.FC = () => {
         >
           {/* Header */}
           <div className="text-center mb-16">
-            <motion.h1
+            <MotionH1
               className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-gold to-primary bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               Contact Us
-            </motion.h1>
-            <motion.p
+            </MotionH1>
+            <MotionP
               className="text-xl text-muted-foreground max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -149,13 +159,13 @@ const Contact: React.FC = () => {
             >
               Have questions about AI Flow? We're here to help. Reach out to our team and we'll get
               back to you as soon as possible.
-            </motion.p>
+            </MotionP>
           </div>
 
           {/* Contact Methods */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {contactMethods.map((method, index) => (
-              <motion.div
+              <MotionDiv
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -180,7 +190,7 @@ const Contact: React.FC = () => {
                     </Button>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
 
@@ -188,7 +198,7 @@ const Contact: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -291,12 +301,12 @@ const Contact: React.FC = () => {
                     </form>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </MotionDiv>
             </div>
 
             {/* Contact Info */}
             <div className="lg:col-span-1">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -314,51 +324,53 @@ const Contact: React.FC = () => {
                   <CardContent className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Monday - Friday</span>
-                      <span>9:00 AM - 6:00 PM PST</span>
+                      <span>Business Hours</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Saturday</span>
-                      <span>10:00 AM - 4:00 PM PST</span>
+                      <span className="text-muted-foreground">Weekend</span>
+                      <span>Limited Support</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Sunday</span>
-                      <span>Closed</span>
+                      <span className="text-muted-foreground">Response Time</span>
+                      <span>Within 24 hours</span>
                     </div>
                     <div className="pt-2 border-t border-border-alt">
                       <div className="flex items-center gap-2 text-sm text-primary">
                         <Headphones className="w-4 h-4" />
-                        24/7 Emergency Support Available
+                        Community Support Always Available
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* Office Locations */}
+                {/* Support Resources */}
                 <Card className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <MapPin className="w-5 h-5 text-primary" />
-                      Office Locations
+                      <Headphones className="w-5 h-5 text-primary" />
+                      Support Resources
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    {offices.map((office, index) => (
+                    {supportChannels.map((channel, index) => (
                       <div key={index} className="space-y-1">
-                        <h4 className="font-semibold">{office.city}</h4>
-                        <p className="text-sm text-muted-foreground">{office.address}</p>
-                        <p className="text-sm text-muted-foreground">{office.zipCode}</p>
-                        <p className="text-sm text-primary">{office.phone}</p>
-                        {index < offices.length - 1 && (
+                        <div className="flex items-center gap-2">
+                          {channel.icon}
+                          <h4 className="font-semibold">{channel.name}</h4>
+                        </div>
+                        <p className="text-sm text-muted-foreground">{channel.description}</p>
+                        <p className="text-sm text-primary">{channel.availability}</p>
+                        {index < supportChannels.length - 1 && (
                           <div className="border-b border-border-alt pt-2" />
                         )}
                       </div>
                     ))}
                   </CardContent>
                 </Card>
-              </motion.div>
+              </MotionDiv>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </div>
   );

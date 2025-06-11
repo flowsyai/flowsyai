@@ -9,7 +9,19 @@ import { allAiAgents } from '../data/aiAgents';
 import { NodeConfigModal } from '@/components/workflow/NodeConfigModal';
 import { toast } from 'sonner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  MotionMain,
+} from '@/lib/motion-wrapper';
+import { useScroll, useTransform } from 'framer-motion';
+
 import { Sparkles, Workflow, Zap, Settings, Play, Save } from 'lucide-react';
 import { tsParticles } from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
@@ -664,7 +676,7 @@ const WorkflowStudio = () => {
       {/* Animated Floating Elements */}
       <div className="absolute inset-0 z-10 overflow-hidden">
         {[...Array(8)].map((_, i) => (
-          <motion.div
+          <MotionDiv
             key={i}
             className={`absolute rounded-full backdrop-blur-sm border ${i % 3 === 0 ? 'bg-primary/10 border-primary/20' : i % 3 === 1 ? 'bg-gold/10 border-gold/20' : 'bg-platinum/10 border-platinum/20'}`}
             style={{
@@ -692,7 +704,7 @@ const WorkflowStudio = () => {
       </div>
 
       <div className="relative z-20 min-h-screen flex flex-col">
-        <motion.main
+        <MotionMain
           ref={sectionRef}
           style={{ opacity }}
           className="flex-1 p-4 md:p-6 flex flex-col"
@@ -701,14 +713,14 @@ const WorkflowStudio = () => {
           animate="visible"
         >
           {/* Header Section */}
-          <motion.div variants={itemVariants} className="mb-8">
+          <MotionDiv variants={itemVariants} className="mb-8">
             <div className="flex items-center gap-4 mb-6">
-              <motion.div
+              <MotionDiv
                 className="w-12 h-12 rounded-full premium-glass flex items-center justify-center border border-gold/20 shadow-lg premium-shadow relative overflow-hidden group"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                <motion.div
+                <MotionDiv
                   className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary via-gold to-primary bg-[length:200%_200%] animate-gradient-slow"
                   animate={{
                     scale: [1, 1.1, 1],
@@ -722,8 +734,8 @@ const WorkflowStudio = () => {
                   <div className="w-full h-full flex items-center justify-center">
                     <Workflow className="w-4 h-4 text-background animate-pulse-scale" />
                   </div>
-                </motion.div>
-              </motion.div>
+                </MotionDiv>
+              </MotionDiv>
 
               <div>
                 <h1 className="text-3xl md:text-4xl font-bold text-foreground font-serif">
@@ -734,10 +746,10 @@ const WorkflowStudio = () => {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Controls Section */}
-          <motion.div variants={itemVariants} className="mb-6">
+          <MotionDiv variants={itemVariants} className="mb-6">
             <div className="premium-card p-4 bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl rounded-lg">
               <WorkflowControls
                 flowDirection={flowDirection}
@@ -750,24 +762,21 @@ const WorkflowStudio = () => {
                 onLoadWorkflow={handleLoadWorkflowButtonClick}
               />
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Main Workspace */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-1 gap-4 md:gap-6 overflow-hidden"
-          >
+          <MotionDiv variants={itemVariants} className="flex flex-1 gap-4 md:gap-6 overflow-hidden">
             {/* Agent Palette */}
-            <motion.div
+            <MotionDiv
               className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl rounded-lg overflow-hidden"
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.3 }}
             >
               <AgentPalette onAddNodeToCanvas={onAddNodeToCanvas} />
-            </motion.div>
+            </MotionDiv>
 
             {/* Workflow Canvas */}
-            <motion.div
+            <MotionDiv
               className="flex-1"
               whileHover={{ scale: 1.005 }}
               transition={{ duration: 0.3 }}
@@ -804,8 +813,8 @@ const WorkflowStudio = () => {
                   />
                 </CardContent>
               </Card>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
 
           {/* Node Configuration Modal */}
           <NodeConfigModal
@@ -814,7 +823,7 @@ const WorkflowStudio = () => {
             node={selectedNodeForConfig}
             onSave={handleSaveNodeConfig}
           />
-        </motion.main>
+        </MotionMain>
         <Footer />
       </div>
     </div>

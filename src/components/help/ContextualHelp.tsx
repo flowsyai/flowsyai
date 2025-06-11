@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   HelpCircle,
   X,
@@ -201,7 +212,7 @@ const ContextualHelp: React.FC<ContextualHelpProps> = ({
   if (!isVisible || relevantTips.length === 0) return null;
 
   return (
-    <motion.div
+    <MotionDiv
       initial={{ opacity: 0, x: 300 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 300 }}
@@ -225,7 +236,7 @@ const ContextualHelp: React.FC<ContextualHelpProps> = ({
 
         <CardContent className="space-y-3">
           {relevantTips.map(tip => (
-            <motion.div
+            <MotionDiv
               key={tip.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -303,7 +314,7 @@ const ContextualHelp: React.FC<ContextualHelpProps> = ({
                   </CollapsibleContent>
                 </Collapsible>
               )}
-            </motion.div>
+            </MotionDiv>
           ))}
 
           {relevantTips.length === 0 && (
@@ -314,7 +325,7 @@ const ContextualHelp: React.FC<ContextualHelpProps> = ({
           )}
         </CardContent>
       </Card>
-    </motion.div>
+    </MotionDiv>
   );
 };
 

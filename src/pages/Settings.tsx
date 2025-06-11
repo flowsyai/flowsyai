@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -108,7 +118,7 @@ const Settings: React.FC = () => {
 
       {/* Main Content */}
       <div className="relative z-10 w-full">
-        <motion.div
+        <MotionDiv
           className="w-full px-4 sm:px-6 lg:px-8 py-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -141,7 +151,7 @@ const Settings: React.FC = () => {
                 <CardContent className="p-0">
                   <nav className="space-y-1">
                     {settingsTabs.map(tab => (
-                      <motion.button
+                      <MotionButton
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
                         className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg transition-all duration-200 ${
@@ -179,7 +189,7 @@ const Settings: React.FC = () => {
                         {tab.premium && (
                           <div className="w-2 h-2 bg-gold rounded-full animate-pulse" />
                         )}
-                      </motion.button>
+                      </MotionButton>
                     ))}
                   </nav>
                 </CardContent>
@@ -188,7 +198,7 @@ const Settings: React.FC = () => {
 
             {/* Content Area */}
             <div className="xl:col-span-3">
-              <motion.div
+              <MotionDiv
                 key={activeTab}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -285,7 +295,7 @@ const Settings: React.FC = () => {
                         <Input
                           id="email"
                           type="email"
-                          defaultValue="john.doe@example.com"
+                          defaultValue="user@example.com"
                           className="bg-background/50"
                         />
                       </div>
@@ -366,10 +376,10 @@ const Settings: React.FC = () => {
                     </CardContent>
                   </Card>
                 )}
-              </motion.div>
+              </MotionDiv>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </div>
   );

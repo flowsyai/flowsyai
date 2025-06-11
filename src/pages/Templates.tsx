@@ -30,7 +30,19 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  MotionMain,
+} from '@/lib/motion-wrapper';
+import { useScroll, useTransform } from 'framer-motion';
+
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import {
@@ -355,7 +367,7 @@ const Templates = () => {
       {/* Animated Floating Elements */}
       <div className="absolute inset-0 z-10 overflow-hidden">
         {[...Array(10)].map((_, i) => (
-          <motion.div
+          <MotionDiv
             key={i}
             className={`absolute rounded-full backdrop-blur-sm border ${i % 3 === 0 ? 'bg-primary/10 border-primary/20' : i % 3 === 1 ? 'bg-gold/10 border-gold/20' : 'bg-platinum/10 border-platinum/20'}`}
             style={{
@@ -383,7 +395,7 @@ const Templates = () => {
       </div>
 
       <div className="relative z-20 min-h-screen flex flex-col">
-        <motion.main
+        <MotionMain
           ref={sectionRef}
           style={{ opacity }}
           className="flex-1"
@@ -394,19 +406,19 @@ const Templates = () => {
         >
           <section className="container mx-auto px-4 py-12 md:py-16 max-w-screen-xl">
             {/* Header Section */}
-            <motion.div
+            <MotionDiv
               className="mb-12 text-center"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
               <div className="flex items-center justify-center gap-4 mb-6">
-                <motion.div
+                <MotionDiv
                   className="w-16 h-16 rounded-full premium-glass flex items-center justify-center border border-gold/20 shadow-lg premium-shadow relative overflow-hidden group"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
-                  <motion.div
+                  <MotionDiv
                     className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary via-gold to-primary bg-[length:200%_200%] animate-gradient-slow"
                     animate={{
                       scale: [1, 1.1, 1],
@@ -420,8 +432,8 @@ const Templates = () => {
                     <div className="w-full h-full flex items-center justify-center">
                       <Layout className="w-5 h-5 text-background animate-pulse-scale" />
                     </div>
-                  </motion.div>
-                </motion.div>
+                  </MotionDiv>
+                </MotionDiv>
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground font-serif">
@@ -431,10 +443,10 @@ const Templates = () => {
                 Choose from our curated collection of premium AI workflow templates or create your
                 own masterpiece from scratch.
               </p>
-            </motion.div>
+            </MotionDiv>
 
             {/* Search and Filters Section */}
-            <motion.div
+            <MotionDiv
               className="mb-12"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -462,7 +474,7 @@ const Templates = () => {
                     </Label>
                     <div className="flex flex-wrap gap-3">
                       {allCategories.map(category => (
-                        <motion.div
+                        <MotionDiv
                           key={category}
                           className="flex items-center space-x-2"
                           whileHover={{ scale: 1.05 }}
@@ -480,7 +492,7 @@ const Templates = () => {
                           >
                             {category}
                           </Label>
-                        </motion.div>
+                        </MotionDiv>
                       ))}
                     </div>
                     {selectedCategories.length > 0 && (
@@ -515,9 +527,9 @@ const Templates = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div
+            <MotionDiv
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
               variants={containerVariants}
               initial="hidden"
@@ -525,7 +537,7 @@ const Templates = () => {
             >
               {/* Featured Templates Section */}
               {filteredTemplates.some(t => t.featured) && (
-                <motion.div
+                <MotionDiv
                   className="col-span-1 md:col-span-2 lg:col-span-3 mb-2"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -539,7 +551,7 @@ const Templates = () => {
                     {filteredTemplates
                       .filter(t => t.featured)
                       .map(template => (
-                        <motion.div key={template.id} variants={itemVariants} className="h-full">
+                        <MotionDiv key={template.id} variants={itemVariants} className="h-full">
                           <GlassCard
                             className="h-full flex flex-col relative"
                             icon={
@@ -583,17 +595,17 @@ const Templates = () => {
                               </div>
                             </div>
                           </GlassCard>
-                        </motion.div>
+                        </MotionDiv>
                       ))}
                   </div>
-                </motion.div>
+                </MotionDiv>
               )}
 
               {/* All Templates */}
               {filteredTemplates
                 .filter(t => !t.featured)
                 .map(template => (
-                  <motion.div key={template.id} variants={itemVariants} className="h-full">
+                  <MotionDiv key={template.id} variants={itemVariants} className="h-full">
                     <GlassCard
                       className="h-full flex flex-col relative"
                       icon={
@@ -637,11 +649,11 @@ const Templates = () => {
                         </div>
                       </div>
                     </GlassCard>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
 
               {/* Create Custom Template Card */}
-              <motion.div variants={itemVariants} className="h-full">
+              <MotionDiv variants={itemVariants} className="h-full">
                 <GlassCard className="h-full flex flex-col items-center justify-center p-8 text-center">
                   <div className="p-4 bg-primary/10 rounded-full mb-5 group-hover:bg-primary/20 transition-colors">
                     <PlusCircle className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
@@ -662,10 +674,10 @@ const Templates = () => {
                     <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
                   </Button>
                 </GlassCard>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           </section>
-        </motion.main>
+        </MotionMain>
         <Footer />
       </div>
     </div>

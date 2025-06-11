@@ -1,5 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Bot, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useComingSoon } from '@/hooks/useComingSoon';
@@ -15,7 +25,7 @@ const MinimalistHero: React.FC = () => {
 
       <div className="container mx-auto px-6 z-10 flex flex-col items-center text-center">
         {/* Logo */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -28,20 +38,20 @@ const MinimalistHero: React.FC = () => {
               className="w-full h-full object-contain"
             />
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Title */}
-        <motion.h1
+        <MotionH1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-5xl md:text-7xl font-bold mb-6 text-foreground font-serif"
         >
           Bot Architect <span className="premium-gradient-text">Studio</span>
-        </motion.h1>
+        </MotionH1>
 
         {/* Subtitle */}
-        <motion.p
+        <MotionP
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -49,10 +59,10 @@ const MinimalistHero: React.FC = () => {
         >
           Build powerful AI workflows visually. Drag, drop, and connect AI agents to create
           intelligent automation pipelines.
-        </motion.p>
+        </MotionP>
 
         {/* Social Proof & Urgency */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -70,10 +80,10 @@ const MinimalistHero: React.FC = () => {
               🚀 <strong className="text-foreground">Free trial</strong> - No credit card required
             </span>
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* CTA Buttons - Discovery Phase */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -95,28 +105,28 @@ const MinimalistHero: React.FC = () => {
           >
             View Pricing
           </Button>
-        </motion.div>
+        </MotionDiv>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
       >
-        <motion.div
+        <MotionDiv
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center"
         >
-          <motion.div
+          <MotionDiv
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             className="w-1 h-3 bg-primary/50 rounded-full mt-2"
           />
-        </motion.div>
-      </motion.div>
+        </MotionDiv>
+      </MotionDiv>
     </section>
   );
 };

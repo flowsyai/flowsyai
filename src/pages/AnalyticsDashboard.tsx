@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   BarChart3,
   TrendingUp,
@@ -177,14 +187,14 @@ const AnalyticsDashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <motion.div
+        <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="space-y-8"
         >
           {/* Header */}
-          <motion.div
+          <MotionDiv
             variants={itemVariants}
             className="flex flex-col md:flex-row md:items-center justify-between gap-4"
           >
@@ -225,10 +235,10 @@ const AnalyticsDashboard: React.FC = () => {
                 Export
               </Button>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Overview Stats */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
               <StatCard
                 title="Total Workflows"
@@ -273,10 +283,10 @@ const AnalyticsDashboard: React.FC = () => {
                 icon={Users}
               />
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Real-time Status */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
@@ -314,12 +324,12 @@ const AnalyticsDashboard: React.FC = () => {
                 </div>
               </div>
             </GlassCard>
-          </motion.div>
+          </MotionDiv>
 
           {/* Charts Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Executions Over Time */}
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
                 <div className="p-6">
                   <h3 className="text-lg font-bold text-foreground mb-4">Executions Over Time</h3>
@@ -378,10 +388,10 @@ const AnalyticsDashboard: React.FC = () => {
                   </div>
                 </div>
               </GlassCard>
-            </motion.div>
+            </MotionDiv>
 
             {/* Agent Usage Distribution */}
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
                 <div className="p-6">
                   <h3 className="text-lg font-bold text-foreground mb-4">
@@ -417,11 +427,11 @@ const AnalyticsDashboard: React.FC = () => {
                   </div>
                 </div>
               </GlassCard>
-            </motion.div>
+            </MotionDiv>
           </div>
 
           {/* Workflow Performance Table */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
@@ -504,10 +514,10 @@ const AnalyticsDashboard: React.FC = () => {
                 </div>
               </div>
             </GlassCard>
-          </motion.div>
+          </MotionDiv>
 
           {/* AI Insights */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-6">
@@ -552,8 +562,8 @@ const AnalyticsDashboard: React.FC = () => {
                 </div>
               </div>
             </GlassCard>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       </div>
     </div>
   );

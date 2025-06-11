@@ -1,5 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useMemo } from 'react';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Play,
   ArrowRight,
@@ -174,6 +185,7 @@ const InteractiveTutorial: React.FC<InteractiveTutorialProps> = ({
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set());
   const [highlightedElement, setHighlightedElement] = useState<Element | null>(null);
+  const [elementRect, setElementRect] = useState<DOMRect | null>(null);
 
   const steps = tutorialSteps[tutorialType] || tutorialSteps.beginner;
   const currentStepData = steps[currentStep];
@@ -185,10 +197,16 @@ const InteractiveTutorial: React.FC<InteractiveTutorialProps> = ({
     const element = document.querySelector(currentStepData.target);
     if (element) {
       setHighlightedElement(element);
+      // Cache the element's position to avoid forced reflows during render
+      const rect = element.getBoundingClientRect();
+      setElementRect(rect);
       element.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    return () => setHighlightedElement(null);
+    return () => {
+      setHighlightedElement(null);
+      setElementRect(null);
+    };
   }, [currentStep, isOpen, currentStepData?.target]);
 
   const handleNext = () => {
@@ -218,26 +236,25 @@ const InteractiveTutorial: React.FC<InteractiveTutorialProps> = ({
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
+    <SafeAnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         {/* Overlay with highlight */}
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm">
-          {highlightedElement && (
+          {highlightedElement && elementRect && (
             <div
-              className="absolute border-2 border-primary rounded-lg shadow-lg"
+              className="absolute border-2 border-primary rounded-lg shadow-lg pointer-events-none"
               style={{
-                top: highlightedElement.getBoundingClientRect().top - 4,
-                left: highlightedElement.getBoundingClientRect().left - 4,
-                width: highlightedElement.getBoundingClientRect().width + 8,
-                height: highlightedElement.getBoundingClientRect().height + 8,
-                pointerEvents: 'none',
+                top: elementRect.top - 4,
+                left: elementRect.left - 4,
+                width: elementRect.width + 8,
+                height: elementRect.height + 8,
               }}
             />
           )}
         </div>
 
         {/* Tutorial Card */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -324,9 +341,9 @@ const InteractiveTutorial: React.FC<InteractiveTutorialProps> = ({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </MotionDiv>
       </div>
-    </AnimatePresence>
+    </SafeAnimatePresence>
   );
 };
 

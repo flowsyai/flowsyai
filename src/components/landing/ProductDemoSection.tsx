@@ -1,5 +1,16 @@
 import React, { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+import { useInView } from 'framer-motion';
+
 import { Button } from '@/components/ui/button';
 import { Play, Pause, ArrowRight, Monitor, Smartphone, Tablet } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -72,32 +83,32 @@ const ProductDemoSection: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background z-0"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
+        <MotionDiv
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
           className="text-center mb-16"
         >
-          <motion.div variants={itemVariants} className="mb-4">
+          <MotionDiv variants={itemVariants} className="mb-4">
             <span className="px-4 py-1.5 text-xs font-medium rounded-full border border-primary/30 text-primary bg-primary/10 inline-block">
               VISUAL SHOWCASE
             </span>
-          </motion.div>
-          <motion.h2
+          </MotionDiv>
+          <MotionH2
             variants={itemVariants}
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground font-serif"
           >
             Experience the <span className="text-primary">Power</span>
-          </motion.h2>
-          <motion.p
+          </MotionH2>
+          <MotionP
             variants={itemVariants}
             className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto"
           >
             See our platform in action with these interactive demonstrations
-          </motion.p>
-        </motion.div>
+          </MotionP>
+        </MotionDiv>
 
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -125,7 +136,7 @@ const ProductDemoSection: React.FC = () => {
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-primary/20 backdrop-blur-sm p-6 rounded-full text-white hover:bg-primary/40 transition-all duration-300 border border-primary/30 group"
               aria-label={isVideoPlaying ? 'Pause demo video' : 'Play demo video'}
             >
-              <motion.div
+              <MotionDiv
                 animate={{ scale: isVideoPlaying ? 1 : [1, 1.1, 1] }}
                 transition={{ duration: 2, repeat: isVideoPlaying ? 0 : Infinity }}
               >
@@ -134,7 +145,7 @@ const ProductDemoSection: React.FC = () => {
                 ) : (
                   <Play size={30} className="group-hover:translate-x-0.5 transition-transform" />
                 )}
-              </motion.div>
+              </MotionDiv>
             </button>
 
             {/* Video Caption */}
@@ -144,10 +155,10 @@ const ProductDemoSection: React.FC = () => {
               </p>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Responsive Design Showcase */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -198,9 +209,9 @@ const ProductDemoSection: React.FC = () => {
               </div>
             </TabsContent>
           </Tabs>
-        </motion.div>
+        </MotionDiv>
 
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.7 }}
@@ -223,7 +234,7 @@ const ProductDemoSection: React.FC = () => {
               </span>
             </a>
           </Button>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

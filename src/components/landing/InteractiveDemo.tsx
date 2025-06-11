@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import { useAnimatedScroll } from '@/hooks/useAnimatedScroll';
 import {
@@ -161,7 +172,7 @@ const InteractiveDemo: React.FC = () => {
 
         {/* Animated dots */}
         {[...Array(30)].map((_, i) => (
-          <motion.div
+          <MotionDiv
             key={i}
             className="absolute rounded-full bg-primary/20"
             style={{
@@ -185,7 +196,7 @@ const InteractiveDemo: React.FC = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <motion.h2
+          <MotionH2
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -193,9 +204,9 @@ const InteractiveDemo: React.FC = () => {
           >
             <span className="block">See Our Platform</span>
             <span className="premium-gradient-text">In Action</span>
-          </motion.h2>
+          </MotionH2>
 
-          <motion.p
+          <MotionP
             className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -203,7 +214,7 @@ const InteractiveDemo: React.FC = () => {
           >
             Experience how our platform seamlessly integrates multiple AI bots to deliver
             comprehensive, intelligent responses.
-          </motion.p>
+          </MotionP>
         </div>
 
         {/* Demo Interface */}
@@ -227,7 +238,7 @@ const InteractiveDemo: React.FC = () => {
               <div className="absolute top-4 left-0 w-full h-0.5 bg-border -z-10"></div>
 
               {demoSteps.map((step, index) => (
-                <motion.div
+                <MotionDiv
                   key={step.id}
                   className={`flex flex-col items-center cursor-pointer relative z-10 ${
                     index <= currentStep ? `text-${step.color}` : 'text-muted-foreground'
@@ -236,7 +247,7 @@ const InteractiveDemo: React.FC = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <motion.div
+                  <MotionDiv
                     className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
                       index <= currentStep
                         ? `bg-${step.color}/20 border border-${step.color}/50`
@@ -257,18 +268,18 @@ const InteractiveDemo: React.FC = () => {
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
                     {index < currentStep ? <CheckCircle2 className="w-4 h-4" /> : step.icon}
-                  </motion.div>
+                  </MotionDiv>
                   <span className="text-xs text-center hidden md:block">{step.title}</span>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
 
             {/* Demo Visualization */}
             <div className="bg-background/50 rounded-lg p-6 mb-8 min-h-[300px]">
               {/* Step 1: User Input */}
-              <AnimatePresence mode="wait">
+              <SafeAnimatePresence>
                 {currentStep >= 0 && (
-                  <motion.div
+                  <MotionDiv
                     key="user-input"
                     className="mb-8"
                     initial={{ opacity: 0, y: 20 }}
@@ -301,6 +312,7 @@ const InteractiveDemo: React.FC = () => {
                           {sampleQueries.map((query, idx) => (
                             <button
                               key={idx}
+                              type="button"
                               className={`text-xs px-2 py-1 rounded-full border ${
                                 query === selectedQuery
                                   ? 'border-primary bg-primary/10 text-primary'
@@ -314,12 +326,14 @@ const InteractiveDemo: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 )}
+              </SafeAnimatePresence>
 
-                {/* Step 2-3: Bot Processing */}
+              {/* Step 2-3: Bot Processing */}
+              <SafeAnimatePresence>
                 {currentStep >= 2 && showBotResponses && (
-                  <motion.div
+                  <MotionDiv
                     key="bot-responses"
                     className="mb-8"
                     initial={{ opacity: 0 }}
@@ -328,7 +342,7 @@ const InteractiveDemo: React.FC = () => {
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {Object.entries(botResponses).map(([botName, response], idx) => (
-                        <motion.div
+                        <MotionDiv
                           key={botName}
                           className="bg-card/50 border border-border rounded-lg p-4"
                           initial={{ opacity: 0, y: 20 }}
@@ -347,22 +361,24 @@ const InteractiveDemo: React.FC = () => {
                           </div>
                           <p className="text-sm text-muted-foreground">{response}</p>
                           <div className="mt-2 h-1 w-full bg-muted overflow-hidden rounded-full">
-                            <motion.div
+                            <MotionDiv
                               className={`h-full bg-${idx % 2 === 0 ? 'primary' : 'gold'}`}
                               initial={{ width: '0%' }}
                               animate={{ width: '100%' }}
                               transition={{ duration: 1.5 }}
                             />
                           </div>
-                        </motion.div>
+                        </MotionDiv>
                       ))}
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 )}
+              </SafeAnimatePresence>
 
-                {/* Step 5: Final Response */}
+              {/* Step 5: Final Response */}
+              <SafeAnimatePresence>
                 {currentStep >= 4 && showFinalResponse && (
-                  <motion.div
+                  <MotionDiv
                     key="final-response"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -383,9 +399,9 @@ const InteractiveDemo: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 )}
-              </AnimatePresence>
+              </SafeAnimatePresence>
             </div>
 
             {/* Demo Controls */}

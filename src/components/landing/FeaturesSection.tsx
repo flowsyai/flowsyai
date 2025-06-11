@@ -1,88 +1,11 @@
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { MotionDiv } from '@/lib/motion-wrapper';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
 
-// Feature icons as SVG components for better animations
-const FeatureIcon1 = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-10 h-10"
-  >
-    <circle cx="12" cy="12" r="10" />
-    <path d="M12 8v8" />
-    <path d="M8 12h8" />
-  </svg>
-);
-
-const FeatureIcon2 = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-10 h-10"
-  >
-    <rect width="18" height="18" x="3" y="3" rx="2" />
-    <path d="M7 7h.01" />
-    <path d="M17 7h.01" />
-    <path d="M7 17h.01" />
-    <path d="M17 17h.01" />
-    <path d="M7 12h10" />
-  </svg>
-);
-
-const FeatureIcon3 = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-10 h-10"
-  >
-    <path d="M12 2a10 10 0 1 0 10 10H12V2Z" />
-    <path d="M21 12a9 9 0 0 0-9-9" />
-  </svg>
-);
-
-const FeatureIcon4 = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-10 h-10"
-  >
-    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-    <polyline points="14 2 14 8 20 8" />
-    <path d="M12 18v-6" />
-    <path d="M8 18v-1" />
-    <path d="M16 18v-3" />
-  </svg>
-);
+// Feature icons removed - not currently used
 
 // Animation variants
 const containerVariants = {
@@ -111,93 +34,46 @@ const FeaturesSection: React.FC = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.2 });
 
-  const features = [
-    // Feature cards removed as requested - keeping the component structure for future use
-  ];
+  // Feature cards array - currently empty but keeping structure for future use
+  const features: Array<{
+    title: string;
+    description: string;
+    icon: React.ReactNode;
+    color: string;
+    bgColor: string;
+    borderColor: string;
+    path: string;
+  }> = [];
 
-  // Detailed use cases for the carousel
-  const useCases = [
-    {
-      title: 'Customer Support Automation',
-      description:
-        'Build an AI-powered support system that handles routine inquiries, routes complex issues to the right team, and learns from each interaction.',
-      image:
-        'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    },
-    {
-      title: 'Data Processing Pipeline',
-      description:
-        'Create workflows that automatically collect, clean, and analyze data from multiple sources, generating insights and reports without manual intervention.',
-      image:
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    },
-    {
-      title: 'Content Creation Assistant',
-      description:
-        'Deploy AI agents that help generate content drafts, suggest improvements, and maintain consistent brand voice across all your channels.',
-      image:
-        'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    },
-  ];
+  // Use cases removed - not currently used
 
   return (
-    <section
-      id="features"
-      ref={ref}
-      className="py-24 md:py-32 relative overflow-hidden premium-hero-bg"
-    >
-      {/* Background Elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-sapphire/10 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 w-full h-96 bg-gradient-to-t from-gold/10 to-transparent"></div>
-        <motion.div
-          className="absolute -left-64 top-1/4 w-96 h-96 rounded-full bg-primary/15 blur-3xl"
-          animate={{
-            x: [0, 50, 0],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            repeatType: 'reverse',
-          }}
-        ></motion.div>
-        <motion.div
-          className="absolute -right-64 bottom-1/4 w-96 h-96 rounded-full bg-gold/15 blur-3xl"
-          animate={{
-            x: [0, -50, 0],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            repeatType: 'reverse',
-          }}
-        ></motion.div>
-      </div>
+    <section id="features" ref={ref} className="py-24 md:py-32 relative overflow-hidden">
+      {/* Subtle overlay for text readability */}
+      <div className="absolute inset-0 bg-background/10 z-[5]"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={containerVariants}
+        <MotionDiv
+          initial={containerVariants.hidden}
+          animate={isInView ? containerVariants.visible : containerVariants.hidden}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20"
         >
           {features.map((feature, index) => (
-            <motion.div
+            <MotionDiv
               key={index}
-              variants={itemVariants}
+              initial={itemVariants.hidden}
+              animate={isInView ? itemVariants.visible : itemVariants.hidden}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
               className={`premium-card group p-8 ${feature.bgColor} border ${feature.borderColor} relative overflow-hidden`}
             >
-              <motion.div
+              <MotionDiv
                 className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out`}
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 0.1 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br opacity-20"></div>
                 <div className="h-full w-full bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.2),rgba(255,255,255,0))]"></div>
-              </motion.div>
+              </MotionDiv>
 
               <div
                 className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-8 text-white bg-gradient-to-r ${feature.color} group-hover:scale-110 transition-transform duration-500 premium-shadow`}
@@ -227,12 +103,12 @@ const FeaturesSection: React.FC = () => {
                   </Link>
                 </Button>
               </div>
-            </motion.div>
+            </MotionDiv>
           ))}
-        </motion.div>
+        </MotionDiv>
 
         {/* CTA Section */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -256,7 +132,7 @@ const FeaturesSection: React.FC = () => {
               </span>
             </Button>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

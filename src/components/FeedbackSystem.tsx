@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   MessageSquare,
   Star,
@@ -163,14 +174,14 @@ const FeedbackSystem: React.FC<FeedbackSystemProps> = ({
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
-      <motion.div
+    <SafeAnimatePresence>
+      <MotionDiv
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
       >
-        <motion.div
+        <MotionDiv
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -218,7 +229,7 @@ const FeedbackSystem: React.FC<FeedbackSystemProps> = ({
 
               {/* Step 1: Feedback Type */}
               {step === 1 && (
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
@@ -229,7 +240,7 @@ const FeedbackSystem: React.FC<FeedbackSystemProps> = ({
                   </h4>
                   <div className="space-y-3 mb-6">
                     {feedbackTypes.map(type => (
-                      <motion.div
+                      <MotionDiv
                         key={type.id}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -252,18 +263,18 @@ const FeedbackSystem: React.FC<FeedbackSystemProps> = ({
                             </div>
                           </div>
                         </div>
-                      </motion.div>
+                      </MotionDiv>
                     ))}
                   </div>
                   <Button onClick={() => setStep(2)} className="w-full">
                     Next Step
                   </Button>
-                </motion.div>
+                </MotionDiv>
               )}
 
               {/* Step 2: Rating & Satisfaction */}
               {step === 2 && (
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
@@ -277,7 +288,7 @@ const FeedbackSystem: React.FC<FeedbackSystemProps> = ({
                       </Label>
                       <div className="flex items-center gap-2">
                         {[1, 2, 3, 4, 5].map(star => (
-                          <motion.button
+                          <MotionButton
                             key={star}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
@@ -289,7 +300,7 @@ const FeedbackSystem: React.FC<FeedbackSystemProps> = ({
                             }`}
                           >
                             <Star className="h-6 w-6 fill-current" />
-                          </motion.button>
+                          </MotionButton>
                         ))}
                       </div>
                     </div>
@@ -301,7 +312,7 @@ const FeedbackSystem: React.FC<FeedbackSystemProps> = ({
                       </Label>
                       <div className="flex items-center gap-4">
                         {satisfactionOptions.map(option => (
-                          <motion.button
+                          <MotionButton
                             key={option.id}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
@@ -316,7 +327,7 @@ const FeedbackSystem: React.FC<FeedbackSystemProps> = ({
                           >
                             <div className={option.color}>{option.icon}</div>
                             <span className="text-xs text-muted-foreground">{option.label}</span>
-                          </motion.button>
+                          </MotionButton>
                         ))}
                       </div>
                     </div>
@@ -330,12 +341,12 @@ const FeedbackSystem: React.FC<FeedbackSystemProps> = ({
                       Next Step
                     </Button>
                   </div>
-                </motion.div>
+                </MotionDiv>
               )}
 
               {/* Step 3: Message */}
               {step === 3 && (
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
@@ -397,13 +408,13 @@ const FeedbackSystem: React.FC<FeedbackSystemProps> = ({
                       )}
                     </Button>
                   </div>
-                </motion.div>
+                </MotionDiv>
               )}
             </div>
           </GlassCard>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+        </MotionDiv>
+      </MotionDiv>
+    </SafeAnimatePresence>
   );
 };
 

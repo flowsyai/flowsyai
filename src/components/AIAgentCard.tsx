@@ -1,5 +1,15 @@
 import React, { FC, cloneElement } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -50,7 +60,7 @@ const AIAgentCard: FC<AIAgentCardProps> = ({ agent, onClick, onAddToWorkflow, in
   });
 
   return (
-    <motion.div
+    <MotionDiv
       className="h-full hover-lift hover-glow rounded-xl group"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -132,7 +142,7 @@ const AIAgentCard: FC<AIAgentCardProps> = ({ agent, onClick, onAddToWorkflow, in
           </div>
         </div>
       </Card>
-    </motion.div>
+    </MotionDiv>
   );
 };
 

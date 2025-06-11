@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Brain,
   Zap,
@@ -245,14 +256,14 @@ const AIOptimizationHub: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <motion.div
+        <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="space-y-8"
         >
           {/* Header */}
-          <motion.div
+          <MotionDiv
             variants={itemVariants}
             className="flex flex-col md:flex-row md:items-center justify-between gap-4"
           >
@@ -288,10 +299,10 @@ const AIOptimizationHub: React.FC = () => {
                 Export Report
               </Button>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Quick Stats */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
                 <div className="p-6">
@@ -353,10 +364,10 @@ const AIOptimizationHub: React.FC = () => {
                 </div>
               </GlassCard>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Navigation Tabs */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <div className="flex flex-wrap gap-2">
               {tabs.map(tab => (
                 <Button
@@ -370,12 +381,12 @@ const AIOptimizationHub: React.FC = () => {
                 </Button>
               ))}
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Content based on active tab */}
-          <AnimatePresence mode="wait">
+          <SafeAnimatePresence mode="wait">
             {activeTab === 'suggestions' && (
-              <motion.div
+              <MotionDiv
                 key="suggestions"
                 variants={itemVariants}
                 initial="hidden"
@@ -468,11 +479,11 @@ const AIOptimizationHub: React.FC = () => {
                     </div>
                   </GlassCard>
                 ))}
-              </motion.div>
+              </MotionDiv>
             )}
 
             {activeTab === 'analytics' && (
-              <motion.div
+              <MotionDiv
                 key="analytics"
                 variants={itemVariants}
                 initial="hidden"
@@ -547,11 +558,11 @@ const AIOptimizationHub: React.FC = () => {
                     </div>
                   </GlassCard>
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {activeTab === 'automation' && (
-              <motion.div
+              <MotionDiv
                 key="automation"
                 variants={itemVariants}
                 initial="hidden"
@@ -632,21 +643,21 @@ const AIOptimizationHub: React.FC = () => {
                     </div>
                   </div>
                 </GlassCard>
-              </motion.div>
+              </MotionDiv>
             )}
-          </AnimatePresence>
+          </SafeAnimatePresence>
 
           {/* Suggestion Details Modal */}
-          <AnimatePresence>
+          <SafeAnimatePresence>
             {selectedSuggestion && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-lg"
                 onClick={() => setSelectedSuggestion(null)}
               >
-                <motion.div
+                <MotionDiv
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
@@ -699,11 +710,11 @@ const AIOptimizationHub: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </motion.div>
-              </motion.div>
+                </MotionDiv>
+              </MotionDiv>
             )}
-          </AnimatePresence>
-        </motion.div>
+          </SafeAnimatePresence>
+        </MotionDiv>
       </div>
     </div>
   );

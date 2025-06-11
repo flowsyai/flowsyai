@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Bot,
   Play,
@@ -358,7 +368,7 @@ const AIAgentTester: React.FC<AIAgentTesterProps> = ({ agent, onExecutionComplet
 
       {/* Execution Result */}
       {executionResult && (
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
@@ -406,7 +416,7 @@ const AIAgentTester: React.FC<AIAgentTesterProps> = ({ agent, onExecutionComplet
               </div>
             </div>
           )}
-        </motion.div>
+        </MotionDiv>
       )}
     </GlassCard>
   );

@@ -4,7 +4,17 @@ import Footer from './Footer';
 import FloatingFeedbackButton from './FloatingFeedbackButton';
 import GlobalPipelineBackground from './landing/GlobalPipelineBackground';
 import { useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -61,14 +71,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         {/* Page Content */}
         <main className={`flex-grow ${isLandingPage ? 'pt-0' : 'pt-16'}`}>
-          <motion.div
+          <MotionDiv
             key={location.pathname}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             {children}
-          </motion.div>
+          </MotionDiv>
         </main>
 
         <Footer />

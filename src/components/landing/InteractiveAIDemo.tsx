@@ -1,5 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Send,
   Bot,
@@ -348,7 +359,7 @@ What type of project or automation are you considering? I can help you design th
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <motion.div
+        <MotionDiv
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -356,7 +367,7 @@ What type of project or automation are you considering? I can help you design th
           transition={{ duration: 0.8 }}
         >
           {/* Live Demo Badge */}
-          <motion.div
+          <MotionDiv
             className="mb-8 flex justify-center"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -368,14 +379,14 @@ What type of project or automation are you considering? I can help you design th
               <span className="text-sm font-semibold">Live Interactive Demo</span>
               <Sparkles className="w-4 h-4" />
             </div>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             className="w-20 h-20 mx-auto mb-8 rounded-full premium-card flex items-center justify-center border border-primary/20 shadow-lg premium-shadow relative overflow-hidden group wow-factor-animation"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <motion.div
+            <MotionDiv
               className="w-12 h-12 rounded-full bg-gradient-to-tr from-primary via-sapphire to-primary bg-[length:200%_200%] animate-gradient-slow"
               animate={{
                 scale: [1, 1.1, 1],
@@ -389,8 +400,8 @@ What type of project or automation are you considering? I can help you design th
               <div className="w-full h-full flex items-center justify-center">
                 <BrainCircuit className="w-6 h-6 text-background animate-pulse-scale" />
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-serif">
             Try <span className="premium-gradient-text">AI Flow</span> Right Now
@@ -400,10 +411,10 @@ What type of project or automation are you considering? I can help you design th
             assistant to explore features, see real examples, and discover how AI Flow can transform
             your business processes in minutes.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         {/* Interactive Chat Interface */}
-        <motion.div
+        <MotionDiv
           className="max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -437,9 +448,9 @@ What type of project or automation are you considering? I can help you design th
 
             {/* Messages Container */}
             <div className="h-96 overflow-y-auto p-6 space-y-4 bg-background/50">
-              <AnimatePresence>
+              <SafeAnimatePresence>
                 {messages.map(message => (
-                  <motion.div
+                  <MotionDiv
                     key={message.id}
                     initial={{ opacity: 0, y: 20, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -488,13 +499,13 @@ What type of project or automation are you considering? I can help you design th
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
-              </AnimatePresence>
+              </SafeAnimatePresence>
 
               {/* Typing Indicator */}
               {isTyping && (
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
@@ -517,7 +528,7 @@ What type of project or automation are you considering? I can help you design th
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </MotionDiv>
               )}
 
               <div ref={messagesEndRef} />
@@ -527,7 +538,7 @@ What type of project or automation are you considering? I can help you design th
             <div className="p-6 border-t border-border-alt bg-card/30">
               {/* Suggested Questions */}
               {messages.length === 1 && (
-                <motion.div
+                <MotionDiv
                   className="mb-4"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -548,7 +559,7 @@ What type of project or automation are you considering? I can help you design th
                       </button>
                     ))}
                   </div>
-                </motion.div>
+                </MotionDiv>
               )}
 
               {/* Input Field */}
@@ -591,10 +602,10 @@ What type of project or automation are you considering? I can help you design th
               </div>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Call to Action */}
-        <motion.div
+        <MotionDiv
           className="text-center mt-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -631,7 +642,7 @@ What type of project or automation are you considering? I can help you design th
               </Button>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

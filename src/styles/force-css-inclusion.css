@@ -1,0 +1,229 @@
+/* 
+ * CRITICAL CSS FORCE INCLUSION
+ * This file ensures all custom styles are included in production builds
+ * DO NOT REMOVE - Required for Vercel deployment styling
+ */
+
+/* Force inclusion of all custom animation classes */
+.hero-floating-dot,
+.hero-floating-dot-1,
+.hero-floating-dot-2,
+.hero-floating-dot-3,
+.hero-floating-dot-4,
+.hero-floating-dot-5,
+.hero-floating-dot-6,
+.hero-floating-dot-7,
+.hero-floating-dot-8 {
+  /* Ensure these classes are never purged */
+  content: '';
+}
+
+/* Force inclusion of luxury effects */
+.luxury-glow,
+.animate-luxury-glow,
+.animate-luxury-shimmer,
+.animate-luxury-pulse,
+.glass-card,
+.premium-card {
+  /* Ensure these classes are never purged */
+  content: '';
+}
+
+/* Force inclusion of background animations */
+.pulsating-gradient-bg,
+.subtle-pulsating-gradient-bg,
+.pipeline-canvas,
+.gradient-text {
+  /* Ensure these classes are never purged */
+  content: '';
+}
+
+/* Force inclusion of workflow elements */
+.agent-card,
+.connection-line,
+.glow-effect,
+.workflow-canvas,
+.float-animation {
+  /* Ensure these classes are never purged */
+  content: '';
+}
+
+/* Force inclusion of media elements */
+.logo-video,
+.hero-video {
+  /* Ensure these classes are never purged */
+  content: '';
+}
+
+/* Force inclusion of animation utilities */
+.animate-float,
+.animate-pulse,
+.animate-fade-in,
+.animate-slide-up,
+.animate-slide-down {
+  /* Ensure these classes are never purged */
+  content: '';
+}
+
+/* Force inclusion of UI effects */
+.glass-effect,
+.card-hover,
+.roadmap-card,
+.milestone-card,
+.progress-bar,
+.progress-fill {
+  /* Ensure these classes are never purged */
+  content: '';
+}
+
+/* Force inclusion of gradient utilities */
+.bg-gradient-to-r,
+.from-primary,
+.to-gold,
+.text-primary,
+.text-gold,
+.border-primary,
+.bg-primary,
+.bg-gold {
+  /* Ensure these classes are never purged */
+  content: '';
+}
+
+/* Force inclusion of shadow utilities */
+.shadow-primary,
+.hover:bg-primary,
+.hover:shadow-xl,
+.hover:shadow-primary {
+  /* Ensure these classes are never purged */
+  content: '';
+}
+
+/* Force inclusion of text utilities */
+.bg-clip-text,
+.text-transparent {
+  /* Ensure these classes are never purged */
+  content: '';
+}
+
+/* Critical CSS Variables - Force inclusion */
+:root {
+  /* Ensure all CSS variables are preserved */
+  --force-inclusion: true;
+}
+
+/* Force inclusion of all custom keyframes */
+@keyframes luxury-glow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes luxury-shimmer {
+  0% { background-position: -200% 0; opacity: 0; }
+  50% { opacity: 1; }
+  100% { background-position: 200% 0; opacity: 0; }
+}
+
+@keyframes luxury-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -10px, 0); }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translate3d(0, 20px, 0); opacity: 0; }
+  to { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translate3d(0, -20px, 0); opacity: 0; }
+  to { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+
+/* Force inclusion of animation classes */
+.animate-luxury-glow { animation: luxury-glow 3s ease-in-out infinite; }
+.animate-luxury-shimmer { animation: luxury-shimmer 2s ease-in-out infinite; }
+.animate-luxury-pulse { animation: luxury-pulse 2s ease-in-out infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.animate-fade-in { animation: fadeIn 0.5s ease-out; }
+.animate-slide-up { animation: slideUp 0.5s ease-out; }
+.animate-slide-down { animation: slideDown 0.5s ease-out; }
+
+/* Force inclusion of gradient backgrounds */
+.pulsating-gradient-bg {
+  background: linear-gradient(-45deg, rgba(var(--background), 0.98), rgba(var(--primary), 0.05), rgba(var(--background), 0.98), rgba(var(--secondary), 0.07));
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.subtle-pulsating-gradient-bg {
+  background: linear-gradient(-45deg, rgba(var(--background), 0.99), rgba(var(--primary), 0.02), rgba(var(--background), 0.99), rgba(var(--secondary), 0.03));
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+}
+
+/* Force inclusion of premium card styles */
+.premium-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.premium-card:hover {
+  border-color: hsl(var(--primary) / 0.3);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3), 0 0 15px -3px hsl(var(--primary) / 0.2);
+}
+
+/* Force inclusion of glass effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+}
+
+.glass-effect {
+  backdrop-filter: blur(8px);
+  background: rgba(var(--background), 0.8);
+}
+
+/* Force inclusion of glow effects */
+.glow-effect {
+  box-shadow: 0 0 20px rgba(var(--primary), 0.3);
+}
+
+.luxury-glow {
+  box-shadow: 
+    0 0 5px rgba(255, 215, 0, 0.3),
+    0 0 10px rgba(59, 130, 246, 0.2),
+    0 0 15px rgba(168, 85, 247, 0.1);
+}
+
+/* Ensure this file is always processed */
+.force-css-inclusion-marker {
+  display: none !important;
+  content: 'CSS_FORCE_INCLUSION_ACTIVE';
+}

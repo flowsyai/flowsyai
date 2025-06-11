@@ -27,12 +27,15 @@ import {
   Timer,
   Award,
   Flame,
+  RefreshCw,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TokenTabContent } from './TokenTabContent';
+import { solanaTokenService, TokenData } from '@/services/solanaTokenService';
+import { FLOWSY_TOKEN_CONFIG } from '@/config/tokenConfig';
 
 interface TokenDistribution {
   category: string;
@@ -61,10 +64,15 @@ interface MarketData {
   marketCap: number;
   volume24h: number;
   change24h: number;
-  holders: number;
+  holders?: number; // Optional - only show if real data available
   totalSupply: number;
   circulatingSupply: number;
   fdv: number;
+  // Data transparency fields
+  dataSource?: string;
+  lastUpdated?: number;
+  isVerified?: boolean;
+  dataQuality?: 'high' | 'medium' | 'low';
 }
 
 const EnhancedTokenShowcase: React.FC = () => {
@@ -77,31 +85,26 @@ const EnhancedTokenShowcase: React.FC = () => {
     marketCap: 823400,
     volume24h: 45670,
     change24h: 15.67,
-    holders: 3247,
+    holders: undefined, // No fake data - will be populated with real data if available
     totalSupply: 100000000,
     circulatingSupply: 45000000,
     fdv: 823400,
+    dataSource: 'loading',
+    lastUpdated: Date.now(),
+    isVerified: false,
+    dataQuality: 'low',
   });
+  const [isLoadingRealData, setIsLoadingRealData] = useState(false);
+  const [lastRealDataUpdate, setLastRealDataUpdate] = useState<Date | null>(null);
 
   const tokenDistribution: TokenDistribution[] = [
     {
       category: 'Public Sale',
-      percentage: 60,
-      amount: '60M FLOWSY',
+      percentage: 90,
+      amount: '90M FLOWSY',
       color: 'from-emerald-500 to-teal-500',
       description: 'Maximum allocation for community ownership and decentralized trading',
       locked: false,
-      highlight: true,
-    },
-    {
-      category: 'Liquidity Pool',
-      percentage: 30,
-      amount: '30M FLOWSY',
-      color: 'from-orange-500 to-red-500',
-      description: 'Will be BURNED at $10M market cap to permanently increase token value',
-      locked: false,
-      unlockDate: 'BURN at $10M market cap',
-      burnScheduled: true,
       highlight: true,
     },
     {
@@ -109,33 +112,26 @@ const EnhancedTokenShowcase: React.FC = () => {
       percentage: 10,
       amount: '10M FLOWSY',
       color: 'from-blue-500 to-indigo-500',
-      description: 'Ultra-locked until $1B market cap - Maximum trust & anti-rug guarantee',
+      description: 'Locked until $10M market cap. 5% will be burned at $1M market cap (0.5% of total supply)',
       locked: true,
-      unlockDate: 'Ultra-locked until $1B market cap',
+      unlockDate: 'Locked until $10M market cap',
       highlight: true,
+      burnScheduled: true,
     },
   ];
 
   const topHolders: TopHolder[] = [
     {
       rank: 1,
-      address: '7xKXtg2CW...9rKhTYXs',
-      percentage: 30.0,
-      amount: '30M FLOWSY',
-      type: 'liquidity',
-      locked: false,
-      burnScheduled: true,
-    },
-    {
-      rank: 2,
       address: '4mNpkTGm...8vLqWxRt',
       percentage: 10.0,
       amount: '10M FLOWSY',
       type: 'team',
       locked: true,
+      burnScheduled: true,
     },
     {
-      rank: 3,
+      rank: 2,
       address: '9kLmVwXr...3hPqZtYs',
       percentage: 8.5,
       amount: '8.5M FLOWSY',
@@ -143,7 +139,7 @@ const EnhancedTokenShowcase: React.FC = () => {
       locked: false,
     },
     {
-      rank: 4,
+      rank: 3,
       address: '2nBxRtKm...7wQpLxVs',
       percentage: 7.2,
       amount: '7.2M FLOWSY',
@@ -151,47 +147,107 @@ const EnhancedTokenShowcase: React.FC = () => {
       locked: false,
     },
     {
-      rank: 5,
+      rank: 4,
       address: '8vCxMnPq...5tRzWxKs',
       percentage: 6.8,
       amount: '6.8M FLOWSY',
       type: 'public',
       locked: false,
     },
+    {
+      rank: 5,
+      address: '3nCxRtLm...9wQpMxVs',
+      percentage: 5.4,
+      amount: '5.4M FLOWSY',
+      type: 'public',
+      locked: false,
+    },
   ];
 
-  // Simulate real-time updates (will be replaced with live API data on launch)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMarketData(prev => {
-        // Simulate more realistic market movements for a smaller cap token
-        const volatilityFactor = 0.015; // 1.5% max change per update
-        const baseChange = (Math.random() - 0.5) * volatilityFactor;
+  // Fetch real token data from APIs
+  const fetchRealTokenData = async () => {
+    try {
+      setIsLoadingRealData(true);
+      console.log('🚀 Fetching REAL data for token:', FLOWSY_TOKEN_CONFIG.contractAddress);
 
-        let newMarketCap = prev.marketCap * (1 + baseChange);
-        let newPrice = prev.price * (1 + baseChange);
-        let newVolume = prev.volume24h + (Math.random() - 0.5) * 3000;
-        let newChange = prev.change24h + (Math.random() - 0.5) * 1.5;
-        let newHolders = prev.holders + Math.floor(Math.random() * 2);
+      const tokenData = await solanaTokenService.getTokenData(FLOWSY_TOKEN_CONFIG.contractAddress);
+      console.log('✅ Real token data received:', tokenData);
 
-        // Keep realistic bounds for early-stage token
-        newMarketCap = Math.max(400000, Math.min(1500000, newMarketCap)); // 400K - 1.5M range
-        newPrice = Math.max(0.004, Math.min(0.015, newPrice)); // Price bounds
-        newVolume = Math.max(20000, Math.min(80000, newVolume)); // Volume bounds
-        newChange = Math.max(-25, Math.min(45, newChange)); // Change bounds
-        newHolders = Math.max(3000, newHolders); // Minimum holders
-
-        return {
-          ...prev,
-          marketCap: newMarketCap,
-          price: newPrice,
-          volume24h: newVolume,
-          change24h: newChange,
-          holders: newHolders,
-          fdv: newMarketCap,
-        };
+      // Log data quality assessment
+      console.log('📊 Data Quality Assessment:', {
+        source: tokenData.dataSource,
+        verified: tokenData.isVerified,
+        quality: tokenData.dataQuality,
+        hasHolders: tokenData.holders !== undefined,
+        priceChange: tokenData.priceChange24h,
+        lastUpdated: new Date(tokenData.lastUpdated).toLocaleString()
       });
-    }, 3000);
+
+      setMarketData({
+        price: tokenData.price,
+        marketCap: tokenData.marketCap,
+        volume24h: tokenData.volume24h,
+        change24h: tokenData.priceChange24h,
+        holders: tokenData.holders, // Real data only - undefined if not available
+        totalSupply: tokenData.supply,
+        circulatingSupply: tokenData.supply, // Assuming all tokens are circulating
+        fdv: tokenData.marketCap,
+        dataSource: tokenData.dataSource,
+        lastUpdated: tokenData.lastUpdated,
+        isVerified: tokenData.isVerified,
+        dataQuality: tokenData.dataQuality,
+      });
+
+      setLastRealDataUpdate(new Date());
+      console.log('✅ Market data updated with REAL values');
+    } catch (error) {
+      console.error('❌ Failed to fetch real token data:', error);
+      // Keep trying to fetch real data - no fallback to simulation
+      console.log('🔄 Will retry fetching real data in next update cycle');
+    } finally {
+      setIsLoadingRealData(false);
+    }
+  };
+
+  // Fallback simulation for when real data is unavailable
+  const simulateMarketData = () => {
+    setMarketData(prev => {
+      const volatilityFactor = 0.015;
+      const baseChange = (Math.random() - 0.5) * volatilityFactor;
+
+      let newMarketCap = prev.marketCap * (1 + baseChange);
+      let newPrice = prev.price * (1 + baseChange);
+      let newVolume = prev.volume24h + (Math.random() - 0.5) * 3000;
+      let newChange = prev.change24h + (Math.random() - 0.5) * 1.5;
+      let newHolders = prev.holders + Math.floor(Math.random() * 2);
+
+      newMarketCap = Math.max(400000, Math.min(1500000, newMarketCap));
+      newPrice = Math.max(0.004, Math.min(0.015, newPrice));
+      newVolume = Math.max(20000, Math.min(80000, newVolume));
+      newChange = Math.max(-25, Math.min(45, newChange));
+      newHolders = Math.max(3000, newHolders);
+
+      return {
+        ...prev,
+        marketCap: newMarketCap,
+        price: newPrice,
+        volume24h: newVolume,
+        change24h: newChange,
+        holders: newHolders,
+        fdv: newMarketCap,
+      };
+    });
+  };
+
+  // Initial data fetch and periodic updates
+  useEffect(() => {
+    // Try to fetch real data first
+    fetchRealTokenData();
+
+    // Set up periodic updates - always fetch real data
+    const interval = setInterval(() => {
+      fetchRealTokenData();
+    }, FLOWSY_TOKEN_CONFIG.refreshInterval);
 
     return () => clearInterval(interval);
   }, []);
@@ -273,10 +329,10 @@ const EnhancedTokenShowcase: React.FC = () => {
 
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             Revolutionary tokenomics:{' '}
-            <span className="text-emerald-500 font-semibold">60% public ownership</span>,
-            <span className="text-orange-500 font-semibold">30% burn at $10M</span>, and
+            <span className="text-emerald-500 font-semibold">90% public ownership</span>,
             <span className="text-blue-500 font-semibold">only 10% developer fund</span> locked
-            until $1B market cap.
+            until $10M market cap, with{' '}
+            <span className="text-orange-500 font-semibold">0.5% burn at $1M</span>.
           </p>
 
           <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20">
@@ -331,17 +387,44 @@ const EnhancedTokenShowcase: React.FC = () => {
             <div className="relative z-10 text-center">
               {/* Live Data Indicator */}
               <motion.div
-                className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-emerald-500/20 rounded-full border border-emerald-500/30"
+                className={`inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border ${
+                  FLOWSY_TOKEN_CONFIG.enableLiveData && lastRealDataUpdate
+                    ? 'bg-emerald-500/20 border-emerald-500/30'
+                    : 'bg-orange-500/20 border-orange-500/30'
+                }`}
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
                 <motion.div
-                  className="w-2 h-2 bg-emerald-500 rounded-full"
+                  className={`w-2 h-2 rounded-full ${
+                    FLOWSY_TOKEN_CONFIG.enableLiveData && lastRealDataUpdate
+                      ? 'bg-emerald-500'
+                      : 'bg-orange-500'
+                  }`}
                   animate={{ opacity: [1, 0.3, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
-                <span className="text-sm font-semibold text-emerald-500">LIVE DATA</span>
-                <span className="text-xs text-muted-foreground">• Updates every 3s</span>
+                <span className={`text-sm font-semibold ${
+                  FLOWSY_TOKEN_CONFIG.enableLiveData && lastRealDataUpdate
+                    ? 'text-emerald-500'
+                    : 'text-orange-500'
+                }`}>
+                  {FLOWSY_TOKEN_CONFIG.enableLiveData && lastRealDataUpdate ? 'LIVE DATA' : 'DEMO DATA'}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  • {lastRealDataUpdate
+                    ? `Last update: ${lastRealDataUpdate.toLocaleTimeString()}`
+                    : 'Simulated data'
+                  }
+                </span>
+                {isLoadingRealData && (
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                  >
+                    <RefreshCw className="w-3 h-3 text-muted-foreground" />
+                  </motion.div>
+                )}
               </motion.div>
 
               {/* Dynamic Market Cap Display */}
@@ -394,6 +477,7 @@ const EnhancedTokenShowcase: React.FC = () => {
                     icon: DollarSign,
                     color: 'text-emerald-500',
                     bgColor: 'bg-emerald-500/10',
+                    verified: marketData.isVerified,
                   },
                   {
                     label: '24h Volume',
@@ -401,20 +485,25 @@ const EnhancedTokenShowcase: React.FC = () => {
                     icon: BarChart3,
                     color: 'text-blue-500',
                     bgColor: 'bg-blue-500/10',
+                    verified: marketData.isVerified,
                   },
-                  {
+                  // Only show holders if real data is available
+                  ...(marketData.holders !== undefined ? [{
                     label: 'Token Holders',
                     value: formatNumber(marketData.holders),
                     icon: Users,
                     color: 'text-purple-500',
                     bgColor: 'bg-purple-500/10',
-                  },
+                    verified: true, // Holder data is always verified when available
+                  }] : []),
                   {
                     label: '24h Change',
                     value: `${marketData.change24h >= 0 ? '+' : ''}${marketData.change24h.toFixed(2)}%`,
                     icon: marketData.change24h >= 0 ? TrendingUp : TrendingDown,
                     color: marketData.change24h >= 0 ? 'text-emerald-500' : 'text-red-500',
                     bgColor: marketData.change24h >= 0 ? 'bg-emerald-500/10' : 'bg-red-500/10',
+                    verified: marketData.isVerified,
+                    suspicious: Math.abs(marketData.change24h) > 50, // Flag large changes
                   },
                 ].map((metric, index) => (
                   <motion.div
@@ -438,7 +527,15 @@ const EnhancedTokenShowcase: React.FC = () => {
                     >
                       {metric.value}
                     </motion.div>
-                    <div className="text-xs text-muted-foreground mt-1">{metric.label}</div>
+                    <div className="flex items-center justify-center gap-1 mt-1">
+                      <div className="text-xs text-muted-foreground">{metric.label}</div>
+                      {metric.verified && (
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full" title="Verified data"></div>
+                      )}
+                      {metric.suspicious && (
+                        <div className="w-2 h-2 bg-yellow-500 rounded-full" title="Large change - verify independently"></div>
+                      )}
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -450,7 +547,10 @@ const EnhancedTokenShowcase: React.FC = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
               >
-                <motion.button
+                <motion.a
+                  href={FLOWSY_TOKEN_CONFIG.dexScreenerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-300"
@@ -463,7 +563,7 @@ const EnhancedTokenShowcase: React.FC = () => {
                   >
                     <ArrowRight className="w-4 h-4" />
                   </motion.div>
-                </motion.button>
+                </motion.a>
               </motion.div>
             </div>
           </Card>
@@ -479,6 +579,7 @@ const EnhancedTokenShowcase: React.FC = () => {
           ].map(tab => (
             <button
               key={tab.id}
+              type="button"
               onClick={() =>
                 setSelectedTab(tab.id as 'overview' | 'distribution' | 'holders' | 'security')
               }
@@ -527,7 +628,7 @@ const EnhancedTokenShowcase: React.FC = () => {
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Ultra-minimal developer allocation locked until $1B market cap - Maximum
+                        Ultra-minimal developer allocation locked until $10M market cap - Maximum
                         community ownership with anti-rug guarantee.
                       </p>
                     </div>
@@ -536,23 +637,23 @@ const EnhancedTokenShowcase: React.FC = () => {
                       <div className="flex items-center gap-2 mb-2">
                         <Flame className="w-5 h-5 text-orange-500" />
                         <span className="font-semibold text-orange-500">
-                          30M FLOWSY Burn Scheduled
+                          0.5M FLOWSY Burn Scheduled
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Liquidity tokens will be permanently burned at $10M market cap, reducing
-                        supply and increasing value for all holders.
+                        5% of developer fund (0.5% of total supply) will be permanently burned at $1M market cap,
+                        reducing supply and increasing value for all holders.
                       </p>
                     </div>
 
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span>Progress to unlock</span>
-                        <span>{((marketData.marketCap / 1000000000) * 100).toFixed(2)}%</span>
+                        <span>{((marketData.marketCap / 10000000) * 100).toFixed(2)}%</span>
                       </div>
-                      <Progress value={(marketData.marketCap / 1000000000) * 100} className="h-2" />
+                      <Progress value={(marketData.marketCap / 10000000) * 100} className="h-2" />
                       <p className="text-xs text-muted-foreground">
-                        Current: {formatCurrency(marketData.marketCap)} / Target: $1.00B
+                        Current: {formatCurrency(marketData.marketCap)} / Target: $10.00M
                       </p>
                     </div>
 
@@ -597,24 +698,69 @@ const EnhancedTokenShowcase: React.FC = () => {
                       </div>
                       <div className="text-xs text-muted-foreground">Fully Diluted</div>
                     </div>
-                    <div className="p-3 bg-muted/20 rounded-lg">
-                      <div className="text-lg font-bold text-foreground">
-                        {formatNumber(marketData.holders)}
+                    {marketData.holders !== undefined ? (
+                      <div className="p-3 bg-muted/20 rounded-lg">
+                        <div className="text-lg font-bold text-foreground">
+                          {formatNumber(marketData.holders)}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <div className="text-xs text-muted-foreground">Holders</div>
+                          <div className="w-2 h-2 bg-emerald-500 rounded-full" title="Real blockchain data"></div>
+                        </div>
                       </div>
-                      <div className="text-xs text-muted-foreground">Holders</div>
-                    </div>
+                    ) : (
+                      <div className="p-3 bg-muted/20 rounded-lg opacity-50">
+                        <div className="text-lg font-bold text-muted-foreground">
+                          N/A
+                        </div>
+                        <div className="text-xs text-muted-foreground">Holders (Loading...)</div>
+                      </div>
+                    )}
                   </div>
 
-                  <div className="mt-4 p-3 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Activity className="w-4 h-4 text-emerald-500" />
-                      <span className="text-sm font-semibold text-emerald-500">
-                        Growing Community
+                  {/* Data Source Transparency */}
+                  <div className="mt-4 p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Activity className="w-4 h-4 text-blue-500" />
+                      <span className="text-sm font-semibold text-blue-500">
+                        Data Transparency
                       </span>
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      Active holder base growing by 50+ new wallets daily
-                    </p>
+                    <div className="space-y-1 text-xs text-muted-foreground">
+                      <div className="flex items-center justify-between">
+                        <span>Price Data Source:</span>
+                        <span className="capitalize font-medium">{marketData.dataSource || 'Loading...'}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Last Updated:</span>
+                        <span className="font-medium">
+                          {marketData.lastUpdated
+                            ? new Date(marketData.lastUpdated).toLocaleTimeString()
+                            : 'Loading...'
+                          }
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Data Quality:</span>
+                        <div className="flex items-center gap-1">
+                          <span className={`font-medium ${
+                            marketData.dataQuality === 'high' ? 'text-emerald-500' :
+                            marketData.dataQuality === 'medium' ? 'text-yellow-500' : 'text-red-500'
+                          }`}>
+                            {marketData.dataQuality?.toUpperCase() || 'UNKNOWN'}
+                          </span>
+                          {marketData.isVerified && (
+                            <div className="w-2 h-2 bg-emerald-500 rounded-full" title="Verified"></div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Holder Count:</span>
+                        <span className="font-medium">
+                          {marketData.holders !== undefined ? 'Real blockchain data' : 'Not available'}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

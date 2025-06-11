@@ -1,5 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -19,27 +29,27 @@ import { Link } from 'react-router-dom';
 const About: React.FC = () => {
   const teamMembers = [
     {
-      name: 'Alex Chen',
+      name: 'Lead Developer',
       role: 'CEO & Co-Founder',
-      bio: 'Former AI researcher at Google with 10+ years in machine learning and automation.',
+      bio: 'Experienced AI researcher with 10+ years in machine learning and automation systems.',
       image: '/api/placeholder/150/150',
     },
     {
-      name: 'Sarah Johnson',
+      name: 'Technical Lead',
       role: 'CTO & Co-Founder',
-      bio: 'Ex-Microsoft engineer specializing in distributed systems and AI infrastructure.',
+      bio: 'Senior engineer specializing in distributed systems and AI infrastructure development.',
       image: '/api/placeholder/150/150',
     },
     {
-      name: 'David Rodriguez',
+      name: 'Product Manager',
       role: 'Head of Product',
-      bio: 'Product leader with experience at Slack and Notion, passionate about user experience.',
+      bio: 'Product strategist with extensive experience in workflow automation and user experience.',
       image: '/api/placeholder/150/150',
     },
     {
-      name: 'Emily Zhang',
+      name: 'AI Researcher',
       role: 'Head of AI Research',
-      bio: 'PhD in Computer Science from Stanford, published researcher in neural networks.',
+      bio: 'Advanced degree in Computer Science with focus on neural networks and machine learning.',
       image: '/api/placeholder/150/150',
     },
   ];
@@ -71,10 +81,10 @@ const About: React.FC = () => {
   ];
 
   const milestones = [
-    { year: '2022', event: 'Company founded with $2M seed funding' },
-    { year: '2023', event: 'Launched beta platform with 1,000+ early adopters' },
-    { year: '2024', event: 'Series A funding of $15M, reached 10,000+ users' },
-    { year: '2025', event: 'FlowsyAI launch and global expansion' },
+    { year: '2022', event: 'Company founded with initial development funding' },
+    { year: '2023', event: 'Launched beta platform with early adopter community' },
+    { year: '2024', event: 'Secured growth funding and expanded user base significantly' },
+    { year: '2025', event: 'FlowsyAI platform launch and ecosystem expansion' },
   ];
 
   return (
@@ -94,7 +104,7 @@ const About: React.FC = () => {
 
       {/* Main Content */}
       <div className="relative z-10 w-full">
-        <motion.div
+        <MotionDiv
           className="w-full px-4 sm:px-6 lg:px-8 py-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -102,15 +112,15 @@ const About: React.FC = () => {
         >
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <motion.h1
+            <MotionH1
               className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-gold to-primary bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               About FlowsyAI
-            </motion.h1>
-            <motion.p
+            </MotionH1>
+            <MotionP
               className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -119,8 +129,8 @@ const About: React.FC = () => {
               We're on a mission to democratize AI and make intelligent automation accessible to
               everyone. Our platform empowers businesses to build, deploy, and scale AI workflows
               without complexity.
-            </motion.p>
-            <motion.div
+            </MotionP>
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -134,12 +144,12 @@ const About: React.FC = () => {
                   Join Our Mission <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-            </motion.div>
+            </MotionDiv>
           </div>
 
           {/* Mission & Vision */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -160,9 +170,9 @@ const About: React.FC = () => {
                   </p>
                 </CardContent>
               </Card>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -183,12 +193,12 @@ const About: React.FC = () => {
                   </p>
                 </CardContent>
               </Card>
-            </motion.div>
+            </MotionDiv>
           </div>
 
           {/* Values */}
           <div className="mb-16">
-            <motion.h2
+            <MotionH2
               className="text-3xl font-bold text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -196,10 +206,10 @@ const About: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               Our Values
-            </motion.h2>
+            </MotionH2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {values.map((value, index) => (
-                <motion.div
+                <MotionDiv
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -215,14 +225,14 @@ const About: React.FC = () => {
                       <p className="text-muted-foreground text-sm">{value.description}</p>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
           </div>
 
           {/* Timeline */}
           <div className="mb-16">
-            <motion.h2
+            <MotionH2
               className="text-3xl font-bold text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -230,10 +240,10 @@ const About: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               Our Journey
-            </motion.h2>
+            </MotionH2>
             <div className="max-w-4xl mx-auto">
               {milestones.map((milestone, index) => (
-                <motion.div
+                <MotionDiv
                   key={index}
                   className="flex items-center mb-8 last:mb-0"
                   initial={{ opacity: 0, x: -20 }}
@@ -249,14 +259,14 @@ const About: React.FC = () => {
                       <p className="text-foreground">{milestone.event}</p>
                     </div>
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
           </div>
 
           {/* Team */}
           <div className="mb-16">
-            <motion.h2
+            <MotionH2
               className="text-3xl font-bold text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -264,10 +274,10 @@ const About: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               Meet Our Team
-            </motion.h2>
+            </MotionH2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {teamMembers.map((member, index) => (
-                <motion.div
+                <MotionDiv
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -284,13 +294,13 @@ const About: React.FC = () => {
                       <p className="text-muted-foreground text-sm">{member.bio}</p>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
           </div>
 
           {/* CTA */}
-          <motion.div
+          <MotionDiv
             className="text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -325,8 +335,8 @@ const About: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       </div>
     </div>
   );

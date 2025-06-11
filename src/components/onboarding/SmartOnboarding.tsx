@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Sparkles,
   Target,
@@ -196,9 +207,9 @@ const SmartOnboarding: React.FC<SmartOnboardingProps> = ({
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
+    <SafeAnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -232,7 +243,7 @@ const SmartOnboarding: React.FC<SmartOnboardingProps> = ({
               {/* Path Selection */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {(['beginner', 'intermediate', 'advanced'] as const).map(path => (
-                  <motion.div key={path} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <MotionDiv key={path} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Card
                       className={`cursor-pointer transition-all ${
                         selectedPath === path
@@ -255,7 +266,7 @@ const SmartOnboarding: React.FC<SmartOnboardingProps> = ({
                         </p>
                       </CardContent>
                     </Card>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
               </div>
 
@@ -270,7 +281,7 @@ const SmartOnboarding: React.FC<SmartOnboardingProps> = ({
 
                 <div className="grid gap-4">
                   {currentSteps.map((step, index) => (
-                    <motion.div
+                    <MotionDiv
                       key={step.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -353,7 +364,7 @@ const SmartOnboarding: React.FC<SmartOnboardingProps> = ({
                           </div>
                         </CardContent>
                       </Card>
-                    </motion.div>
+                    </MotionDiv>
                   ))}
                 </div>
               </div>
@@ -376,9 +387,9 @@ const SmartOnboarding: React.FC<SmartOnboardingProps> = ({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </MotionDiv>
       </div>
-    </AnimatePresence>
+    </SafeAnimatePresence>
   );
 };
 

@@ -81,6 +81,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Skip Vite development resources (HMR, client, etc.)
+  if (isViteDevelopmentResource(request)) {
+    console.log('[SW] Skipping Vite development resource:', request.url);
+    return;
+  }
+
   // Handle different types of requests
   if (isStaticAsset(request)) {
     event.respondWith(cacheFirst(request, STATIC_CACHE_NAME));
@@ -122,22 +128,23 @@ async function networkFirst(request, cacheName) {
   try {
     console.log('[SW] Network first for:', request.url);
     const networkResponse = await fetch(request);
-    
-    if (networkResponse.ok) {
+
+    // Only cache complete responses (not partial content)
+    if (networkResponse.ok && networkResponse.status !== 206) {
       const cache = await caches.open(cacheName);
       cache.put(request, networkResponse.clone());
     }
-    
+
     return networkResponse;
   } catch (error) {
     console.log('[SW] Network failed, trying cache:', request.url);
     const cache = await caches.open(cacheName);
     const cachedResponse = await cache.match(request);
-    
+
     if (cachedResponse) {
       return cachedResponse;
     }
-    
+
     return new Response('Offline', { status: 503 });
   }
 }
@@ -145,14 +152,15 @@ async function networkFirst(request, cacheName) {
 async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName);
   const cachedResponse = await cache.match(request);
-  
+
   const fetchPromise = fetch(request).then((networkResponse) => {
-    if (networkResponse.ok) {
+    // Only cache complete responses (not partial content)
+    if (networkResponse.ok && networkResponse.status !== 206) {
       cache.put(request, networkResponse.clone());
     }
     return networkResponse;
   }).catch(() => cachedResponse);
-  
+
   return cachedResponse || fetchPromise;
 }
 
@@ -170,9 +178,22 @@ function isDynamicAsset(request) {
 
 function isAPIRequest(request) {
   const url = new URL(request.url);
-  return url.pathname.startsWith('/api/') || 
+  return url.pathname.startsWith('/api/') ||
          url.hostname.includes('supabase') ||
          url.hostname.includes('openai');
+}
+
+function isViteDevelopmentResource(request) {
+  const url = new URL(request.url);
+  return url.pathname.includes('@vite/') ||
+         url.pathname.includes('@react-refresh') ||
+         url.pathname.includes('/@fs/') ||
+         url.pathname.includes('/node_modules/') ||
+         url.search.includes('import') ||
+         url.search.includes('t=') ||
+         url.pathname.endsWith('.ts') ||
+         url.pathname.endsWith('.tsx') ||
+         url.pathname.endsWith('.jsx');
 }
 
 // Handle messages from main thread

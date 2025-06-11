@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Play, Pause, RotateCcw, Settings, Info, Sparkles, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import TokenBanner from './TokenBanner';
@@ -51,7 +62,7 @@ const InteractiveTokenDemo: React.FC<InteractiveTokenDemoProps> = ({ className =
   return (
     <div className={`space-y-8 ${className}`}>
       {/* Demo Controls */}
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="premium-card p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/30"
@@ -102,16 +113,16 @@ const InteractiveTokenDemo: React.FC<InteractiveTokenDemoProps> = ({ className =
         </div>
 
         {/* Feature Highlights */}
-        <AnimatePresence>
+        <SafeAnimatePresence>
           {showFeatures && (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-4 pt-4 border-t border-border/30"
             >
               {features.map((feature, index) => (
-                <motion.div
+                <MotionDiv
                   key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -125,18 +136,18 @@ const InteractiveTokenDemo: React.FC<InteractiveTokenDemoProps> = ({ className =
                     <h4 className="text-sm font-medium text-foreground">{feature.title}</h4>
                     <p className="text-xs text-muted-foreground">{feature.description}</p>
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))}
-            </motion.div>
+            </MotionDiv>
           )}
-        </AnimatePresence>
-      </motion.div>
+        </SafeAnimatePresence>
+      </MotionDiv>
 
       {/* Demo Content */}
       <div className="space-y-6">
         {/* Banner Demo */}
         {(demoMode === 'banner' || demoMode === 'both') && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -150,12 +161,12 @@ const InteractiveTokenDemo: React.FC<InteractiveTokenDemoProps> = ({ className =
               </p>
             </div>
             <TokenBanner className="w-full" tokenAddress="DEMO_TOKEN" />
-          </motion.div>
+          </MotionDiv>
         )}
 
         {/* Widget Demo */}
         {(demoMode === 'widget' || demoMode === 'both') && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -168,16 +179,15 @@ const InteractiveTokenDemo: React.FC<InteractiveTokenDemoProps> = ({ className =
             </div>
             <SolanaTokenWidget
               className="w-full"
-              tokenAddress="DEMO_TOKEN"
               showTransactions={true}
               autoRefresh={isPlaying}
             />
-          </motion.div>
+          </MotionDiv>
         )}
       </div>
 
       {/* Interactive Instructions */}
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
@@ -213,10 +223,10 @@ const InteractiveTokenDemo: React.FC<InteractiveTokenDemoProps> = ({ className =
             </div>
           </div>
         </div>
-      </motion.div>
+      </MotionDiv>
 
       {/* Technical Details */}
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
@@ -247,7 +257,7 @@ const InteractiveTokenDemo: React.FC<InteractiveTokenDemoProps> = ({ className =
             </ul>
           </div>
         </div>
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 };

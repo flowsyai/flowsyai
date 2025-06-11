@@ -1,5 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -121,7 +131,7 @@ const QuickAccessPanel: React.FC<QuickAccessPanelProps> = ({ className = '' }) =
         {quickActions
           .filter(action => action.featured)
           .map((action, index) => (
-            <motion.div
+            <MotionDiv
               key={action.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -173,7 +183,7 @@ const QuickAccessPanel: React.FC<QuickAccessPanelProps> = ({ className = '' }) =
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </MotionDiv>
           ))}
       </div>
 
@@ -182,7 +192,7 @@ const QuickAccessPanel: React.FC<QuickAccessPanelProps> = ({ className = '' }) =
         {quickActions
           .filter(action => !action.featured)
           .map((action, index) => (
-            <motion.div
+            <MotionDiv
               key={action.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -216,13 +226,13 @@ const QuickAccessPanel: React.FC<QuickAccessPanelProps> = ({ className = '' }) =
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </MotionDiv>
           ))}
       </div>
 
       {/* Call to Action */}
       <div className="text-center pt-6">
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.8 }}
@@ -236,7 +246,7 @@ const QuickAccessPanel: React.FC<QuickAccessPanelProps> = ({ className = '' }) =
             <Workflow className="w-5 h-5 mr-2" />
             View Documentation
           </Button>
-        </motion.div>
+        </MotionDiv>
       </div>
     </div>
   );

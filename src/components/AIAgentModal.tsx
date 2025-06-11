@@ -9,7 +9,17 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { type AIAgent } from './AIAgentCard';
-import { motion } from 'framer-motion'; // Added framer-motion
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+// Added framer-motion
 import { CheckCircle } from 'lucide-react'; // Added CheckCircle for capabilities
 
 interface AIAgentModalProps {
@@ -48,14 +58,14 @@ const AIAgentModal: FC<AIAgentModalProps> = ({ agent, open, onOpenChange, onAddT
       <DialogContent className="sm:max-w-lg bg-card-alt border-border-alt shadow-2xl rounded-xl">
         <DialogHeader className="pt-2">
           <div className="flex items-center gap-4 mb-3">
-            <motion.div
+            <MotionDiv
               className="p-3 bg-primary/10 rounded-lg border border-primary/20"
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.4, type: 'spring', stiffness: 200 }}
             >
               {React.cloneElement(agent.icon, { className: 'w-7 h-7 text-primary' })}
-            </motion.div>
+            </MotionDiv>
             <DialogTitle className="text-h3 text-foreground">{agent.name}</DialogTitle>
           </div>
           <DialogDescription className="text-body-std text-muted-foreground">
@@ -67,7 +77,7 @@ const AIAgentModal: FC<AIAgentModalProps> = ({ agent, open, onOpenChange, onAddT
           <h4 className="text-lg font-semibold mb-3 text-foreground/90">Key Capabilities</h4>
           <ul className="space-y-2.5">
             {capabilities.map((cap, index) => (
-              <motion.li
+              <MotionLi
                 key={index}
                 className="flex items-start gap-2.5"
                 custom={index}
@@ -77,7 +87,7 @@ const AIAgentModal: FC<AIAgentModalProps> = ({ agent, open, onOpenChange, onAddT
               >
                 <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                 <span className="text-body-std text-foreground/80">{cap}</span>
-              </motion.li>
+              </MotionLi>
             ))}
           </ul>
         </div>

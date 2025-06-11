@@ -1,4 +1,4 @@
-limport React from 'react';
+import React from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { screen, fireEvent } from '@testing-library/react';
 import { render, createMockUser } from '@/test/utils';
@@ -108,8 +108,13 @@ describe('Navbar', () => {
 
     render(<Navbar />);
 
-    const logoButton = screen.getAllByLabelText('Navigate to home page')[0];
-    fireEvent.click(logoButton);
+    const logoButtons = screen.getAllByLabelText('Navigate to home page');
+    expect(logoButtons.length).toBeGreaterThan(0);
+    const logoButton = logoButtons[0];
+    expect(logoButton).toBeDefined();
+    if (logoButton) {
+      fireEvent.click(logoButton);
+    }
 
     expect(mockNavigate).toHaveBeenCalledWith('/');
   });
@@ -132,8 +137,13 @@ describe('Navbar', () => {
 
     render(<Navbar />);
 
-    const logoButton = screen.getAllByLabelText('Navigate to home page')[0];
-    fireEvent.click(logoButton);
+    const logoButtons = screen.getAllByLabelText('Navigate to home page');
+    expect(logoButtons.length).toBeGreaterThan(0);
+    const logoButton = logoButtons[0];
+    expect(logoButton).toBeDefined();
+    if (logoButton) {
+      fireEvent.click(logoButton);
+    }
 
     expect(mockNavigate).toHaveBeenCalledWith('/account');
   });
@@ -262,7 +272,12 @@ describe('Navbar', () => {
 
     // Just check that the Features link exists and has proper structure
     // Active state testing requires complex router mocking that's beyond this scope
-    const featuresLink = screen.getAllByText('Features')[0];
-    expect(featuresLink.closest('a')).toHaveAttribute('href', '/features');
+    const featuresLinks = screen.getAllByText('Features');
+    expect(featuresLinks.length).toBeGreaterThan(0);
+    const featuresLink = featuresLinks[0];
+    expect(featuresLink).toBeDefined();
+    if (featuresLink) {
+      expect(featuresLink.closest('a')).toHaveAttribute('href', '/features');
+    }
   });
 });

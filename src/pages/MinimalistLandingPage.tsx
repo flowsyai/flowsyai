@@ -8,7 +8,14 @@ import { useComingSoon } from '@/hooks/useComingSoon';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionH2,
+  MotionP,
+  MotionLi,
+  MotionTr,
+  SafeAnimatePresence,
+} from '@/lib/motion-wrapper';
 import {
   ArrowRight,
   Sparkles,
@@ -185,7 +192,7 @@ const MinimalistLandingPage: React.FC = () => {
       {/* Business Impact Metrics - să ne lăudăm cu cifrele! 📊 */}
       <section className="py-20 bg-gradient-to-r from-primary/5 via-gold/5 to-primary/5">
         <div className="container mx-auto px-4">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -200,11 +207,11 @@ const MinimalistLandingPage: React.FC = () => {
               Join thousands of organizations already seeing dramatic improvements in productivity
               and efficiency
             </p>
-          </motion.div>
+          </MotionDiv>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {businessMetrics.map((metric, index) => (
-              <motion.div
+              <MotionDiv
                 key={metric.metric}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -225,7 +232,7 @@ const MinimalistLandingPage: React.FC = () => {
                     <p className="text-muted-foreground">{metric.detail}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </div>
@@ -234,7 +241,7 @@ const MinimalistLandingPage: React.FC = () => {
       {/* Competitive Comparison - să ne lăudăm față de competiție! 🏆 */}
       <section className="py-20 bg-card/50">
         <div className="container mx-auto px-4">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -248,7 +255,7 @@ const MinimalistLandingPage: React.FC = () => {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               See how we compare to other automation platforms and why industry leaders choose us
             </p>
-          </motion.div>
+          </MotionDiv>
 
           <div className="overflow-x-auto">
             <table className="w-full bg-background rounded-lg shadow-lg overflow-hidden">
@@ -268,7 +275,7 @@ const MinimalistLandingPage: React.FC = () => {
               </thead>
               <tbody>
                 {competitorComparison.map((row, index) => (
-                  <motion.tr
+                  <MotionTr
                     key={row.feature}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -300,13 +307,13 @@ const MinimalistLandingPage: React.FC = () => {
                         {getStatusIcon(row.powerAutomate.status)} {row.powerAutomate.value}
                       </div>
                     </td>
-                  </motion.tr>
+                  </MotionTr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -320,7 +327,7 @@ const MinimalistLandingPage: React.FC = () => {
               <Crown className="w-5 h-5 mr-2" />
               See Full Platform Comparison
             </Button>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
 
@@ -336,7 +343,7 @@ const MinimalistLandingPage: React.FC = () => {
       {/* Unique Advantages - de ce suntem cei mai tari! 🏆 */}
       <section className="py-20 bg-gradient-to-r from-primary/10 via-gold/10 to-primary/10">
         <div className="container mx-auto px-4">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -350,11 +357,11 @@ const MinimalistLandingPage: React.FC = () => {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Discover the exclusive features that set us apart from every other automation platform
             </p>
-          </motion.div>
+          </MotionDiv>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {uniqueAdvantages.map((advantage, index) => (
-              <motion.div
+              <MotionDiv
                 key={advantage.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -372,9 +379,9 @@ const MinimalistLandingPage: React.FC = () => {
                     <p className="text-muted-foreground">{advantage.description}</p>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-3">
+                    <div className="space-y-3">
                       {advantage.features.map((feature, featureIndex) => (
-                        <motion.li
+                        <MotionDiv
                           key={featureIndex}
                           initial={{ opacity: 0, x: -10 }}
                           whileInView={{ opacity: 1, x: 0 }}
@@ -384,16 +391,16 @@ const MinimalistLandingPage: React.FC = () => {
                         >
                           <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                           <span className="text-sm">{feature}</span>
-                        </motion.li>
+                        </MotionDiv>
                       ))}
-                    </ul>
+                    </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -425,7 +432,7 @@ const MinimalistLandingPage: React.FC = () => {
                 </Button>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
 
@@ -434,14 +441,14 @@ const MinimalistLandingPage: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-gold/5 to-primary/5"></div>
 
         <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.8 }}
             className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-2xl rounded-2xl p-8 md:p-12"
           >
-            <motion.h2
+            <MotionH2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
@@ -449,9 +456,9 @@ const MinimalistLandingPage: React.FC = () => {
               className="text-3xl md:text-4xl font-bold mb-4 text-foreground font-serif"
             >
               Join <span className="premium-gradient-text">10,000+</span> Professionals
-            </motion.h2>
+            </MotionH2>
 
-            <motion.p
+            <MotionP
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
@@ -462,9 +469,9 @@ const MinimalistLandingPage: React.FC = () => {
               <br className="hidden md:block" />
               <strong className="text-foreground">Start your free trial today</strong> – no credit
               card required.
-            </motion.p>
+            </MotionP>
 
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
@@ -487,9 +494,9 @@ const MinimalistLandingPage: React.FC = () => {
               >
                 Compare Plans
               </Button>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.5 }}
@@ -497,15 +504,15 @@ const MinimalistLandingPage: React.FC = () => {
               className="mt-6 text-sm text-muted-foreground"
             >
               ✓ Free 14-day trial &nbsp;&nbsp; ✓ No setup fees &nbsp;&nbsp; ✓ Cancel anytime
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         </div>
       </section>
 
       {/* Sticky Mobile CTA */}
-      <AnimatePresence>
+      <SafeAnimatePresence>
         {showStickyCTA && (
-          <motion.div
+          <MotionDiv
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
@@ -520,9 +527,9 @@ const MinimalistLandingPage: React.FC = () => {
               <Sparkles className="w-5 h-5 mr-2" />
               Start Free Trial
             </Button>
-          </motion.div>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </SafeAnimatePresence>
 
       {/* Coming Soon Modal */}
       <ComingSoonModal

@@ -1,5 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Shield,
   AlertTriangle,
@@ -352,7 +362,7 @@ const SecurityDashboard: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Security Overview */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -373,9 +383,9 @@ const SecurityDashboard: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -401,9 +411,9 @@ const SecurityDashboard: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -425,9 +435,9 @@ const SecurityDashboard: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -446,7 +456,7 @@ const SecurityDashboard: React.FC = () => {
                 <p className="text-sm text-muted-foreground mt-2">Last 24 hours</p>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
         </div>
 
         {/* Main Content Tabs */}

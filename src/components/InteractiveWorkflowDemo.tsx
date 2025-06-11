@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -346,7 +357,7 @@ const InteractiveWorkflowDemo: React.FC<InteractiveWorkflowDemoProps> = ({ onClo
 
   return (
     <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
@@ -385,7 +396,7 @@ const InteractiveWorkflowDemo: React.FC<InteractiveWorkflowDemoProps> = ({ onClo
             {!selectedWorkflow ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {demoWorkflows.map(workflow => (
-                  <motion.div
+                  <MotionDiv
                     key={workflow.id}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -429,7 +440,7 @@ const InteractiveWorkflowDemo: React.FC<InteractiveWorkflowDemoProps> = ({ onClo
                         </Button>
                       </CardContent>
                     </Card>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
               </div>
             ) : (
@@ -474,7 +485,7 @@ const InteractiveWorkflowDemo: React.FC<InteractiveWorkflowDemoProps> = ({ onClo
                 {/* Workflow Steps */}
                 <div className="space-y-4">
                   {selectedWorkflow.steps.map((step, index) => (
-                    <motion.div
+                    <MotionDiv
                       key={step.id}
                       initial={{ opacity: 0.5 }}
                       animate={{
@@ -523,7 +534,7 @@ const InteractiveWorkflowDemo: React.FC<InteractiveWorkflowDemoProps> = ({ onClo
                           )}
                         </div>
                       </div>
-                    </motion.div>
+                    </MotionDiv>
                   ))}
                 </div>
 
@@ -551,7 +562,7 @@ const InteractiveWorkflowDemo: React.FC<InteractiveWorkflowDemoProps> = ({ onClo
             )}
           </CardContent>
         </Card>
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 };

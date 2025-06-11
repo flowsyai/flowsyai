@@ -1,0 +1,32 @@
+# Headers for JavaScript assets
+/assets/*.js
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: public, max-age=31536000, immutable
+
+# Headers for CSS assets
+/assets/*.css
+  Content-Type: text/css; charset=utf-8
+  Cache-Control: public, max-age=31536000, immutable
+
+# Headers for all assets directory
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Manifest file
+/manifest.webmanifest
+  Content-Type: application/manifest+json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000
+
+# Favicon
+/favicon.ico
+  Content-Type: image/x-icon
+  Cache-Control: public, max-age=31536000
+
+# Security headers for all pages
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

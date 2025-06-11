@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { SafeAnimatePresence, MotionDiv } from '@/lib/motion-wrapper';
+
 import {
   Bot,
   MessageSquare,
@@ -88,20 +89,7 @@ interface NodeOutput extends Record<string, unknown> {
   scrapingData?: Record<string, unknown>;
 }
 
-function ParticlesBackground() {
-  // Simplified background without tsParticles to prevent loading issues
-  return (
-    <div className="absolute inset-0 z-0">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-sapphire/5"></div>
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/40 rounded-full animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-sapphire/40 rounded-full animate-pulse delay-1000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-gold/40 rounded-full animate-pulse delay-2000"></div>
-        <div className="absolute top-2/3 right-1/4 w-1 h-1 bg-primary/40 rounded-full animate-pulse delay-3000"></div>
-      </div>
-    </div>
-  );
-}
+// Removed unused ParticlesBackground component
 
 const VisualWorkflowBuilder: React.FC = () => {
   const [nodes, setNodes] = useState<AgentNode[]>([]);
@@ -161,19 +149,7 @@ const VisualWorkflowBuilder: React.FC = () => {
   >([]);
 
   const [smartMode, setSmartMode] = useState(true);
-  const [workflowTemplates, setWorkflowTemplates] = useState<
-    Array<{
-      id: string;
-      name: string;
-      description: string;
-      nodes: AgentNode[];
-      connections: Connection[];
-      category: string;
-      difficulty: 'beginner' | 'intermediate' | 'advanced';
-      estimatedTime: string;
-      popularity: number;
-    }>
-  >([]);
+  // Removed unused workflowTemplates state
 
   const [,] = useState(true);
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -399,7 +375,7 @@ const VisualWorkflowBuilder: React.FC = () => {
       },
     ];
 
-    setWorkflowTemplates(templates);
+    // Templates initialized (removed setWorkflowTemplates as it's unused)
 
     // Initialize AI suggestions only once
     setTimeout(() => {
@@ -1725,24 +1701,24 @@ The transition to sustainable technology requires continued investment, policy s
 
   return (
     <section id="workflow-demo" className="py-16 md:py-20 relative overflow-hidden">
-      {/* Particles Background */}
-      <ParticlesBackground />
+      {/* Subtle overlay for text readability */}
+      <div className="absolute inset-0 bg-background/10 z-[5]"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <motion.div
+        <MotionDiv
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <motion.div
+          <MotionDiv
             className="w-20 h-20 mx-auto mb-8 rounded-full premium-glass flex items-center justify-center border border-primary/20 shadow-lg premium-shadow relative overflow-hidden group"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <motion.div
+            <MotionDiv
               className="w-12 h-12 rounded-full bg-gradient-to-tr from-primary via-gold to-primary bg-[length:200%_200%] animate-gradient-slow"
               animate={{
                 scale: [1, 1.1, 1],
@@ -1756,8 +1732,8 @@ The transition to sustainable technology requires continued investment, policy s
               <div className="w-full h-full flex items-center justify-center">
                 <Bot className="w-6 h-6 text-background animate-pulse-scale" />
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-serif">
             Build <span className="premium-gradient-text">AI Workflows</span> Visually
@@ -1766,10 +1742,10 @@ The transition to sustainable technology requires continued investment, policy s
             Drag and drop AI agents to create powerful workflows. Connect them to build complex
             automation pipelines without writing a single line of code.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         {/* Workflow Builder Interface */}
-        <motion.div
+        <MotionDiv
           className="max-w-7xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1869,9 +1845,9 @@ The transition to sustainable technology requires continued investment, policy s
               </div>
 
               {/* AI Suggestions Bar */}
-              <AnimatePresence>
+              <SafeAnimatePresence>
                 {aiSuggestions.length > 0 && (
-                  <motion.div
+                  <MotionDiv
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
@@ -1883,7 +1859,7 @@ The transition to sustainable technology requires continued investment, policy s
                     </div>
                     <div className="space-y-2">
                       {aiSuggestions.slice(-3).map(suggestion => (
-                        <motion.div
+                        <MotionDiv
                           key={suggestion.id}
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
@@ -1926,12 +1902,12 @@ The transition to sustainable technology requires continued investment, policy s
                           >
                             ×
                           </Button>
-                        </motion.div>
+                        </MotionDiv>
                       ))}
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 )}
-              </AnimatePresence>
+              </SafeAnimatePresence>
             </div>
 
             {/* Main Interface */}
@@ -1950,7 +1926,7 @@ The transition to sustainable technology requires continued investment, policy s
 
                 <div className="space-y-3">
                   {agentLibrary.map((agent, index) => (
-                    <motion.div
+                    <MotionDiv
                       key={agent.type}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -1983,7 +1959,7 @@ The transition to sustainable technology requires continued investment, policy s
                           {agent.description}
                         </p>
                       </div>
-                    </motion.div>
+                    </MotionDiv>
                   ))}
                 </div>
 
@@ -2005,6 +1981,7 @@ The transition to sustainable technology requires continued investment, policy s
                   className="w-full h-full relative overflow-hidden"
                   onDrop={handleCanvasDrop}
                   onDragOver={handleCanvasDragOver}
+                  // Dynamic background pattern required for canvas grid
                   style={{
                     backgroundImage:
                       'radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)',
@@ -2067,9 +2044,9 @@ The transition to sustainable technology requires continued investment, policy s
                   </svg>
 
                   {/* Workflow Nodes */}
-                  <AnimatePresence>
+                  <SafeAnimatePresence>
                     {nodes.map(node => (
-                      <motion.div
+                      <MotionDiv
                         key={node.id}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -2081,7 +2058,7 @@ The transition to sustainable technology requires continued investment, policy s
                           zIndex: selectedNode === node.id ? 10 : 1,
                         }}
                         onClick={() => setSelectedNode(node.id)}
-                        onMouseDown={e => handleNodeMouseDown(e, node.id)}
+                        onMouseDown={(e: React.MouseEvent) => handleNodeMouseDown(e, node.id)}
                       >
                         <div
                           className={`premium-card w-32 bg-background border-2 rounded-lg shadow-lg transition-all duration-300 ${
@@ -2139,7 +2116,7 @@ The transition to sustainable technology requires continued investment, policy s
                                 e.stopPropagation();
                                 handlePortClick(node.id, index, 'input');
                               }}
-                              style={{ top: `${30 + index * 20}px` }}
+                              style={{ top: `${30 + index * 20}px` }} // Dynamic positioning for multiple input ports
                             />
                           ))}
 
@@ -2152,7 +2129,7 @@ The transition to sustainable technology requires continued investment, policy s
                                 e.stopPropagation();
                                 handlePortClick(node.id, index, 'output');
                               }}
-                              style={{ top: `${30 + index * 20}px` }}
+                              style={{ top: `${30 + index * 20}px` }} // Dynamic positioning for multiple output ports
                             />
                           ))}
 
@@ -2220,9 +2197,9 @@ The transition to sustainable technology requires continued investment, policy s
                             </div>
                           )}
                         </div>
-                      </motion.div>
+                      </MotionDiv>
                     ))}
-                  </AnimatePresence>
+                  </SafeAnimatePresence>
 
                   {/* Connection Preview */}
                   {connectionStart && (
@@ -2236,24 +2213,24 @@ The transition to sustainable technology requires continued investment, policy s
               </div>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* User Input Dialog */}
-        <AnimatePresence>
+        <SafeAnimatePresence>
           {showInputDialog && (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
               onClick={() => setShowInputDialog(false)}
             >
-              <motion.div
+              <MotionDiv
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 className="bg-card border border-border-alt rounded-2xl p-6 max-w-lg w-full shadow-2xl"
-                onClick={e => e.stopPropagation()}
+                onClick={(e?: React.MouseEvent) => e?.stopPropagation()}
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -2320,14 +2297,14 @@ The transition to sustainable technology requires continued investment, policy s
                     </Button>
                   </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           )}
-        </AnimatePresence>
+        </SafeAnimatePresence>
 
         {/* Results Section Below Canvas */}
         {finalResults && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="mt-8 bg-card border border-border-alt rounded-xl p-6"
@@ -2352,7 +2329,7 @@ The transition to sustainable technology requires continued investment, policy s
                 </pre>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </div>
     </section>

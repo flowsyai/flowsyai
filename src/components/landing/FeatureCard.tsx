@@ -1,10 +1,21 @@
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  useInView,
+} from '@/lib/motion-wrapper';
+
 import { Link as RouterLink } from 'react-router-dom'; // Renamed to avoid conflict with motion.div if it was named Link
 import { Button as ShadButton } from '@/components/ui/button'; // Renamed to avoid conflict
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 
-const MotionButton = motion(ShadButton); // Wrap ShadCN Button for motion props
+// Use MotionButton from motion-wrapper instead of creating one
 
 // Define the type for the feature prop
 interface Feature {
@@ -35,7 +46,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index }) => {
   };
 
   return (
-    <motion.div
+    <MotionDiv
       ref={ref}
       key={feature.id}
       className={`group flex flex-col md:flex-row items-center gap-8 md:gap-12 ${
@@ -89,7 +100,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index }) => {
           </RouterLink>
         </MotionButton>
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 };
 

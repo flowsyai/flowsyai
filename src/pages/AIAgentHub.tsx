@@ -1,5 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Bot,
   Plus,
@@ -156,7 +166,7 @@ const AIAgentHub: React.FC = () => {
     <div className="min-h-screen w-full relative overflow-hidden premium-hero-bg">
       <div className="relative z-20 container mx-auto px-4 py-8 max-w-screen-xl">
         {/* Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -175,20 +185,20 @@ const AIAgentHub: React.FC = () => {
               Create New Agent
             </Button>
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Token Manager */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mb-8"
         >
           <TokenManager compact={true} showPurchaseOptions={true} />
-        </motion.div>
+        </MotionDiv>
 
         {/* Filters */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -232,10 +242,10 @@ const AIAgentHub: React.FC = () => {
               </Select>
             </div>
           </GlassCard>
-        </motion.div>
+        </MotionDiv>
 
         {/* Agents Grid */}
-        <motion.div
+        <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -244,7 +254,7 @@ const AIAgentHub: React.FC = () => {
           {isLoading ? (
             // Loading skeleton
             Array.from({ length: 6 }).map((_, index) => (
-              <motion.div key={index} variants={itemVariants}>
+              <MotionDiv key={index} variants={itemVariants}>
                 <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl p-6">
                   <div className="animate-pulse">
                     <div className="flex items-center gap-3 mb-4">
@@ -262,10 +272,10 @@ const AIAgentHub: React.FC = () => {
                     </div>
                   </div>
                 </GlassCard>
-              </motion.div>
+              </MotionDiv>
             ))
           ) : filteredAgents.length === 0 ? (
-            <motion.div variants={itemVariants} className="col-span-full">
+            <MotionDiv variants={itemVariants} className="col-span-full">
               <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl p-12">
                 <div className="text-center">
                   <Bot className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
@@ -284,10 +294,10 @@ const AIAgentHub: React.FC = () => {
                   </Button>
                 </div>
               </GlassCard>
-            </motion.div>
+            </MotionDiv>
           ) : (
             filteredAgents.map(agent => (
-              <motion.div key={agent.id} variants={itemVariants} whileHover={{ y: -4 }}>
+              <MotionDiv key={agent.id} variants={itemVariants} whileHover={{ y: -4 }}>
                 <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl p-6 h-full">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
@@ -336,21 +346,21 @@ const AIAgentHub: React.FC = () => {
                     </Button>
                   </div>
                 </GlassCard>
-              </motion.div>
+              </MotionDiv>
             ))
           )}
-        </motion.div>
+        </MotionDiv>
 
         {/* AI Agent Tester Modal */}
         {showTester && selectedAgent && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={() => setShowTester(false)}
           >
-            <motion.div
+            <MotionDiv
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -375,8 +385,8 @@ const AIAgentHub: React.FC = () => {
                   }}
                 />
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
       </div>
     </div>

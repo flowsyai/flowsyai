@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { MotionDiv, SafeAnimatePresence } from '@/lib/motion-wrapper';
 import {
   Mic,
   MicOff,
@@ -300,15 +300,15 @@ const VoiceCommandsPanel: React.FC<VoiceCommandsPanelProps> = ({
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
-      <motion.div
+    <SafeAnimatePresence>
+      <MotionDiv
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-lg"
         onClick={onClose}
       >
-        <motion.div
+        <MotionDiv
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -475,9 +475,9 @@ const VoiceCommandsPanel: React.FC<VoiceCommandsPanelProps> = ({
               </div>
             )}
           </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+        </MotionDiv>
+      </MotionDiv>
+    </SafeAnimatePresence>
   );
 };
 

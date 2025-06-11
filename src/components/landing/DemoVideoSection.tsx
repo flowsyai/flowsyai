@@ -1,5 +1,15 @@
 import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import {
   Play,
@@ -51,7 +61,7 @@ const DemoVideoSection: React.FC = () => {
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         {/* Section Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -76,10 +86,10 @@ const DemoVideoSection: React.FC = () => {
             Watch our revolutionary AI-powered tutorial system, enterprise gamification, and
             real-time optimization in action. No competitor comes close to our advanced technology.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         {/* Demo Video Container */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -139,19 +149,19 @@ const DemoVideoSection: React.FC = () => {
             {/* Video Overlay */}
             {!isPlaying && (
               <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                <motion.button
+                <MotionButton
                   onClick={togglePlay}
                   className="w-20 h-20 bg-gradient-to-r from-primary to-gold rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Play className="w-8 h-8 text-white ml-1" />
-                </motion.button>
+                </MotionButton>
               </div>
             )}
 
             {/* Custom Controls */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: showControls || !isPlaying ? 1 : 0 }}
               transition={{ duration: 0.3 }}
@@ -189,11 +199,11 @@ const DemoVideoSection: React.FC = () => {
                   </Button>
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
 
           {/* Video Features */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -230,10 +240,10 @@ const DemoVideoSection: React.FC = () => {
                 <p className="text-sm text-muted-foreground">{feature.description}</p>
               </div>
             ))}
-          </motion.div>
+          </MotionDiv>
 
           {/* Call to Action */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -264,8 +274,8 @@ const DemoVideoSection: React.FC = () => {
                 </a>
               </Button>
             </div>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       </div>
     </section>
   );

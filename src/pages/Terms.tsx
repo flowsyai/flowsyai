@@ -1,5 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   FileText,
@@ -118,7 +128,7 @@ const Terms: React.FC = () => {
 
       {/* Main Content */}
       <div className="relative z-10 w-full">
-        <motion.div
+        <MotionDiv
           className="w-full px-4 sm:px-6 lg:px-8 py-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -126,15 +136,15 @@ const Terms: React.FC = () => {
         >
           {/* Header */}
           <div className="text-center mb-16">
-            <motion.h1
+            <MotionH1
               className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-gold to-primary bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               Terms of Service
-            </motion.h1>
-            <motion.p
+            </MotionH1>
+            <MotionP
               className="text-xl text-muted-foreground max-w-3xl mx-auto mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -142,8 +152,8 @@ const Terms: React.FC = () => {
             >
               These terms govern your use of AI Flow and outline the rights and responsibilities of
               both parties.
-            </motion.p>
-            <motion.div
+            </MotionP>
+            <MotionDiv
               className="flex items-center justify-center gap-4 text-sm text-muted-foreground"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -157,13 +167,13 @@ const Terms: React.FC = () => {
                 <Mail className="w-4 h-4" />
                 Questions? Contact legal@aiflow.com
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
 
           {/* Terms Sections */}
           <div className="max-w-4xl mx-auto space-y-8">
             {sections.map((section, index) => (
-              <motion.div
+              <MotionDiv
                 key={section.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -190,11 +200,11 @@ const Terms: React.FC = () => {
                     </ul>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </MotionDiv>
             ))}
 
             {/* Additional Terms */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -238,10 +248,10 @@ const Terms: React.FC = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </MotionDiv>
 
             {/* Contact Information */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -279,10 +289,10 @@ const Terms: React.FC = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </MotionDiv>
 
             {/* Agreement Notice */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -301,9 +311,9 @@ const Terms: React.FC = () => {
                   </p>
                 </CardContent>
               </Card>
-            </motion.div>
+            </MotionDiv>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </div>
   );

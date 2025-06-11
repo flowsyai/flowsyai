@@ -1,5 +1,16 @@
 import React, { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+import { useAnimation } from '@/lib/motion-hooks';
+
 import { useInView } from 'react-intersection-observer';
 import { Bot, BrainCircuit, Zap, Sparkles } from 'lucide-react';
 
@@ -41,7 +52,7 @@ const CapabilitiesAnimation: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/5 to-background"></div>
 
       <div className="container mx-auto px-6 relative z-10 max-w-6xl">
-        <motion.div
+        <MotionDiv
           className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={controls}
@@ -56,11 +67,11 @@ const CapabilitiesAnimation: React.FC = () => {
             Discover the powerful features that make Bot Architect Studio the leading platform for
             AI workflow orchestration
           </p>
-        </motion.div>
+        </MotionDiv>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {capabilities.map((capability, index) => (
-            <motion.div
+            <MotionDiv
               key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={controls}
@@ -77,7 +88,7 @@ const CapabilitiesAnimation: React.FC = () => {
               className="group"
             >
               <div className="premium-card bg-card/60 backdrop-blur-lg border border-border-alt shadow-xl rounded-2xl p-6 flex flex-col items-center text-center h-full group-hover:scale-105 transition-all duration-300">
-                <motion.div
+                <MotionDiv
                   className="w-16 h-16 rounded-full bg-gradient-to-r from-primary/10 to-gold/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
                   animate={{
                     boxShadow: [
@@ -91,16 +102,16 @@ const CapabilitiesAnimation: React.FC = () => {
                   <div className="text-primary group-hover:text-gold transition-colors duration-300">
                     {capability.icon}
                   </div>
-                </motion.div>
+                </MotionDiv>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">{capability.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{capability.description}</p>
               </div>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
 
         {/* Animație centrală */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0 }}
           animate={controls}
           variants={{
@@ -111,7 +122,7 @@ const CapabilitiesAnimation: React.FC = () => {
           <div className="relative w-64 h-64 md:w-80 md:h-80">
             {/* Linii de conexiune animate */}
             {[...Array(8)].map((_, i) => (
-              <motion.div
+              <MotionDiv
                 key={i}
                 className="absolute top-1/2 left-1/2 w-full h-0.5 bg-primary/30 origin-left"
                 style={{ rotate: `${i * 45}deg` }}
@@ -129,7 +140,7 @@ const CapabilitiesAnimation: React.FC = () => {
             ))}
 
             {/* Nod central */}
-            <motion.div
+            <MotionDiv
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-gradient-to-r from-primary to-gold flex items-center justify-center"
               animate={{
                 scale: [1, 1.1, 1],
@@ -142,7 +153,7 @@ const CapabilitiesAnimation: React.FC = () => {
               transition={{ duration: 3, repeat: Infinity }}
             >
               <BrainCircuit className="w-10 h-10 text-background" />
-            </motion.div>
+            </MotionDiv>
 
             {/* Noduri periferice */}
             {[...Array(6)].map((_, i) => {
@@ -151,7 +162,7 @@ const CapabilitiesAnimation: React.FC = () => {
               const y = Math.sin(angle) * 100;
 
               return (
-                <motion.div
+                <MotionDiv
                   key={i}
                   className="absolute w-10 h-10 rounded-full bg-card flex items-center justify-center border border-primary/30"
                   style={{
@@ -170,11 +181,11 @@ const CapabilitiesAnimation: React.FC = () => {
                   }}
                 >
                   <Bot className="w-5 h-5 text-primary" />
-                </motion.div>
+                </MotionDiv>
               );
             })}
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

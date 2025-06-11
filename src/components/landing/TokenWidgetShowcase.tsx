@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Sparkles,
   TrendingUp,
@@ -110,7 +121,7 @@ const TokenWidgetShowcase: React.FC = () => {
     <section className="py-20 px-6 bg-gradient-to-br from-background via-primary/5 to-background">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -127,11 +138,11 @@ const TokenWidgetShowcase: React.FC = () => {
             Our enhanced token widgets aren't just displays—they're interactive experiences that
             engage users and drive action. Try the features below and see the difference.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Interactive Demo */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -181,41 +192,41 @@ const TokenWidgetShowcase: React.FC = () => {
                 </div>
 
                 {/* Reward Animation */}
-                <AnimatePresence>
+                <SafeAnimatePresence>
                   {showReward && (
-                    <motion.div
+                    <MotionDiv
                       initial={{ opacity: 0, scale: 0.8, y: 20 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.8, y: -20 }}
                       className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm rounded-2xl"
                     >
                       <div className="text-center p-6">
-                        <motion.div
+                        <MotionDiv
                           animate={{ rotate: 360 }}
                           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
                           className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-gold to-yellow-500 rounded-full flex items-center justify-center"
                         >
                           <Trophy className="w-8 h-8 text-white" />
-                        </motion.div>
+                        </MotionDiv>
                         <h4 className="text-xl font-bold text-white mb-2">Engagement Master!</h4>
                         <p className="text-white/80">You've discovered 5 interactive features!</p>
                       </div>
-                    </motion.div>
+                    </MotionDiv>
                   )}
-                </AnimatePresence>
+                </SafeAnimatePresence>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Feature Highlights */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="order-1 lg:order-2 space-y-6"
           >
             {features.map((feature, index) => (
-              <motion.div
+              <MotionDiv
                 key={feature.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -243,7 +254,7 @@ const TokenWidgetShowcase: React.FC = () => {
                     <div className="flex items-center gap-2 mb-2">
                       <h3 className="font-semibold text-foreground">{feature.title}</h3>
                       {currentFeature === index && (
-                        <motion.div
+                        <MotionDiv
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           className="w-2 h-2 bg-primary rounded-full"
@@ -260,18 +271,18 @@ const TokenWidgetShowcase: React.FC = () => {
 
                 {/* Progress Bar */}
                 {currentFeature === index && isAutoPlaying && (
-                  <motion.div
+                  <MotionDiv
                     initial={{ width: 0 }}
                     animate={{ width: '100%' }}
                     transition={{ duration: 4, ease: 'linear' }}
                     className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary to-gold rounded-b-xl"
                   />
                 )}
-              </motion.div>
+              </MotionDiv>
             ))}
 
             {/* Call to Action */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -296,8 +307,8 @@ const TokenWidgetShowcase: React.FC = () => {
                   </a>
                 </Button>
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         </div>
       </div>
     </section>

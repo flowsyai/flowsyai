@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Crown,
   CreditCard,
@@ -148,7 +158,7 @@ const BillingPage: React.FC = () => {
     <div className="min-h-screen w-full relative overflow-hidden premium-hero-bg">
       <div className="relative z-20 container mx-auto px-4 py-8 max-w-screen-xl">
         {/* Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -178,16 +188,16 @@ const BillingPage: React.FC = () => {
               </Badge>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
 
-        <motion.div
+        <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="space-y-8"
         >
           {/* Current Usage */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <h2 className="text-xl font-bold text-foreground mb-4">Current Usage</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
@@ -246,15 +256,15 @@ const BillingPage: React.FC = () => {
                 </div>
               </GlassCard>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Plans Comparison */}
           {!user?.isPremium && (
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <h2 className="text-xl font-bold text-foreground mb-4">Upgrade Your Plan</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {plans.map(plan => (
-                  <motion.div
+                  <MotionDiv
                     key={plan.id}
                     whileHover={{ y: -4 }}
                     className={`relative ${plan.popular ? 'lg:scale-105' : ''}`}
@@ -316,16 +326,16 @@ const BillingPage: React.FC = () => {
                         </Button>
                       </div>
                     </GlassCard>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
               </div>
-            </motion.div>
+            </MotionDiv>
           )}
 
           {/* Payment Method & Billing History */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Payment Method */}
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <h2 className="text-xl font-bold text-foreground mb-4">Payment Method</h2>
               <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
                 <div className="p-6">
@@ -357,10 +367,10 @@ const BillingPage: React.FC = () => {
                   )}
                 </div>
               </GlassCard>
-            </motion.div>
+            </MotionDiv>
 
             {/* Billing History */}
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <h2 className="text-xl font-bold text-foreground mb-4">Billing History</h2>
               <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
                 <div className="p-6">
@@ -398,12 +408,12 @@ const BillingPage: React.FC = () => {
                   )}
                 </div>
               </GlassCard>
-            </motion.div>
+            </MotionDiv>
           </div>
 
           {/* Premium Benefits */}
           {user?.isPremium && (
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <h2 className="text-xl font-bold text-foreground mb-4">Premium Benefits</h2>
               <GlassCard className="premium-card bg-gradient-to-r from-gold/10 via-gold-light/10 to-gold/10 border border-gold/20 shadow-xl">
                 <div className="p-6">
@@ -438,9 +448,9 @@ const BillingPage: React.FC = () => {
                   </div>
                 </div>
               </GlassCard>
-            </motion.div>
+            </MotionDiv>
           )}
-        </motion.div>
+        </MotionDiv>
       </div>
     </div>
   );

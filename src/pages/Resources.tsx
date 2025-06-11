@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -218,7 +228,7 @@ const Resources: React.FC = () => {
 
       {/* Main Content */}
       <div className="relative z-10 w-full">
-        <motion.div
+        <MotionDiv
           className="w-full px-4 sm:px-6 lg:px-8 py-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -262,7 +272,7 @@ const Resources: React.FC = () => {
                 <CardContent className="p-0">
                   <nav className="space-y-1">
                     {resourceSections.map(section => (
-                      <motion.button
+                      <MotionButton
                         key={section.id}
                         onClick={() => setActiveSection(section.id)}
                         className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg transition-all duration-200 ${
@@ -302,7 +312,7 @@ const Resources: React.FC = () => {
                         <Badge variant="secondary" className="text-xs">
                           {section.count}
                         </Badge>
-                      </motion.button>
+                      </MotionButton>
                     ))}
                   </nav>
                 </CardContent>
@@ -311,7 +321,7 @@ const Resources: React.FC = () => {
 
             {/* Content Area */}
             <div className="xl:col-span-3">
-              <motion.div
+              <MotionDiv
                 key={activeSection}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -572,10 +582,10 @@ const Resources: React.FC = () => {
                     </CardContent>
                   </Card>
                 )}
-              </motion.div>
+              </MotionDiv>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { MotionDiv, SafeAnimatePresence } from '@/lib/motion-wrapper';
 import {
   Calendar,
   Target,
@@ -285,9 +285,9 @@ const DailyChallenges: React.FC<DailyChallengesProps> = ({ userStats, onChalleng
 
       {/* Challenges List */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <AnimatePresence>
+        <SafeAnimatePresence>
           {challenges.map((challenge, index) => (
-            <motion.div
+            <MotionDiv
               key={challenge.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -369,14 +369,14 @@ const DailyChallenges: React.FC<DailyChallengesProps> = ({ userStats, onChalleng
                   </div>
                 </div>
               </GlassCard>
-            </motion.div>
+            </MotionDiv>
           ))}
-        </AnimatePresence>
+        </SafeAnimatePresence>
       </div>
 
       {/* Streak Bonus */}
       {streak >= 3 && (
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
@@ -400,7 +400,7 @@ const DailyChallenges: React.FC<DailyChallengesProps> = ({ userStats, onChalleng
               </div>
             </div>
           </GlassCard>
-        </motion.div>
+        </MotionDiv>
       )}
     </div>
   );

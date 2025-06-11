@@ -1,5 +1,14 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
 
 interface PremiumLogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
@@ -31,15 +40,50 @@ const PremiumLogo: React.FC<PremiumLogoProps> = ({
   };
 
   const logoVariants = {
-    initial: { scale: 1, rotate: 0 },
-    hover: {
-      scale: 1.05,
-      rotate: [0, -5, 5, 0],
-      transition: {
-        duration: 0.6,
-        ease: 'easeInOut',
-      },
+    initial: {
+      scale: 1,
+      rotate: 0,
+      y: 0,
     },
+    animate:
+      size === 'xxl'
+        ? {
+            // Original floating for hero logos only
+            y: [0, -3, 0],
+            transition: {
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            },
+          }
+        : {
+            // Subtle luxury breathing for navbar logos (sm, md, lg, xl)
+            scale: [1, 1.02, 1],
+            transition: {
+              duration: 8,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            },
+          },
+    hover:
+      size === 'xxl'
+        ? {
+            // Original hover for hero logos only
+            scale: 1.08,
+            rotate: 360,
+            transition: {
+              duration: 0.8,
+              ease: 'easeInOut',
+            },
+          }
+        : {
+            // Luxury hover for navbar logos (sm, md, lg, xl)
+            scale: 1.05,
+            transition: {
+              duration: 0.3,
+              ease: 'easeOut',
+            },
+          },
   };
 
   const pathVariants = {
@@ -57,18 +101,19 @@ const PremiumLogo: React.FC<PremiumLogoProps> = ({
 
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <motion.div
+      <MotionDiv
         variants={animated ? logoVariants : undefined}
         initial="initial"
+        animate={animated ? 'animate' : undefined}
         whileHover={animated ? 'hover' : undefined}
         className="relative group"
       >
         {/* FlowsyAI Animated Logo Video */}
         <div
-          className={`${sizeClasses[size]} rounded-lg overflow-hidden border border-primary/20 shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105`}
+          className={`${sizeClasses[size]} rounded-lg overflow-hidden border border-primary/20 shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105 relative ${size !== 'xxl' ? 'animate-luxury-glow' : ''}`}
         >
           <video
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover logo-video"
             autoPlay
             loop
             muted
@@ -83,19 +128,74 @@ const PremiumLogo: React.FC<PremiumLogoProps> = ({
               className="w-full h-full object-contain"
             />
           </video>
+          {/* Enhanced background integration overlay - Reduced opacity for better visibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-background/20 via-background/5 to-background/20 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-background/10 to-background/10 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-background/5 mix-blend-overlay pointer-events-none"></div>
+
+          {/* Luxury shimmer effect for navbar logos - Enhanced visibility */}
+          {size !== 'xxl' && (
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-luxury-shimmer pointer-events-none"></div>
+          )}
         </div>
 
-        {/* Luxury Glow Effect */}
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/30 to-accent/30 blur-xl -z-10 opacity-20 group-hover:opacity-60 transition-all duration-500 scale-110" />
-
-        {/* Enhanced Background Glow for larger sizes */}
+        {/* Enhanced Luxury Glow Effect with Pulsing - Only for large sizes */}
         {(size === 'xl' || size === 'xxl') && (
-          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 blur-2xl -z-20 opacity-40 group-hover:opacity-80 transition-all duration-700 scale-125" />
+          <MotionDiv
+            className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/30 to-accent/30 blur-xl -z-10 scale-110"
+            animate={{
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
         )}
-      </motion.div>
+
+        {/* Enhanced Background Glow for larger sizes with Rotation */}
+        {(size === 'xl' || size === 'xxl') && (
+          <MotionDiv
+            className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 blur-2xl -z-20 scale-125"
+            animate={{
+              opacity: [0.4, 0.8, 0.4],
+              rotate: [0, 360],
+            }}
+            transition={{
+              opacity: {
+                duration: 4,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              },
+              rotate: {
+                duration: 20,
+                repeat: Infinity,
+                ease: 'linear',
+              },
+            }}
+          />
+        )}
+
+        {/* Luxury Glow Effect for navbar logos */}
+        {size !== 'xxl' && (
+          <MotionDiv
+            className="absolute inset-0 rounded-xl bg-gradient-to-r from-gold/20 via-primary/30 to-sapphire/20 blur-lg -z-10 scale-110"
+            animate={{
+              opacity: [0.3, 0.7, 0.3],
+              scale: [1.1, 1.15, 1.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+        )}
+      </MotionDiv>
 
       {showText && (
-        <motion.div
+        <MotionDiv
           initial={animated ? { opacity: 0, x: -10 } : undefined}
           animate={animated ? { opacity: 1, x: 0 } : undefined}
           transition={animated ? { delay: 0.5, duration: 0.5 } : undefined}
@@ -114,7 +214,7 @@ const PremiumLogo: React.FC<PremiumLogoProps> = ({
           {size === 'lg' && (
             <span className="text-base font-semibold text-foreground tracking-tight">FlowsyAI</span>
           )}
-        </motion.div>
+        </MotionDiv>
       )}
     </div>
   );

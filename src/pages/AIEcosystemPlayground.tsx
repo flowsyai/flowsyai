@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 // ReactFlow imports removed as not used in this component
 import {
   Brain,
@@ -581,7 +592,7 @@ const AIEcosystemPlayground: React.FC = () => {
 
               <div className="space-y-2">
                 {componentLibrary.map(component => (
-                  <motion.div
+                  <MotionDiv
                     key={component.type}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -605,7 +616,7 @@ const AIEcosystemPlayground: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
               </div>
 
@@ -653,7 +664,7 @@ const AIEcosystemPlayground: React.FC = () => {
           {/* Components */}
           <div className="absolute inset-0">
             {components.map(component => (
-              <motion.div
+              <MotionDiv
                 key={component.id}
                 className="absolute cursor-move"
                 style={{
@@ -725,7 +736,7 @@ const AIEcosystemPlayground: React.FC = () => {
                       </Badge>
 
                       {isSimulating && (
-                        <motion.div
+                        <MotionDiv
                           animate={{
                             opacity: [0.5, 1, 0.5],
                             scale: [1, 1.1, 1],
@@ -737,7 +748,7 @@ const AIEcosystemPlayground: React.FC = () => {
                           }}
                         >
                           <div className="h-2 w-2 rounded-full bg-green-500" />
-                        </motion.div>
+                        </MotionDiv>
                       )}
                     </div>
                   </div>
@@ -745,7 +756,7 @@ const AIEcosystemPlayground: React.FC = () => {
 
                 {/* Pulse effect for active components */}
                 {component.isActive && isSimulating && visualEffectsLevel > 30 && (
-                  <motion.div
+                  <MotionDiv
                     className="absolute inset-0 rounded-lg"
                     style={{
                       background: `radial-gradient(circle, ${component.color.includes('purple') ? 'rgba(147, 51, 234, 0.2)' : 'rgba(59, 130, 246, 0.2)'} 0%, transparent 70%)`,
@@ -762,7 +773,7 @@ const AIEcosystemPlayground: React.FC = () => {
                     }}
                   />
                 )}
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
 
@@ -770,7 +781,7 @@ const AIEcosystemPlayground: React.FC = () => {
           {components.length === 0 && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center max-w-md">
-                <motion.div
+                <MotionDiv
                   className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 flex items-center justify-center"
                   animate={{
                     scale: [1, 1.1, 1],
@@ -783,7 +794,7 @@ const AIEcosystemPlayground: React.FC = () => {
                   }}
                 >
                   <Network className="h-10 w-10 text-purple-500" />
-                </motion.div>
+                </MotionDiv>
                 <h2 className="text-xl font-semibold text-foreground mb-3">
                   AI Ecosystem Playground
                 </h2>
@@ -1041,16 +1052,16 @@ const AIEcosystemPlayground: React.FC = () => {
       </div>
 
       {/* Environment Controls Modal */}
-      <AnimatePresence>
+      <SafeAnimatePresence>
         {showEnvironmentControls && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center"
             onClick={() => setShowEnvironmentControls(false)}
           >
-            <motion.div
+            <MotionDiv
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
@@ -1228,10 +1239,10 @@ const AIEcosystemPlayground: React.FC = () => {
                   Apply
                 </Button>
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </SafeAnimatePresence>
     </div>
   );
 };

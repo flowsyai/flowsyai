@@ -1,7 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  MotionMain,
+} from '@/lib/motion-wrapper';
+import { useScroll, useTransform } from 'framer-motion';
+
 import {
   Card,
   CardContent,
@@ -344,7 +356,7 @@ const Pricing = () => {
       {/* Animated Floating Elements */}
       <div className="absolute inset-0 z-10 overflow-hidden">
         {[...Array(20)].map((_, i) => (
-          <motion.div
+          <MotionDiv
             key={i}
             className={`absolute rounded-full backdrop-blur-sm border ${i % 3 === 0 ? 'bg-primary/10 border-primary/20' : i % 3 === 1 ? 'bg-secondary/10 border-secondary/20' : 'bg-accent/10 border-accent/20'}`}
             style={{
@@ -371,7 +383,7 @@ const Pricing = () => {
         ))}
       </div>
 
-      <motion.main
+      <MotionMain
         ref={sectionRef}
         style={{ opacity }}
         className="flex-1 relative z-20"
@@ -381,14 +393,14 @@ const Pricing = () => {
           <div className="container px-4 md:px-6 relative z-10 max-w-screen-xl">
             {' '}
             {/* Added max-width */}
-            <motion.div className="text-center mb-12 md:mb-16" variants={fadeIn}>
+            <MotionDiv className="text-center mb-12 md:mb-16" variants={fadeIn}>
               {/* Premium Logo/Icon */}
-              <motion.div
+              <MotionDiv
                 className="w-24 h-24 mx-auto mb-8 rounded-full premium-glass flex items-center justify-center border border-primary/20 shadow-lg fire-glow relative overflow-hidden group"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                <motion.div
+                <MotionDiv
                   className="w-16 h-16 rounded-full bg-gradient-to-tr from-primary via-fire-red to-primary bg-[length:200%_200%] animate-gradient-slow"
                   animate={{
                     scale: [1, 1.1, 1],
@@ -402,10 +414,10 @@ const Pricing = () => {
                   <div className="w-full h-full flex items-center justify-center">
                     <Rocket className="w-8 h-8 text-background animate-pulse-scale" />
                   </div>
-                </motion.div>
-              </motion.div>
+                </MotionDiv>
+              </MotionDiv>
 
-              <motion.h1
+              <MotionH1
                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -415,9 +427,9 @@ const Pricing = () => {
                 <span className="block bg-gradient-to-r from-gold via-primary to-sapphire bg-clip-text text-transparent">
                   Plans
                 </span>
-              </motion.h1>
+              </MotionH1>
 
-              <motion.p
+              <MotionP
                 className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -426,10 +438,10 @@ const Pricing = () => {
                 Choose the perfect plan for your AI automation needs. Pay with traditional money or
                 with <span className="text-gold font-semibold">FlowsyAI Tokens</span> for additional
                 discounts.
-              </motion.p>
+              </MotionP>
 
               {/* Launch Timeline */}
-              <motion.div
+              <MotionDiv
                 className="mt-8 inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-gold/20 to-primary/20 border border-gold/30"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -440,12 +452,12 @@ const Pricing = () => {
                 <Badge variant="secondary" className="bg-gold/20 text-gold border-gold/30">
                   Early Bird Pricing
                 </Badge>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
             {/* Pricing Tiers Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {tokenTiers.map((tier, index) => (
-                <motion.div
+                <MotionDiv
                   key={tier.id}
                   className={`relative ${tier.popular ? 'lg:scale-105 z-10' : ''} ${tier.exclusive ? 'lg:scale-102 z-5' : ''}`}
                   initial={{ opacity: 0, y: 30 }}
@@ -560,11 +572,11 @@ const Pricing = () => {
                       </span>
                     </Button>
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
             {/* FlowsyAI Token Investment Section */}
-            <motion.div
+            <MotionDiv
               className="text-center mt-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -754,10 +766,10 @@ const Pricing = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
-      </motion.main>
+      </MotionMain>
 
       <Footer />
     </div>

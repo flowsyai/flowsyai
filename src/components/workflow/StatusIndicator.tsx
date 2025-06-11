@@ -1,4 +1,14 @@
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { NodeStatus } from '@/types/workflow'; // Adjusted path
 import { CheckCircle2, XCircle, Loader2, Info } from 'lucide-react'; // Added Info for idle
 
@@ -44,7 +54,7 @@ const StatusIndicator = ({ status, className }: StatusIndicatorProps) => {
     <div className={className || 'absolute bottom-2 right-2'}>
       {' '}
       {/* Default position if not overridden */}
-      <motion.div
+      <MotionDiv
         className={`px-2 py-1 rounded-full bg-card/80 border border-border/50 shadow-md flex items-center gap-1.5 backdrop-blur-sm ${colorClass}`}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -52,7 +62,7 @@ const StatusIndicator = ({ status, className }: StatusIndicatorProps) => {
         transition={{ duration: 0.2 }}
       >
         {animateDot ? (
-          <motion.div
+          <MotionDiv
             className={`w-1.5 h-1.5 ${status === 'running' ? 'bg-primary' : status === 'completed' ? 'bg-green-500' : status === 'error' ? 'bg-red-500' : 'bg-gray-400'} rounded-full`}
             animate={{ scale: [1, 1.3, 1] }}
             transition={{ duration: 1, repeat: Infinity }}
@@ -61,7 +71,7 @@ const StatusIndicator = ({ status, className }: StatusIndicatorProps) => {
           icon
         )}
         <span className="text-xs font-medium">{text}</span>
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 };

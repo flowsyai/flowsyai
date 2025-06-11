@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Play,
   Pause,
@@ -196,7 +207,7 @@ const InteractiveWorkflowPreview: React.FC = () => {
   return (
     <section className="py-20 px-6 bg-gradient-to-br from-background via-background/95 to-background/90">
       <div className="container mx-auto max-w-6xl">
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -213,10 +224,10 @@ const InteractiveWorkflowPreview: React.FC = () => {
             Watch how our AI workflows transform complex tasks into simple, automated processes.
             Choose a demo scenario and see the magic happen.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         {/* Demo Type Selector */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -241,10 +252,10 @@ const InteractiveWorkflowPreview: React.FC = () => {
               </button>
             ))}
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Workflow Visualization */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -254,7 +265,7 @@ const InteractiveWorkflowPreview: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
             {currentWorkflow.map((node, index) => (
               <React.Fragment key={node.id}>
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -269,22 +280,22 @@ const InteractiveWorkflowPreview: React.FC = () => {
                   {/* Status Indicator */}
                   <div className="absolute -top-2 -right-2">
                     {node.status === 'processing' && (
-                      <motion.div
+                      <MotionDiv
                         animate={{ rotate: 360 }}
                         transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
                         className="w-6 h-6 rounded-full bg-primary flex items-center justify-center"
                       >
                         <div className="w-2 h-2 bg-white rounded-full" />
-                      </motion.div>
+                      </MotionDiv>
                     )}
                     {node.status === 'complete' && (
-                      <motion.div
+                      <MotionDiv
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center"
                       >
                         <CheckCircle className="w-4 h-4 text-white" />
-                      </motion.div>
+                      </MotionDiv>
                     )}
                   </div>
 
@@ -301,14 +312,14 @@ const InteractiveWorkflowPreview: React.FC = () => {
 
                   {/* Processing Animation */}
                   {node.status === 'processing' && (
-                    <motion.div
+                    <MotionDiv
                       initial={{ width: 0 }}
                       animate={{ width: '100%' }}
                       transition={{ duration: 1.8 }}
                       className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary to-gold rounded-b-xl"
                     />
                   )}
-                </motion.div>
+                </MotionDiv>
 
                 {/* Arrow Connector */}
                 {index < currentWorkflow.length - 1 && (
@@ -316,7 +327,7 @@ const InteractiveWorkflowPreview: React.FC = () => {
                     className="hidden md:flex items-center justify-center absolute top-1/2 transform -translate-y-1/2"
                     style={{ left: `${(index + 1) * 25 - 2}%` }}
                   >
-                    <motion.div
+                    <MotionDiv
                       animate={{
                         opacity: currentStep > index ? 1 : 0.3,
                         scale: currentStep > index ? 1.1 : 1,
@@ -326,16 +337,16 @@ const InteractiveWorkflowPreview: React.FC = () => {
                       <ArrowRight
                         className={`w-6 h-6 ${currentStep > index ? 'text-primary' : 'text-muted-foreground'}`}
                       />
-                    </motion.div>
+                    </MotionDiv>
                   </div>
                 )}
               </React.Fragment>
             ))}
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Demo Controls */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -359,10 +370,10 @@ const InteractiveWorkflowPreview: React.FC = () => {
             <RotateCcw className="w-4 h-4 mr-2" />
             Reset
           </Button>
-        </motion.div>
+        </MotionDiv>
 
         {/* Call to Action */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -384,7 +395,7 @@ const InteractiveWorkflowPreview: React.FC = () => {
               <ArrowRight className="w-5 h-5 ml-2" />
             </a>
           </Button>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

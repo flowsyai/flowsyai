@@ -3,7 +3,18 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+import { useScroll, useTransform } from 'framer-motion';
+
 import { ArrowRight, Mail, Lock, Sparkles, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { tsParticles } from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
@@ -190,7 +201,7 @@ const LoginPage: React.FC = () => {
       {/* Animated Floating Elements */}
       <div className="absolute inset-0 z-10 overflow-hidden">
         {[...Array(15)].map((_, i) => (
-          <motion.div
+          <MotionDiv
             key={i}
             className={`absolute rounded-full backdrop-blur-sm border ${i % 3 === 0 ? 'bg-primary/10 border-primary/20' : i % 3 === 1 ? 'bg-gold/10 border-gold/20' : 'bg-platinum/10 border-platinum/20'}`}
             style={{
@@ -218,7 +229,7 @@ const LoginPage: React.FC = () => {
       </div>
 
       {/* Login Content */}
-      <motion.div
+      <MotionDiv
         ref={sectionRef}
         style={{ opacity }}
         className="relative z-20 w-full max-w-md px-6"
@@ -227,13 +238,13 @@ const LoginPage: React.FC = () => {
         animate="visible"
       >
         {/* Logo/Brand Section */}
-        <motion.div variants={itemVariants} className="text-center mb-8">
-          <motion.div
+        <MotionDiv variants={itemVariants} className="text-center mb-8">
+          <MotionDiv
             className="w-20 h-20 mx-auto mb-6 rounded-full premium-glass flex items-center justify-center border border-gold/20 shadow-lg premium-shadow relative overflow-hidden group"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <motion.div
+            <MotionDiv
               className="w-12 h-12 rounded-full bg-gradient-to-tr from-primary via-gold to-primary bg-[length:200%_200%] animate-gradient-slow"
               animate={{
                 scale: [1, 1.1, 1],
@@ -247,27 +258,27 @@ const LoginPage: React.FC = () => {
               <div className="w-full h-full flex items-center justify-center">
                 <Sparkles className="w-6 h-6 text-background animate-pulse-scale" />
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
 
-          <motion.h1
+          <MotionH1
             variants={itemVariants}
             className="text-3xl md:text-4xl font-bold mb-2 text-foreground font-serif"
           >
             Welcome Back
-          </motion.h1>
-          <motion.p variants={itemVariants} className="text-muted-foreground">
+          </MotionH1>
+          <MotionP variants={itemVariants} className="text-muted-foreground">
             Sign in to your Bot Architect Studio account
-          </motion.p>
-        </motion.div>
+          </MotionP>
+        </MotionDiv>
 
         {/* Login Form */}
-        <motion.div
+        <MotionDiv
           variants={itemVariants}
           className="premium-card p-8 bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <Label htmlFor="email" className="text-foreground font-medium">
                 Email Address
               </Label>
@@ -283,9 +294,9 @@ const LoginPage: React.FC = () => {
                   className="pl-10 bg-background/50 border-border-alt focus:border-primary/50 focus:ring-primary/20 transition-all duration-300"
                 />
               </div>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <Label htmlFor="password" className="text-foreground font-medium">
                 Password
               </Label>
@@ -308,20 +319,20 @@ const LoginPage: React.FC = () => {
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
-            </motion.div>
+            </MotionDiv>
 
             {error && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-lg"
               >
                 <AlertCircle className="h-4 w-4 text-red-500" />
                 <span className="text-sm text-red-500">{error}</span>
-              </motion.div>
+              </MotionDiv>
             )}
 
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <Button
                 type="submit"
                 disabled={isLoading}
@@ -329,7 +340,7 @@ const LoginPage: React.FC = () => {
               >
                 <span className="relative z-10 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                   {isLoading ? (
-                    <motion.div
+                    <MotionDiv
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                       className="w-5 h-5 border-2 border-background border-t-transparent rounded-full"
@@ -342,10 +353,10 @@ const LoginPage: React.FC = () => {
                   )}
                 </span>
               </Button>
-            </motion.div>
+            </MotionDiv>
 
             {/* Additional Links */}
-            <motion.div variants={itemVariants} className="space-y-4">
+            <MotionDiv variants={itemVariants} className="space-y-4">
               <div className="text-center">
                 <Link
                   to="#/forgot-password"
@@ -373,12 +384,12 @@ const LoginPage: React.FC = () => {
                   Sign up
                 </Link>
               </div>
-            </motion.div>
+            </MotionDiv>
           </form>
-        </motion.div>
+        </MotionDiv>
 
         {/* Footer */}
-        <motion.div variants={itemVariants} className="text-center mt-8">
+        <MotionDiv variants={itemVariants} className="text-center mt-8">
           <p className="text-xs text-muted-foreground">
             By signing in, you surrender your soul to our{' '}
             <Link to="/terms" className="text-primary hover:text-primary/80 transition-colors">
@@ -389,8 +400,8 @@ const LoginPage: React.FC = () => {
               Privacy Policy
             </Link>
           </p>
-        </motion.div>
-      </motion.div>
+        </MotionDiv>
+      </MotionDiv>
     </div>
   );
 };

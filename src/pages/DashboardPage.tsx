@@ -1,5 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+import { useScroll, useTransform } from 'framer-motion';
+
 import {
   DollarSign,
   Users,
@@ -293,7 +304,7 @@ const DashboardPage: React.FC = () => {
       {/* Animated Floating Elements */}
       <div className="absolute inset-0 z-10 overflow-hidden">
         {[...Array(12)].map((_, i) => (
-          <motion.div
+          <MotionDiv
             key={i}
             className={`absolute rounded-full backdrop-blur-sm border ${i % 3 === 0 ? 'bg-primary/10 border-primary/20' : i % 3 === 1 ? 'bg-gold/10 border-gold/20' : 'bg-platinum/10 border-platinum/20'}`}
             style={{
@@ -321,7 +332,7 @@ const DashboardPage: React.FC = () => {
       </div>
 
       <div className="relative z-20 container mx-auto px-4 py-12 md:py-16 max-w-screen-xl">
-        <motion.div
+        <MotionDiv
           ref={sectionRef}
           style={{ opacity }}
           initial={{ opacity: 0, y: -30 }}
@@ -331,12 +342,12 @@ const DashboardPage: React.FC = () => {
         >
           {/* Header with Logo */}
           <div className="text-center mb-12">
-            <motion.div
+            <MotionDiv
               className="w-16 h-16 mx-auto mb-6 rounded-full premium-glass flex items-center justify-center border border-gold/20 shadow-lg premium-shadow relative overflow-hidden group"
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <motion.div
+              <MotionDiv
                 className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary via-gold to-primary bg-[length:200%_200%] animate-gradient-slow"
                 animate={{
                   scale: [1, 1.1, 1],
@@ -350,8 +361,8 @@ const DashboardPage: React.FC = () => {
                 <div className="w-full h-full flex items-center justify-center">
                   <BarChart3 className="w-5 h-5 text-background animate-pulse-scale" />
                 </div>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground font-serif">
               Welcome to your <span className="premium-gradient-text">Command Center</span>
@@ -361,25 +372,25 @@ const DashboardPage: React.FC = () => {
               from your premium dashboard.
             </p>
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Key Metrics Section */}
-        <motion.div
+        <MotionDiv
           className="mb-16"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={itemVariants} className="mb-8">
+          <MotionDiv variants={itemVariants} className="mb-8">
             <h2 className="text-2xl md:text-3xl font-bold mb-2 text-foreground font-serif">
               Performance Overview
             </h2>
             <p className="text-muted-foreground">Real-time insights into your AI ecosystem</p>
-          </motion.div>
+          </MotionDiv>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <motion.div variants={itemVariants} whileHover="hover">
-              <motion.div variants={cardHoverVariants}>
+            <MotionDiv variants={itemVariants} whileHover="hover">
+              <MotionDiv variants={cardHoverVariants}>
                 <GlassCard
                   className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl"
                   icon={<Bot className="h-6 w-6 text-primary" />}
@@ -393,11 +404,11 @@ const DashboardPage: React.FC = () => {
                     <p className="text-sm text-green-500">+3 this month</p>
                   </div>
                 </GlassCard>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
 
-            <motion.div variants={itemVariants} whileHover="hover">
-              <motion.div variants={cardHoverVariants}>
+            <MotionDiv variants={itemVariants} whileHover="hover">
+              <MotionDiv variants={cardHoverVariants}>
                 <GlassCard
                   className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl"
                   icon={<Workflow className="h-6 w-6 text-sapphire" />}
@@ -411,11 +422,11 @@ const DashboardPage: React.FC = () => {
                     <p className="text-sm text-sapphire">Currently active</p>
                   </div>
                 </GlassCard>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
 
-            <motion.div variants={itemVariants} whileHover="hover">
-              <motion.div variants={cardHoverVariants}>
+            <MotionDiv variants={itemVariants} whileHover="hover">
+              <MotionDiv variants={cardHoverVariants}>
                 <GlassCard
                   className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl"
                   icon={<Target className="h-6 w-6 text-gold" />}
@@ -429,11 +440,11 @@ const DashboardPage: React.FC = () => {
                     <p className="text-sm text-gold">+247 today</p>
                   </div>
                 </GlassCard>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
 
-            <motion.div variants={itemVariants} whileHover="hover">
-              <motion.div variants={cardHoverVariants}>
+            <MotionDiv variants={itemVariants} whileHover="hover">
+              <MotionDiv variants={cardHoverVariants}>
                 <GlassCard
                   className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl"
                   icon={<BarChart3 className="h-6 w-6 text-platinum" />}
@@ -447,20 +458,20 @@ const DashboardPage: React.FC = () => {
                     <p className="text-sm text-green-500">+2.1% this week</p>
                   </div>
                 </GlassCard>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* AI Agents Section */}
-        <motion.div
+        <MotionDiv
           className="mb-16"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.4 }}
         >
-          <motion.div variants={itemVariants} className="flex justify-between items-center mb-8">
+          <MotionDiv variants={itemVariants} className="flex justify-between items-center mb-8">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-2 text-foreground font-serif">
                 Your AI Agents
@@ -490,11 +501,11 @@ const DashboardPage: React.FC = () => {
                 </span>
               </Button>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <motion.div variants={itemVariants} whileHover="hover">
-              <motion.div variants={cardHoverVariants}>
+            <MotionDiv variants={itemVariants} whileHover="hover">
+              <MotionDiv variants={cardHoverVariants}>
                 <GlassCard
                   className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl h-full"
                   icon={<Bot className="h-6 w-6 text-primary" />}
@@ -521,11 +532,11 @@ const DashboardPage: React.FC = () => {
                     Configure Agent
                   </Button>
                 </GlassCard>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
 
-            <motion.div variants={itemVariants} whileHover="hover">
-              <motion.div variants={cardHoverVariants}>
+            <MotionDiv variants={itemVariants} whileHover="hover">
+              <MotionDiv variants={cardHoverVariants}>
                 <GlassCard
                   className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl h-full"
                   icon={<Brain className="h-6 w-6 text-sapphire" />}
@@ -552,11 +563,11 @@ const DashboardPage: React.FC = () => {
                     View Reports
                   </Button>
                 </GlassCard>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
 
-            <motion.div variants={itemVariants} whileHover="hover">
-              <motion.div variants={cardHoverVariants}>
+            <MotionDiv variants={itemVariants} whileHover="hover">
+              <MotionDiv variants={cardHoverVariants}>
                 <GlassCard
                   className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl h-full"
                   icon={<Zap className="h-6 w-6 text-gold" />}
@@ -583,11 +594,11 @@ const DashboardPage: React.FC = () => {
                     Start Coding
                   </Button>
                 </GlassCard>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           </div>
 
-          <motion.div variants={itemVariants} className="mt-8 text-center">
+          <MotionDiv variants={itemVariants} className="mt-8 text-center">
             <div className="premium-card p-6 bg-card/60 backdrop-blur-lg border border-border-alt shadow-xl rounded-lg">
               <p className="text-sm text-muted-foreground mb-4">
                 <Sparkles className="inline h-4 w-4 mr-2 text-gold" />
@@ -605,8 +616,8 @@ const DashboardPage: React.FC = () => {
                 </span>
               </Button>
             </div>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       </div>
     </div>
   );

@@ -107,25 +107,27 @@ const HeroSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Revolutionary Badge */}
+        {/* Revolutionary Badge - Centered */}
         <motion.div
-          className="inline-flex items-center gap-3 bg-gradient-to-r from-primary/20 via-gold/20 to-sapphire/20 rounded-full px-8 py-3 mb-8 border border-primary/30 relative z-40"
+          className="flex justify-center mb-8 relative z-40"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <motion.div
-            animate={{ rotate: [0, 360] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-          >
-            <Sparkles className="w-5 h-5 text-gold" />
-          </motion.div>
-          <span className="text-base font-bold text-foreground">REVOLUTIONARY AI PLATFORM</span>
-          <motion.div
-            className="w-2 h-2 bg-primary rounded-full"
-            animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
+          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-primary/20 via-gold/20 to-sapphire/20 rounded-full px-8 py-3 border border-primary/30">
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+            >
+              <Sparkles className="w-5 h-5 text-gold" />
+            </motion.div>
+            <span className="text-base font-bold text-foreground">REVOLUTIONARY AI PLATFORM</span>
+            <motion.div
+              className="w-2 h-2 bg-primary rounded-full"
+              animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </div>
         </motion.div>
 
         <motion.h1

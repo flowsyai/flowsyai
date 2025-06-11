@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Play,
   ArrowRight,
@@ -370,9 +381,9 @@ const ComprehensiveInteractiveTutorial: React.FC<ComprehensiveInteractiveTutoria
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
+    <SafeAnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -459,9 +470,9 @@ const ComprehensiveInteractiveTutorial: React.FC<ComprehensiveInteractiveTutoria
                   </Button>
                 </div>
 
-                <AnimatePresence>
+                <SafeAnimatePresence>
                   {showHints && (
-                    <motion.div
+                    <MotionDiv
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
@@ -478,9 +489,9 @@ const ComprehensiveInteractiveTutorial: React.FC<ComprehensiveInteractiveTutoria
                           </AlertDescription>
                         </Alert>
                       ))}
-                    </motion.div>
+                    </MotionDiv>
                   )}
-                </AnimatePresence>
+                </SafeAnimatePresence>
               </div>
 
               {/* Sample Data */}
@@ -557,9 +568,9 @@ const ComprehensiveInteractiveTutorial: React.FC<ComprehensiveInteractiveTutoria
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </MotionDiv>
       </div>
-    </AnimatePresence>
+    </SafeAnimatePresence>
   );
 };
 

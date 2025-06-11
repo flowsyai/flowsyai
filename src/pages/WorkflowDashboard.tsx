@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Plus,
   Zap,
@@ -192,7 +202,7 @@ const WorkflowDashboard: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -215,9 +225,9 @@ const WorkflowDashboard: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -240,9 +250,9 @@ const WorkflowDashboard: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -263,9 +273,9 @@ const WorkflowDashboard: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -287,7 +297,7 @@ const WorkflowDashboard: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
         </div>
 
         {/* Quick Actions */}
@@ -295,7 +305,7 @@ const WorkflowDashboard: React.FC = () => {
           <h2 className="text-2xl font-bold mb-4">Quick Actions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {quickActions.map((action, index) => (
-              <motion.div
+              <MotionDiv
                 key={action.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -317,7 +327,7 @@ const WorkflowDashboard: React.FC = () => {
                     <p className="text-sm text-muted-foreground">{action.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </div>
@@ -410,7 +420,7 @@ const WorkflowDashboard: React.FC = () => {
           <TabsContent value="templates" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {featuredTemplates.map((template, index) => (
-                <motion.div
+                <MotionDiv
                   key={template.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -446,7 +456,7 @@ const WorkflowDashboard: React.FC = () => {
                       </Button>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
           </TabsContent>

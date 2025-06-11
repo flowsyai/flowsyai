@@ -1,5 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Bot,
   Workflow,
@@ -118,7 +128,7 @@ const Features: React.FC = () => {
     <div className="min-h-screen w-full relative overflow-hidden premium-hero-bg">
       <div className="relative z-20 container mx-auto px-4 py-16 max-w-screen-xl">
         {/* Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -135,17 +145,17 @@ const Features: React.FC = () => {
             Discover the cutting-edge capabilities that make our AI agent platform the most advanced
             solution for intelligent automation.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         {/* Features Grid */}
-        <motion.div
+        <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
         >
           {features.map((feature, index) => (
-            <motion.div key={feature.title} variants={itemVariants} whileHover={{ y: -4 }}>
+            <MotionDiv key={feature.title} variants={itemVariants} whileHover={{ y: -4 }}>
               <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl h-full">
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -167,12 +177,12 @@ const Features: React.FC = () => {
                   </ul>
                 </div>
               </GlassCard>
-            </motion.div>
+            </MotionDiv>
           ))}
-        </motion.div>
+        </MotionDiv>
 
         {/* CTA Section */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -206,7 +216,7 @@ const Features: React.FC = () => {
               </Button>
             </div>
           </GlassCard>
-        </motion.div>
+        </MotionDiv>
       </div>
     </div>
   );

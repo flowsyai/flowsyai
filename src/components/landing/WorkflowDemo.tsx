@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import {
   Bot,
@@ -582,9 +593,9 @@ Sistemul include monitorizare în timp real, optimizare automată a resurselor �
         </div>
 
         {/* Node configuration panel */}
-        <AnimatePresence>
+        <SafeAnimatePresence>
           {showNodeConfig && selectedNode && (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
@@ -624,9 +635,9 @@ Sistemul include monitorizare în timp real, optimizare automată a resurselor �
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
           )}
-        </AnimatePresence>
+        </SafeAnimatePresence>
       </div>
     </section>
   );

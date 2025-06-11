@@ -1,5 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import {
   Brain,
@@ -126,7 +136,7 @@ const CompetitiveAdvantagesSection: React.FC = () => {
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         {/* Section Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -149,10 +159,10 @@ const CompetitiveAdvantagesSection: React.FC = () => {
             While competitors offer basic automation, we deliver revolutionary AI-powered
             experiences that transform how teams build, learn, and optimize workflows.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         {/* Competitive Comparison Table */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -180,7 +190,7 @@ const CompetitiveAdvantagesSection: React.FC = () => {
                 </thead>
                 <tbody>
                   {competitors.map((competitor, index) => (
-                    <motion.tr
+                    <MotionTr
                       key={competitor.name}
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -234,16 +244,16 @@ const CompetitiveAdvantagesSection: React.FC = () => {
                           <X className="w-5 h-5 text-red-500 mx-auto" />
                         )}
                       </td>
-                    </motion.tr>
+                    </MotionTr>
                   ))}
                 </tbody>
               </table>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Detailed Advantages */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -251,7 +261,7 @@ const CompetitiveAdvantagesSection: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
         >
           {advantages.map((advantage, index) => (
-            <motion.div
+            <MotionDiv
               key={advantage.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -272,12 +282,12 @@ const CompetitiveAdvantagesSection: React.FC = () => {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {advantage.description}
               </p>
-            </motion.div>
+            </MotionDiv>
           ))}
-        </motion.div>
+        </MotionDiv>
 
         {/* Call to Action */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -322,7 +332,7 @@ const CompetitiveAdvantagesSection: React.FC = () => {
               </Button>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

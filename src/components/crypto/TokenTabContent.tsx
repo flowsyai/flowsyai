@@ -315,21 +315,21 @@ export const TokenTabContent: React.FC<TokenTabContentProps> = ({
             {
               icon: Users,
               title: 'Community First',
-              description: '60% public ownership - highest in DeFi',
+              description: '90% public ownership - highest in DeFi',
               color: 'text-emerald-500',
               bgColor: 'bg-emerald-500/10',
             },
             {
               icon: Flame,
               title: 'Deflationary Burn',
-              description: '30% supply burn at $10M market cap',
+              description: '0.5% supply burn at $1M market cap',
               color: 'text-orange-500',
               bgColor: 'bg-orange-500/10',
             },
             {
               icon: Shield,
               title: 'Anti-Rug Guarantee',
-              description: 'Only 10% dev fund locked until $1B',
+              description: 'Only 10% dev fund locked until $10M',
               color: 'text-blue-500',
               bgColor: 'bg-blue-500/10',
             },
@@ -490,7 +490,7 @@ export const TokenTabContent: React.FC<TokenTabContentProps> = ({
               <div>
                 <div className="font-semibold text-emerald-500">Time-Locked Contracts</div>
                 <div className="text-sm text-muted-foreground">
-                  Developer funds locked until $1B market cap milestone
+                  Developer funds locked until $10M market cap milestone
                 </div>
               </div>
             </div>

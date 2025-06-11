@@ -1,5 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { cn } from '@/lib/utils';
 import {
   Card,
@@ -70,9 +80,9 @@ const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
 
     if (hoverEffect) {
       return (
-        <motion.div whileHover={{ y: -5 }} transition={{ type: 'spring', stiffness: 300 }}>
+        <MotionDiv whileHover={{ y: -5 }} transition={{ type: 'spring', stiffness: 300 }}>
           {cardContent}
-        </motion.div>
+        </MotionDiv>
       );
     }
 

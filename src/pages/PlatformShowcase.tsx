@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { useNavigate } from 'react-router-dom';
 import '../styles/showcase.css';
 import {
@@ -271,7 +281,7 @@ const PlatformShowcase: React.FC = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         <div className="container mx-auto px-4 py-20">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -314,7 +324,7 @@ const PlatformShowcase: React.FC = () => {
             {/* Quick Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
               {businessImpactMetrics.map((metric, index) => (
-                <motion.div
+                <MotionDiv
                   key={metric.metric}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -330,17 +340,17 @@ const PlatformShowcase: React.FC = () => {
                   <div className="text-sm font-medium text-muted-foreground">
                     {metric.description}
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
 
       {/* Competitive Comparison */}
       <section className="py-20 bg-card/50">
         <div className="container mx-auto px-4">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -354,7 +364,7 @@ const PlatformShowcase: React.FC = () => {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               See why leading organizations choose our platform over traditional automation tools
             </p>
-          </motion.div>
+          </MotionDiv>
 
           <div className="overflow-x-auto">
             <table className="w-full bg-background rounded-lg shadow-lg overflow-hidden">
@@ -374,7 +384,7 @@ const PlatformShowcase: React.FC = () => {
               </thead>
               <tbody>
                 {competitorComparison.map((row, index) => (
-                  <motion.tr
+                  <MotionTr
                     key={row.feature}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -412,7 +422,7 @@ const PlatformShowcase: React.FC = () => {
                         {getStatusBadge(row.powerAutomate.status, row.powerAutomate.value)}
                       </div>
                     </td>
-                  </motion.tr>
+                  </MotionTr>
                 ))}
               </tbody>
             </table>
@@ -423,7 +433,7 @@ const PlatformShowcase: React.FC = () => {
       {/* Unique Advantages */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -438,7 +448,7 @@ const PlatformShowcase: React.FC = () => {
               Discover the breakthrough features that set us apart from every other automation
               platform
             </p>
-          </motion.div>
+          </MotionDiv>
 
           <Tabs
             value={activeFeature}
@@ -500,7 +510,7 @@ const PlatformShowcase: React.FC = () => {
       {/* Platform Features */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -515,11 +525,11 @@ const PlatformShowcase: React.FC = () => {
               Every feature you need for enterprise-grade AI workflow automation, all in one
               platform
             </p>
-          </motion.div>
+          </MotionDiv>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {platformFeatures.map((category, categoryIndex) => (
-              <motion.div
+              <MotionDiv
                 key={category.category}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -541,7 +551,7 @@ const PlatformShowcase: React.FC = () => {
                     </ul>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </div>
@@ -550,7 +560,7 @@ const PlatformShowcase: React.FC = () => {
       {/* Business Impact */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -565,11 +575,11 @@ const PlatformShowcase: React.FC = () => {
               Organizations using our platform achieve measurable improvements in efficiency, cost,
               and reliability
             </p>
-          </motion.div>
+          </MotionDiv>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {businessImpactMetrics.map((metric, index) => (
-              <motion.div
+              <MotionDiv
                 key={metric.metric}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -589,7 +599,7 @@ const PlatformShowcase: React.FC = () => {
                     <div className="text-sm text-muted-foreground">{metric.detail}</div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </div>
@@ -598,7 +608,7 @@ const PlatformShowcase: React.FC = () => {
       {/* Call to Action */}
       <section className="py-20 bg-gradient-to-r from-primary to-purple-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -631,7 +641,7 @@ const PlatformShowcase: React.FC = () => {
                 Explore Platform
               </Button>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
     </div>

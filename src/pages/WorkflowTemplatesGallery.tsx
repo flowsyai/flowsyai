@@ -1,6 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Search,
   Filter,
@@ -319,7 +329,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
   getDifficultyColor,
 }) => {
   return (
-    <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
+    <MotionDiv whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
       <Card className="h-full hover:shadow-lg transition-shadow duration-200">
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between mb-2">
@@ -391,7 +401,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </MotionDiv>
   );
 };
 

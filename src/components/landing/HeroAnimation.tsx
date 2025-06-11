@@ -1,5 +1,14 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
 
 const NUM_SHAPES = 7;
 const CONTAINER_SIZE = 256; // md:w-64 md:h-64
@@ -61,7 +70,7 @@ const HeroAnimation: React.FC = () => {
   };
 
   return (
-    <motion.div
+    <MotionDiv
       className="relative flex items-center justify-center"
       style={{ width: CONTAINER_SIZE, height: CONTAINER_SIZE }}
       variants={containerVariants}
@@ -70,7 +79,7 @@ const HeroAnimation: React.FC = () => {
     >
       {/* Small Converging Shapes */}
       {Array.from({ length: NUM_SHAPES }).map((_, i) => (
-        <motion.div
+        <MotionDiv
           key={`shape-${i}`}
           className="absolute bg-blue-500 rounded-full"
           style={{
@@ -84,7 +93,7 @@ const HeroAnimation: React.FC = () => {
       ))}
 
       {/* Central Merged Shape */}
-      <motion.div
+      <MotionDiv
         className="absolute bg-gradient-to-r from-pink-500 to-purple-600 rounded-full shadow-2xl flex items-center justify-center"
         style={{
           width: CENTRAL_SHAPE_SIZE,
@@ -94,7 +103,7 @@ const HeroAnimation: React.FC = () => {
       >
         {/* Optional: Incorporate LightningBoltIcon or another graphic */}
         {/* <LightningBoltIcon className="w-12 h-12 text-white opacity-90" /> */}
-        <motion.div
+        <MotionDiv
           className="w-full h-full rounded-full bg-white/30"
           animate={{
             scale: [1, 1.1, 1],
@@ -106,8 +115,8 @@ const HeroAnimation: React.FC = () => {
             ease: 'easeInOut',
           }}
         />
-      </motion.div>
-    </motion.div>
+      </MotionDiv>
+    </MotionDiv>
   );
 };
 

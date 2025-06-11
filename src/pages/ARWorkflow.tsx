@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { ArrowLeft, Smartphone, Camera, Zap, Brain, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -49,7 +59,7 @@ const ARWorkflow: React.FC = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Section */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -70,10 +80,10 @@ const ARWorkflow: React.FC = () => {
               Experience the future of workflow building. Use your mobile camera to visualize,
               create, and manipulate AI workflows in 3D space with intuitive gesture controls.
             </p>
-          </motion.div>
+          </MotionDiv>
 
           {/* Features Grid */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -112,10 +122,10 @@ const ARWorkflow: React.FC = () => {
                 <p className="text-muted-foreground">{feature.description}</p>
               </div>
             ))}
-          </motion.div>
+          </MotionDiv>
 
           {/* Device Check and Launch */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -174,10 +184,10 @@ const ARWorkflow: React.FC = () => {
                 </div>
               </div>
             )}
-          </motion.div>
+          </MotionDiv>
 
           {/* Instructions */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -216,7 +226,7 @@ const ARWorkflow: React.FC = () => {
                 <p>Connect nodes to create your AI workflow</p>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </div>

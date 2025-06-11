@@ -40,11 +40,11 @@ const VideoShowcaseSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-background to-background/95">
+    <section className="py-12 bg-gradient-to-b from-background to-background/95">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -61,7 +61,7 @@ const VideoShowcaseSection: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Simple Video Grid */}
+        {/* Simple Video Grid - Made smaller and wider */}
         <motion.div
           className="mb-8"
           initial={{ opacity: 0, y: 30 }}
@@ -69,7 +69,7 @@ const VideoShowcaseSection: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {videos.map((video, index) => (
               <motion.div
                 key={video.id}
@@ -80,8 +80,8 @@ const VideoShowcaseSection: React.FC = () => {
               >
                 <Card className="overflow-hidden border-primary/20 hover:border-primary/40 transition-all duration-300">
                   <CardContent className="p-0">
-                    {/* Simple Video - No overlays, no controls */}
-                    <div className="aspect-video overflow-hidden rounded-t-lg">
+                    {/* Simple Video - Made wider with 21:9 aspect ratio */}
+                    <div className="aspect-[21/9] h-40 overflow-hidden rounded-t-lg">
                       <video
                         className="w-full h-full object-cover"
                         poster={video.thumbnail}
@@ -94,16 +94,16 @@ const VideoShowcaseSection: React.FC = () => {
                       </video>
                     </div>
 
-                    {/* Video Info Below - Clean and Simple */}
-                    <div className="p-6">
-                      <Badge className="mb-3 bg-primary/10 text-primary border-primary/20">
+                    {/* Video Info Below - Clean and Simple, more compact */}
+                    <div className="p-4">
+                      <Badge className="mb-2 bg-primary/10 text-primary border-primary/20 text-xs">
                         {video.category}
                       </Badge>
-                      <h4 className="text-foreground font-bold text-lg mb-2">{video.title}</h4>
-                      <p className="text-muted-foreground text-sm mb-3 leading-relaxed">{video.description}</p>
+                      <h4 className="text-foreground font-bold text-base mb-1">{video.title}</h4>
+                      <p className="text-muted-foreground text-xs mb-2 leading-relaxed">{video.description}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground text-sm font-medium">{video.duration}</span>
-                        <Badge variant="outline" className="text-muted-foreground">
+                        <span className="text-muted-foreground text-xs font-medium">{video.duration}</span>
+                        <Badge variant="outline" className="text-muted-foreground text-xs">
                           HD Quality
                         </Badge>
                       </div>

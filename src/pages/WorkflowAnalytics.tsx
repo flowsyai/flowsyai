@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   TrendingUp,
   Activity,
@@ -232,7 +242,7 @@ const WorkflowAnalytics: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -259,9 +269,9 @@ const WorkflowAnalytics: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -282,9 +292,9 @@ const WorkflowAnalytics: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -309,9 +319,9 @@ const WorkflowAnalytics: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -332,7 +342,7 @@ const WorkflowAnalytics: React.FC = () => {
                 </p>
               </CardContent>
             </Card>
-          </motion.div>
+          </MotionDiv>
         </div>
 
         {/* Charts and Detailed Analytics */}
@@ -419,7 +429,7 @@ const WorkflowAnalytics: React.FC = () => {
           <TabsContent value="performance" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {analyticsData.performanceMetrics.map((metric, index) => (
-                <motion.div
+                <MotionDiv
                   key={metric.metric}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -437,7 +447,7 @@ const WorkflowAnalytics: React.FC = () => {
                       </div>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
           </TabsContent>

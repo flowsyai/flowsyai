@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Trophy,
   Star,
@@ -182,25 +193,25 @@ const TutorialGamification: React.FC<TutorialGamificationProps> = ({
   return (
     <div className="space-y-6">
       {/* Celebration Animation */}
-      <AnimatePresence>
+      <SafeAnimatePresence>
         {celebrationAnimation && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
           >
-            <motion.div
+            <MotionDiv
               initial={{ y: 50 }}
               animate={{ y: 0 }}
               className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-2xl text-white text-center shadow-2xl"
             >
-              <motion.div
+              <MotionDiv
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 0.5, repeat: 2 }}
               >
                 <Trophy className="w-16 h-16 mx-auto mb-4" />
-              </motion.div>
+              </MotionDiv>
               <h2 className="text-2xl font-bold mb-2">Achievement Unlocked!</h2>
               {newUnlocks.map(achievement => (
                 <div key={achievement.id} className="mb-2">
@@ -209,10 +220,10 @@ const TutorialGamification: React.FC<TutorialGamificationProps> = ({
                   <div className="text-lg font-bold">+{achievement.points} XP</div>
                 </div>
               ))}
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </SafeAnimatePresence>
 
       {/* User Stats Header */}
       <Card className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
@@ -277,7 +288,7 @@ const TutorialGamification: React.FC<TutorialGamificationProps> = ({
       {activeTab === 'achievements' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {achievements.map(achievement => (
-            <motion.div
+            <MotionDiv
               key={achievement.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -344,7 +355,7 @@ const TutorialGamification: React.FC<TutorialGamificationProps> = ({
                   Claim Reward
                 </Button>
               )}
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       )}

@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { MessageSquare, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FeedbackSystem from './FeedbackSystem';
@@ -15,7 +26,7 @@ const FloatingFeedbackButton: React.FC = () => {
 
   return (
     <>
-      <motion.div
+      <MotionDiv
         className="fixed bottom-6 right-6 z-40"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -26,7 +37,7 @@ const FloatingFeedbackButton: React.FC = () => {
           delay: 2, // Delay appearance to not overwhelm new users
         }}
       >
-        <motion.div
+        <MotionDiv
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onHoverStart={() => setIsHovered(true)}
@@ -41,13 +52,13 @@ const FloatingFeedbackButton: React.FC = () => {
             </span>
 
             {/* Animated background */}
-            <motion.div
+            <MotionDiv
               className="absolute inset-0 bg-gradient-to-r from-gold-light to-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"
               initial={false}
             />
 
             {/* Pulse animation */}
-            <motion.div
+            <MotionDiv
               className="absolute inset-0 bg-primary/20 rounded-full"
               animate={{
                 scale: [1, 1.2, 1],
@@ -60,12 +71,12 @@ const FloatingFeedbackButton: React.FC = () => {
               }}
             />
           </Button>
-        </motion.div>
+        </MotionDiv>
 
         {/* Tooltip */}
-        <AnimatePresence>
+        <SafeAnimatePresence>
           {isHovered && (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, x: 10, scale: 0.9 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 10, scale: 0.9 }}
@@ -86,10 +97,10 @@ const FloatingFeedbackButton: React.FC = () => {
               <div className="absolute left-full top-1/2 transform -translate-y-1/2">
                 <div className="w-0 h-0 border-l-4 border-l-border-alt border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
               </div>
-            </motion.div>
+            </MotionDiv>
           )}
-        </AnimatePresence>
-      </motion.div>
+        </SafeAnimatePresence>
+      </MotionDiv>
 
       {/* Feedback Modal */}
       <FeedbackSystem

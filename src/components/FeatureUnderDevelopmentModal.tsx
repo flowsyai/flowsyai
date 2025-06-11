@@ -10,7 +10,16 @@ import {
 } from './ui/dialog'; // Assuming path is correct, might be @/components/ui/dialog
 import { Button } from './ui/button'; // Assuming path is correct, might be @/components/ui/button
 import { AlertTriangle } from 'lucide-react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
 
 interface FeatureUnderDevelopmentModalProps {
   open: boolean;
@@ -46,15 +55,15 @@ export const FeatureUnderDevelopmentModal: FC<FeatureUnderDevelopmentModalProps>
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md bg-card-alt border-border-alt shadow-2xl rounded-xl p-6 text-center">
         <DialogHeader className="items-center">
-          <motion.div
+          <MotionDiv
             variants={iconVariants}
             initial="hidden"
             animate={open ? 'visible' : 'hidden'}
             className="p-3 bg-primary/10 rounded-full mb-4 border border-primary/20"
           >
             <AlertTriangle className="h-10 w-10 text-primary" />
-          </motion.div>
-          <motion.div
+          </MotionDiv>
+          <MotionDiv
             variants={itemVariants}
             initial="hidden"
             animate={open ? 'visible' : 'hidden'}
@@ -63,8 +72,8 @@ export const FeatureUnderDevelopmentModal: FC<FeatureUnderDevelopmentModalProps>
             <DialogTitle className="text-h3 text-foreground mb-2">
               {featureName} - Coming Soon!
             </DialogTitle>
-          </motion.div>
-          <motion.div
+          </MotionDiv>
+          <MotionDiv
             variants={itemVariants}
             initial="hidden"
             animate={open ? 'visible' : 'hidden'}
@@ -73,10 +82,10 @@ export const FeatureUnderDevelopmentModal: FC<FeatureUnderDevelopmentModalProps>
             <DialogDescription className="text-body-std text-muted-foreground">
               {actionDescription || defaultDescription}
             </DialogDescription>
-          </motion.div>
+          </MotionDiv>
         </DialogHeader>
         <DialogFooter className="sm:justify-center mt-6">
-          <motion.div
+          <MotionDiv
             variants={itemVariants}
             initial="hidden"
             animate={open ? 'visible' : 'hidden'}
@@ -91,7 +100,7 @@ export const FeatureUnderDevelopmentModal: FC<FeatureUnderDevelopmentModalProps>
             >
               Got it, Thanks!
             </Button>
-          </motion.div>
+          </MotionDiv>
         </DialogFooter>
         {/* The X close button is part of DialogContent by default in ui/dialog.tsx if not overridden */}
       </DialogContent>

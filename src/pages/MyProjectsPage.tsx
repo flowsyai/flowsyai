@@ -1,5 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Plus,
   Search,
@@ -177,7 +187,7 @@ const MyProjectsPage: React.FC = () => {
     <div className="min-h-screen w-full relative overflow-hidden premium-hero-bg">
       <div className="relative z-20 container mx-auto px-4 py-8 max-w-screen-xl">
         {/* Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -235,7 +245,7 @@ const MyProjectsPage: React.FC = () => {
               Filter
             </Button>
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -252,7 +262,7 @@ const MyProjectsPage: React.FC = () => {
 
           {/* Workflows Tab */}
           <TabsContent value="workflows">
-            <motion.div
+            <MotionDiv
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -261,7 +271,7 @@ const MyProjectsPage: React.FC = () => {
               {isLoading ? (
                 // Loading skeletons
                 [...Array(6)].map((_, i) => (
-                  <motion.div key={i} variants={itemVariants}>
+                  <MotionDiv key={i} variants={itemVariants}>
                     <div className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl rounded-lg p-6 h-64 animate-pulse">
                       <div className="h-4 bg-muted rounded w-3/4 mb-4"></div>
                       <div className="h-3 bg-muted rounded w-full mb-2"></div>
@@ -271,10 +281,10 @@ const MyProjectsPage: React.FC = () => {
                         <div className="h-8 bg-muted rounded w-8"></div>
                       </div>
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 ))
               ) : filteredWorkflows.length === 0 ? (
-                <motion.div variants={itemVariants} className="col-span-full">
+                <MotionDiv variants={itemVariants} className="col-span-full">
                   <div className="text-center py-12">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/20 flex items-center justify-center">
                       <Workflow className="h-8 w-8 text-muted-foreground" />
@@ -297,10 +307,10 @@ const MyProjectsPage: React.FC = () => {
                       </Button>
                     )}
                   </div>
-                </motion.div>
+                </MotionDiv>
               ) : (
                 filteredWorkflows.map(workflow => (
-                  <motion.div key={workflow.id} variants={itemVariants} whileHover={{ y: -4 }}>
+                  <MotionDiv key={workflow.id} variants={itemVariants} whileHover={{ y: -4 }}>
                     <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl h-full">
                       <div className="p-6">
                         <div className="flex justify-between items-start mb-4">
@@ -381,15 +391,15 @@ const MyProjectsPage: React.FC = () => {
                         </div>
                       </div>
                     </GlassCard>
-                  </motion.div>
+                  </MotionDiv>
                 ))
               )}
-            </motion.div>
+            </MotionDiv>
           </TabsContent>
 
           {/* AI Agents Tab */}
           <TabsContent value="agents">
-            <motion.div
+            <MotionDiv
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -398,7 +408,7 @@ const MyProjectsPage: React.FC = () => {
               {isLoading ? (
                 // Loading skeletons
                 [...Array(6)].map((_, i) => (
-                  <motion.div key={i} variants={itemVariants}>
+                  <MotionDiv key={i} variants={itemVariants}>
                     <div className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl rounded-lg p-6 h-64 animate-pulse">
                       <div className="h-4 bg-muted rounded w-3/4 mb-4"></div>
                       <div className="h-3 bg-muted rounded w-full mb-2"></div>
@@ -408,10 +418,10 @@ const MyProjectsPage: React.FC = () => {
                         <div className="h-8 bg-muted rounded w-8"></div>
                       </div>
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 ))
               ) : filteredAgents.length === 0 ? (
-                <motion.div variants={itemVariants} className="col-span-full">
+                <MotionDiv variants={itemVariants} className="col-span-full">
                   <div className="text-center py-12">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/20 flex items-center justify-center">
                       <Bot className="h-8 w-8 text-muted-foreground" />
@@ -431,10 +441,10 @@ const MyProjectsPage: React.FC = () => {
                       </Button>
                     )}
                   </div>
-                </motion.div>
+                </MotionDiv>
               ) : (
                 filteredAgents.map(agent => (
-                  <motion.div key={agent.id} variants={itemVariants} whileHover={{ y: -4 }}>
+                  <MotionDiv key={agent.id} variants={itemVariants} whileHover={{ y: -4 }}>
                     <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl h-full">
                       <div className="p-6">
                         <div className="flex justify-between items-start mb-4">
@@ -530,10 +540,10 @@ const MyProjectsPage: React.FC = () => {
                         </div>
                       </div>
                     </GlassCard>
-                  </motion.div>
+                  </MotionDiv>
                 ))
               )}
-            </motion.div>
+            </MotionDiv>
           </TabsContent>
         </Tabs>
       </div>

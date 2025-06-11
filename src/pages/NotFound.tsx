@@ -2,7 +2,18 @@ import { useLocation, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  MotionMain,
+} from '@/lib/motion-wrapper';
+
 import { ServerCrash, Home } from 'lucide-react'; // Or Frown, AlertTriangle etc.
 
 const pageVariants = {
@@ -29,7 +40,7 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <motion.main
+      <MotionMain
         className="flex-1 flex flex-col items-center justify-center text-center p-8"
         variants={pageVariants}
         initial="initial"
@@ -37,37 +48,37 @@ const NotFound = () => {
         exit="out"
         transition={{ duration: 0.5, ease: 'easeInOut' }}
       >
-        <motion.div variants={iconVariants} initial="initial" animate="animate">
+        <MotionDiv variants={iconVariants} initial="initial" animate="animate">
           <ServerCrash className="w-32 h-32 text-primary mb-8" />
-        </motion.div>
+        </MotionDiv>
 
-        <motion.h1
+        <MotionH1
           className="text-6xl md:text-8xl font-bold text-primary mb-4"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           404
-        </motion.h1>
+        </MotionH1>
 
-        <motion.p
+        <MotionP
           className="text-h3 text-foreground/90 mb-3"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           Oops! Page Not Found
-        </motion.p>
-        <motion.p
+        </MotionP>
+        <MotionP
           className="text-body-lg text-muted-foreground mb-10 max-w-md"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           The page you're looking for doesn't exist or has been moved. Let's get you back on track.
-        </motion.p>
+        </MotionP>
 
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
@@ -78,8 +89,8 @@ const NotFound = () => {
               Return to Homepage
             </Link>
           </Button>
-        </motion.div>
-      </motion.main>
+        </MotionDiv>
+      </MotionMain>
       <Footer />
     </div>
   );

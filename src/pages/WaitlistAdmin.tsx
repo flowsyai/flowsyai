@@ -1,5 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Download,
   Mail,
@@ -112,7 +122,7 @@ const WaitlistAdmin: React.FC = () => {
     color: string;
     description?: string;
   }> = ({ title, value, icon, color, description }) => (
-    <motion.div
+    <MotionDiv
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="premium-card p-6 rounded-2xl"
@@ -127,7 +137,7 @@ const WaitlistAdmin: React.FC = () => {
         </div>
       </div>
       {description && <div className="text-xs text-muted-foreground mt-2">{description}</div>}
-    </motion.div>
+    </MotionDiv>
   );
 
   return (
@@ -266,7 +276,7 @@ const WaitlistAdmin: React.FC = () => {
                 </thead>
                 <tbody>
                   {filteredEmails.map((email, index) => (
-                    <motion.tr
+                    <MotionTr
                       key={email.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -292,7 +302,7 @@ const WaitlistAdmin: React.FC = () => {
                       </td>
                       <td className="p-4 text-muted-foreground">{email.utm_source || '-'}</td>
                       <td className="p-4 text-muted-foreground">{email.utm_campaign || '-'}</td>
-                    </motion.tr>
+                    </MotionTr>
                   ))}
                 </tbody>
               </table>

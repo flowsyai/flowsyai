@@ -8,21 +8,24 @@ const AboutUsSection: React.FC = () => {
     >
       <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-10 text-foreground">
-          About Our Company
+          About FlowsyAI
         </h2>
         <div className="space-y-6 text-left">
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            FlowsyAI is a cutting-edge platform designed to democratize AI workflow automation. We
+            believe that powerful AI tools should be accessible to everyone, regardless of technical
+            expertise or company size.
           </p>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum. Our mission is to deliver excellence and
-            innovation.
+            Our mission is to empower businesses and individuals to build, deploy, and scale
+            intelligent workflows without the complexity traditionally associated with AI
+            implementation. We focus on user-friendly interfaces and robust functionality.
           </p>
-          {/* Optionally, add team member details or company values here */}
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+            Built by a distributed team of AI researchers and engineers, FlowsyAI represents the
+            next generation of workflow automation tools, combining advanced AI capabilities with
+            intuitive design and enterprise-grade security.
+          </p>
         </div>
       </div>
     </section>

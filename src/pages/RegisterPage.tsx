@@ -4,7 +4,18 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+import { useScroll, useTransform } from 'framer-motion';
+
 import {
   ArrowRight,
   Mail,
@@ -229,7 +240,7 @@ const RegisterPage: React.FC = () => {
       {/* Animated Floating Elements */}
       <div className="absolute inset-0 z-10 overflow-hidden">
         {[...Array(15)].map((_, i) => (
-          <motion.div
+          <MotionDiv
             key={i}
             className={`absolute rounded-full backdrop-blur-sm border ${i % 3 === 0 ? 'bg-primary/10 border-primary/20' : i % 3 === 1 ? 'bg-gold/10 border-gold/20' : 'bg-platinum/10 border-platinum/20'}`}
             style={{
@@ -257,7 +268,7 @@ const RegisterPage: React.FC = () => {
       </div>
 
       {/* Register Content */}
-      <motion.div
+      <MotionDiv
         ref={sectionRef}
         style={{ opacity }}
         className="relative z-20 w-full max-w-lg px-6"
@@ -266,13 +277,13 @@ const RegisterPage: React.FC = () => {
         animate="visible"
       >
         {/* Logo/Brand Section */}
-        <motion.div variants={itemVariants} className="text-center mb-8">
-          <motion.div
+        <MotionDiv variants={itemVariants} className="text-center mb-8">
+          <MotionDiv
             className="w-20 h-20 mx-auto mb-6 rounded-full premium-glass flex items-center justify-center border border-gold/20 shadow-lg premium-shadow relative overflow-hidden group"
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <motion.div
+            <MotionDiv
               className="w-12 h-12 rounded-full bg-gradient-to-tr from-primary via-gold to-primary bg-[length:200%_200%] animate-gradient-slow"
               animate={{
                 scale: [1, 1.1, 1],
@@ -286,27 +297,27 @@ const RegisterPage: React.FC = () => {
               <div className="w-full h-full flex items-center justify-center">
                 <Sparkles className="w-6 h-6 text-background animate-pulse-scale" />
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
 
-          <motion.h1
+          <MotionH1
             variants={itemVariants}
             className="text-3xl md:text-4xl font-bold mb-2 text-foreground font-serif"
           >
             Join Bot Architect
-          </motion.h1>
-          <motion.p variants={itemVariants} className="text-muted-foreground">
+          </MotionH1>
+          <MotionP variants={itemVariants} className="text-muted-foreground">
             Create your account and start building intelligent workflows
-          </motion.p>
-        </motion.div>
+          </MotionP>
+        </MotionDiv>
 
         {/* Register Form */}
-        <motion.div
+        <MotionDiv
           variants={itemVariants}
           className="premium-card p-8 bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <Label htmlFor="username" className="text-foreground font-medium">
                 Username
               </Label>
@@ -322,9 +333,9 @@ const RegisterPage: React.FC = () => {
                   className="pl-10 bg-background/50 border-border-alt focus:border-primary/50 focus:ring-primary/20 transition-all duration-300"
                 />
               </div>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <Label htmlFor="email" className="text-foreground font-medium">
                 Email Address
               </Label>
@@ -340,9 +351,9 @@ const RegisterPage: React.FC = () => {
                   className="pl-10 bg-background/50 border-border-alt focus:border-primary/50 focus:ring-primary/20 transition-all duration-300"
                 />
               </div>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <Label htmlFor="password" className="text-foreground font-medium">
                 Password
               </Label>
@@ -368,7 +379,7 @@ const RegisterPage: React.FC = () => {
 
               {/* Password Strength Indicator */}
               {password && (
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   className="mt-2"
@@ -384,11 +395,11 @@ const RegisterPage: React.FC = () => {
                       {getPasswordStrengthText(passwordStrength)}
                     </span>
                   </div>
-                </motion.div>
+                </MotionDiv>
               )}
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <Label htmlFor="confirmPassword" className="text-foreground font-medium">
                 Confirm Password
               </Label>
@@ -418,7 +429,7 @@ const RegisterPage: React.FC = () => {
 
               {/* Password Match Indicator */}
               {confirmPassword && (
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   className="mt-2 flex items-center gap-2"
@@ -434,22 +445,22 @@ const RegisterPage: React.FC = () => {
                       <span className="text-xs">Try again, genius</span>
                     </div>
                   )}
-                </motion.div>
+                </MotionDiv>
               )}
-            </motion.div>
+            </MotionDiv>
 
             {error && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-lg"
               >
                 <AlertCircle className="h-4 w-4 text-red-500" />
                 <span className="text-sm text-red-500">{error}</span>
-              </motion.div>
+              </MotionDiv>
             )}
 
-            <motion.div variants={itemVariants} className="flex items-start space-x-3">
+            <MotionDiv variants={itemVariants} className="flex items-start space-x-3">
               <Checkbox
                 id="terms"
                 checked={acceptTerms}
@@ -472,9 +483,9 @@ const RegisterPage: React.FC = () => {
                   Privacy Policy
                 </Link>
               </Label>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div variants={itemVariants}>
+            <MotionDiv variants={itemVariants}>
               <Button
                 type="submit"
                 disabled={isLoading || !acceptTerms}
@@ -482,7 +493,7 @@ const RegisterPage: React.FC = () => {
               >
                 <span className="relative z-10 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                   {isLoading ? (
-                    <motion.div
+                    <MotionDiv
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                       className="w-5 h-5 border-2 border-background border-t-transparent rounded-full"
@@ -495,10 +506,10 @@ const RegisterPage: React.FC = () => {
                   )}
                 </span>
               </Button>
-            </motion.div>
+            </MotionDiv>
 
             {/* Login Link */}
-            <motion.div variants={itemVariants} className="text-center">
+            <MotionDiv variants={itemVariants} className="text-center">
               <span className="text-sm text-muted-foreground">Already have an account? </span>
               <Link
                 to="/login"
@@ -506,10 +517,10 @@ const RegisterPage: React.FC = () => {
               >
                 Sign in
               </Link>
-            </motion.div>
+            </MotionDiv>
           </form>
-        </motion.div>
-      </motion.div>
+        </MotionDiv>
+      </MotionDiv>
     </div>
   );
 };

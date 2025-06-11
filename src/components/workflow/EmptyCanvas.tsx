@@ -1,10 +1,20 @@
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Plus } from 'lucide-react';
 import { type EmptyCanvasProps } from './types';
 
 const EmptyCanvas = (_props: EmptyCanvasProps) => {
   return (
-    <motion.div
+    <MotionDiv
       className="workflow-canvas rounded-xl border border-dashed border-border h-[400px] flex items-center justify-center"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
@@ -15,7 +25,7 @@ const EmptyCanvas = (_props: EmptyCanvasProps) => {
         <p>Add AI agents to build your workflow</p>
         <p className="text-sm mt-2">Drag and arrange agents to create a processing pipeline</p>
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 };
 

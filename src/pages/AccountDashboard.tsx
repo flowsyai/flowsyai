@@ -1,5 +1,15 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   User,
   Crown,
@@ -282,7 +292,7 @@ const AccountDashboard: React.FC = () => {
     <div className="min-h-screen w-full relative overflow-hidden premium-hero-bg">
       <div className="relative z-20 container mx-auto px-4 py-8 max-w-screen-xl">
         {/* Welcome Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -324,26 +334,26 @@ const AccountDashboard: React.FC = () => {
               </Button>
             )}
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Token Balance - Compact View */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-8"
         >
           <TokenManager compact={true} showPurchaseOptions={true} />
-        </motion.div>
+        </MotionDiv>
 
         {/* Stats Overview */}
-        <motion.div
+        <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
         >
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -358,9 +368,9 @@ const AccountDashboard: React.FC = () => {
                 <p className="text-sm text-muted-foreground">Applications Created</p>
               </div>
             </GlassCard>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -377,9 +387,9 @@ const AccountDashboard: React.FC = () => {
                 <p className="text-sm text-muted-foreground">Tokens Used Today</p>
               </div>
             </GlassCard>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -396,9 +406,9 @@ const AccountDashboard: React.FC = () => {
                 <p className="text-sm text-muted-foreground">Monthly Usage</p>
               </div>
             </GlassCard>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -413,30 +423,25 @@ const AccountDashboard: React.FC = () => {
                 <p className="text-sm text-muted-foreground">Success Rate</p>
               </div>
             </GlassCard>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
 
         {/* Enhanced Quick Access Panel */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="mb-8"
-        >
-          <motion.div variants={itemVariants}>
+        <MotionDiv variants={containerVariants} initial="hidden" animate="visible" className="mb-8">
+          <MotionDiv variants={itemVariants}>
             <QuickAccessPanel />
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
 
         {/* Recent Activity */}
-        <motion.div
+        <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
           {/* Recent Workflows */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-foreground">Recent Workflows</h2>
               <Button variant="ghost" onClick={() => navigate('/projects')}>
@@ -476,10 +481,10 @@ const AccountDashboard: React.FC = () => {
                 )}
               </div>
             </GlassCard>
-          </motion.div>
+          </MotionDiv>
 
           {/* Recent AI Agents */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-foreground">AI Agents</h2>
               <Button variant="ghost" onClick={() => navigate('/projects')}>
@@ -528,12 +533,12 @@ const AccountDashboard: React.FC = () => {
                 )}
               </div>
             </GlassCard>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
 
         {/* Daily Challenges Section */}
         {showChallenges && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -545,12 +550,12 @@ const AccountDashboard: React.FC = () => {
                 toast.success(`Challenge completed: ${challenge.title}!`);
               }}
             />
-          </motion.div>
+          </MotionDiv>
         )}
 
         {/* Achievements Section */}
         {showAchievements && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -567,7 +572,7 @@ const AccountDashboard: React.FC = () => {
               </Button>
             </div>
             <AchievementSystem userStats={userStats} />
-          </motion.div>
+          </MotionDiv>
         )}
       </div>
 

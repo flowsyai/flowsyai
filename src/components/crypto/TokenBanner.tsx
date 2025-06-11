@@ -1,5 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  MotionSpan,
+} from '@/lib/motion-wrapper';
+
 import {
   TrendingUp,
   TrendingDown,
@@ -136,8 +148,8 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
 
   const generateMockData = () => ({
     totalSupply: 100000000,
-    holders: 15420,
-    liquidity: 2850000,
+    holders: tokenData?.holders, // Only use real holder data if available
+    liquidity: 2850000, // This could be fetched from DEX APIs in the future
     volume24h: tokenData?.volume24h || 125000,
     marketCap: tokenData?.marketCap || 2450000,
   });
@@ -207,7 +219,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
 
   if (compact) {
     return (
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         onHoverStart={() => setIsHovered(true)}
@@ -218,29 +230,29 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
           <div className="flex items-center justify-between">
             {/* Token Info */}
             <div className="flex items-center gap-3">
-              <motion.div
+              <MotionDiv
                 animate={logoControls}
                 className="w-8 h-8 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 flex items-center justify-center relative group-hover:scale-110 transition-transform duration-300"
                 whileHover={{ scale: 1.1 }}
               >
                 <Coins className="w-4 h-4 text-white" />
                 {isHovered && (
-                  <motion.div
+                  <MotionDiv
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     className="absolute -top-1 -right-1"
                   >
                     <Sparkles className="w-3 h-3 text-gold animate-pulse" />
-                  </motion.div>
+                  </MotionDiv>
                 )}
-              </motion.div>
+              </MotionDiv>
 
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-bold text-foreground">
                     {tokenData?.symbol || tokenConfig.symbol}
                   </span>
-                  <motion.span
+                  <MotionSpan
                     ref={priceRef}
                     className={`text-xs text-muted-foreground transition-colors duration-300 ${
                       priceChangeAnimation === 'up'
@@ -263,7 +275,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                     transition={{ duration: 0.5 }}
                   >
                     {formatCurrency(tokenData?.price || 0)}
-                  </motion.span>
+                  </MotionSpan>
                 </div>
                 <div className="flex items-center gap-1">
                   {(tokenData?.priceChange24h || 0) >= 0 ? (
@@ -287,7 +299,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
 
             {/* Action Buttons */}
             <div className="flex items-center gap-2">
-              <motion.button
+              <MotionButton
                 onClick={handleFavoriteToggle}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -298,7 +310,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                     isFavorited ? 'text-red-500 fill-red-500' : 'text-muted-foreground'
                   }`}
                 />
-              </motion.button>
+              </MotionButton>
 
               <Button
                 onClick={handleTradeClick}
@@ -312,14 +324,14 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
             </div>
           </div>
         </div>
-      </motion.div>
+      </MotionDiv>
     );
   }
 
   const mockData = generateMockData();
 
   return (
-    <motion.div
+    <MotionDiv
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       onHoverStart={() => setIsHovered(true)}
@@ -327,7 +339,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
       className={`premium-card premium-border premium-shadow bg-gradient-to-r from-card/80 via-card/90 to-card/80 backdrop-blur-lg rounded-2xl overflow-hidden relative ${className}`}
     >
       {/* Animated Background */}
-      <motion.div
+      <MotionDiv
         className="absolute inset-0 bg-gradient-to-r from-primary/5 via-gold/5 to-primary/5"
         animate={{
           backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -343,7 +355,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
       {/* Enhanced Floating Particles */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(12)].map((_, i) => (
-          <motion.div
+          <MotionDiv
             key={i}
             className={`absolute rounded-full ${
               i % 3 === 0
@@ -378,7 +390,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
           {/* Left Section - Token Info */}
           <div className="flex items-center gap-4">
             {/* Enhanced Animated Token Logo */}
-            <motion.div
+            <MotionDiv
               animate={logoControls}
               className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-gold flex items-center justify-center relative overflow-hidden group cursor-pointer"
               whileHover={{
@@ -391,14 +403,14 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
               onClick={() => setIsExpanded(!isExpanded)}
             >
               {/* Rotating Background Ring */}
-              <motion.div
+              <MotionDiv
                 className="absolute inset-0 rounded-full border-2 border-gold/30"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
               />
 
               {/* Pulsing Glow Effect */}
-              <motion.div
+              <MotionDiv
                 className="absolute inset-0 bg-gradient-to-r from-primary/20 to-gold/20 blur-lg rounded-full"
                 animate={{
                   scale: [1, 1.3, 1],
@@ -412,7 +424,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
               />
 
               {/* Main Icon */}
-              <motion.div
+              <MotionDiv
                 className="relative z-10"
                 animate={
                   isHovered
@@ -425,11 +437,11 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                 transition={{ duration: 0.5 }}
               >
                 <Coins className="w-8 h-8 text-white" />
-              </motion.div>
+              </MotionDiv>
 
               {/* Multiple Sparkle Effects */}
               {[...Array(3)].map((_, i) => (
-                <motion.div
+                <MotionDiv
                   key={i}
                   className={`absolute ${
                     i === 0 ? 'top-1 right-1' : i === 1 ? 'bottom-1 left-1' : 'top-1 left-1'
@@ -446,13 +458,13 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                   }}
                 >
                   <Sparkles className="w-3 h-3 text-gold" />
-                </motion.div>
+                </MotionDiv>
               ))}
 
               {/* Hover Indicator */}
-              <AnimatePresence>
+              <SafeAnimatePresence>
                 {isHovered && (
-                  <motion.div
+                  <MotionDiv
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0, opacity: 0 }}
@@ -461,10 +473,10 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                     <div className="bg-primary text-white text-xs px-2 py-1 rounded-full whitespace-nowrap">
                       Click for details
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 )}
-              </AnimatePresence>
-            </motion.div>
+              </SafeAnimatePresence>
+            </MotionDiv>
 
             {/* Enhanced Token Details */}
             <div className="space-y-3 flex-1">
@@ -478,7 +490,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
 
                 {/* Interactive Badges */}
                 <div className="flex items-center gap-2">
-                  <motion.button
+                  <MotionButton
                     onClick={handleFavoriteToggle}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -489,18 +501,18 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                         isFavorited ? 'text-red-500 fill-red-500' : 'text-muted-foreground'
                       }`}
                     />
-                  </motion.button>
+                  </MotionButton>
 
-                  <motion.button
+                  <MotionButton
                     onClick={handleShare}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className="p-1 rounded-full hover:bg-primary/10 transition-colors"
                   >
                     <Share2 className="w-4 h-4 text-muted-foreground hover:text-primary" />
-                  </motion.button>
+                  </MotionButton>
 
-                  <motion.button
+                  <MotionButton
                     onClick={() => setIsExpanded(!isExpanded)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -511,14 +523,14 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                     ) : (
                       <ChevronDown className="w-4 h-4 text-muted-foreground" />
                     )}
-                  </motion.button>
+                  </MotionButton>
                 </div>
               </div>
 
               {/* Price Section with Animation */}
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
-                  <motion.span
+                  <MotionSpan
                     ref={priceRef}
                     className={`text-2xl font-bold text-foreground transition-colors duration-300 ${
                       priceChangeAnimation === 'up'
@@ -541,10 +553,10 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                     transition={{ duration: 0.5 }}
                   >
                     {formatCurrency(tokenData?.price || 0)}
-                  </motion.span>
+                  </MotionSpan>
 
                   <div className="flex items-center gap-1">
-                    <motion.div
+                    <MotionDiv
                       animate={priceChangeAnimation ? { rotate: [0, 10, 0] } : {}}
                       transition={{ duration: 0.3 }}
                     >
@@ -553,7 +565,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                       ) : (
                         <TrendingDown className="w-4 h-4 text-red-400" />
                       )}
-                    </motion.div>
+                    </MotionDiv>
                     <span
                       className={`text-sm font-semibold ${
                         (tokenData?.priceChange24h || 0) >= 0 ? 'text-emerald-400' : 'text-red-400'
@@ -578,7 +590,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                     </span>
                   </div>
                   <div className="w-full bg-muted/30 rounded-full h-1">
-                    <motion.div
+                    <MotionDiv
                       className="bg-gradient-to-r from-primary to-gold h-1 rounded-full"
                       initial={{ width: 0 }}
                       animate={{
@@ -597,7 +609,7 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                     </span>
                   </div>
                   <div className="w-full bg-muted/30 rounded-full h-1">
-                    <motion.div
+                    <MotionDiv
                       className="bg-gradient-to-r from-emerald-400 to-blue-400 h-1 rounded-full"
                       initial={{ width: 0 }}
                       animate={{ width: `${Math.min((mockData.volume24h / 1000000) * 100, 100)}%` }}
@@ -642,9 +654,9 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
             </div>
 
             {/* Quick Buy Interface */}
-            <AnimatePresence>
+            <SafeAnimatePresence>
               {showQuickBuy && (
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, y: -10, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.9 }}
@@ -684,16 +696,16 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </MotionDiv>
               )}
-            </AnimatePresence>
+            </SafeAnimatePresence>
           </div>
         </div>
 
         {/* Expandable Details Section */}
-        <AnimatePresence>
+        <SafeAnimatePresence>
           {isExpanded && (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -702,21 +714,24 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
             >
               {/* Additional Token Information */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="bg-card/50 rounded-lg p-3 border border-border/30"
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <Users className="w-4 h-4 text-primary" />
-                    <span className="text-sm font-medium">Holders</span>
-                  </div>
-                  <div className="text-lg font-bold">{mockData.holders.toLocaleString()}</div>
-                  <div className="text-xs text-muted-foreground">Active wallets</div>
-                </motion.div>
+                {mockData.holders !== undefined && (
+                  <MotionDiv
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="bg-card/50 rounded-lg p-3 border border-border/30"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <Users className="w-4 h-4 text-primary" />
+                      <span className="text-sm font-medium">Holders</span>
+                      <div className="w-2 h-2 bg-emerald-500 rounded-full" title="Real data"></div>
+                    </div>
+                    <div className="text-lg font-bold">{mockData.holders.toLocaleString()}</div>
+                    <div className="text-xs text-muted-foreground">Active wallets</div>
+                  </MotionDiv>
+                )}
 
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
@@ -728,9 +743,9 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                   </div>
                   <div className="text-lg font-bold">{formatLargeNumber(mockData.liquidity)}</div>
                   <div className="text-xs text-muted-foreground">Total locked</div>
-                </motion.div>
+                </MotionDiv>
 
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
@@ -742,11 +757,11 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                   </div>
                   <div className="text-lg font-bold">{formatLargeNumber(mockData.totalSupply)}</div>
                   <div className="text-xs text-muted-foreground">Max tokens</div>
-                </motion.div>
+                </MotionDiv>
               </div>
 
               {/* Social Actions */}
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
@@ -781,13 +796,13 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
                     Tweet
                   </Button>
                 </div>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           )}
-        </AnimatePresence>
+        </SafeAnimatePresence>
 
         {/* Launch Announcement */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
@@ -800,9 +815,9 @@ const TokenBanner: React.FC<TokenBannerProps> = ({
               benefits.
             </span>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
-    </motion.div>
+    </MotionDiv>
   );
 };
 

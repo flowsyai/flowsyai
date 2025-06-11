@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Development files
+# Note: src/ and public/ are needed for Vite build process
+*.md
+*.txt
+!README.md
+
+# Build artifacts (keep only dist)
+.vite/
+coverage/
+.nyc_output/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+tests/
+e2e/
+*.spec.ts
+*.test.ts
+playwright.config.ts
+vitest.config.ts
+
+# Config files not needed for deployment
+eslint.config.js
+postcss.config.js
+tailwind.config.ts
+# tsconfig.*.json - REMOVED: tsconfig.app.json needed for Vite build
+vite.config.analyze.ts
+# Note: tsconfig.json, tsconfig.app.json, tsconfig.node.json are needed for build
+
+# Documentation
+docs/
+deployment/
+
+# Scripts
+scripts/
+
+# Backup files
+*_backup_*
+package_backup_*

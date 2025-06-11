@@ -41,7 +41,19 @@ import {
   Star,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  MotionSpan,
+} from '@/lib/motion-wrapper';
+
 import React, { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/hooks/useAuth';
@@ -135,7 +147,7 @@ const Navbar = () => {
   return (
     <nav className="border-b border-[hsl(var(--nav-border))] bg-[hsl(var(--nav-background))]/95 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4 py-2 flex items-center justify-between max-w-screen-xl min-h-[70px]">
-        <motion.button
+        <MotionButton
           onClick={handleLogoClick}
           className="group cursor-pointer bg-transparent border-none p-2 rounded-lg hover:bg-accent/50 transition-all duration-300"
           aria-label="Navigate to home page"
@@ -148,7 +160,7 @@ const Navbar = () => {
             animated={true}
             className="drop-shadow-sm"
           />
-        </motion.button>
+        </MotionButton>
 
         {/* Desktop Navigation */}
         {isDesktop && (
@@ -181,7 +193,7 @@ const Navbar = () => {
                         </Badge>
                       )}
                     </div>
-                    <motion.span
+                    <MotionSpan
                       className={cn(
                         'absolute bottom-0 left-0 h-0.5 w-full origin-bottom-left',
                         item.featured
@@ -304,7 +316,7 @@ const Navbar = () => {
                 </DropdownMenu>
               ) : (
                 <div className="flex items-center gap-3">
-                  <motion.button
+                  <MotionButton
                     onClick={() => navigate('/waitlist')}
                     className="group relative overflow-hidden text-foreground hover:text-primary font-medium rounded-lg transition-all duration-300 ease-in-out inline-flex h-9 items-center justify-center whitespace-nowrap px-3 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent"
                     whileHover={{ scale: 1.02 }}
@@ -314,8 +326,8 @@ const Navbar = () => {
                       <Star className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform duration-300" />
                       Join Token Waitlist
                     </span>
-                  </motion.button>
-                  <motion.button
+                  </MotionButton>
+                  <MotionButton
                     onClick={() => navigate('/waitlist')}
                     className="group relative overflow-hidden bg-gradient-to-r from-primary to-sapphire text-background font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 ease-in-out border border-primary/20 inline-flex h-9 items-center justify-center whitespace-nowrap px-3 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                     whileHover={{ scale: 1.02 }}
@@ -325,7 +337,7 @@ const Navbar = () => {
                       <Sparkles className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
                       Start Free Trial
                     </span>
-                  </motion.button>
+                  </MotionButton>
                 </div>
               )}
             </>
@@ -333,7 +345,7 @@ const Navbar = () => {
 
           {/* New Project Button - Only show for authenticated users */}
           {isAuthenticated && isDesktop && (
-            <motion.button
+            <MotionButton
               onClick={handleNewProject}
               className="bg-primary text-primary-foreground hover:bg-primary/90 group inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md px-3 text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
               whileHover={{ scale: 1.02 }}
@@ -341,7 +353,7 @@ const Navbar = () => {
             >
               <PlusCircle className="w-4 h-4 mr-2 group-hover:rotate-90 transition-transform duration-300" />
               New Project
-            </motion.button>
+            </MotionButton>
           )}
 
           {/* Settings - Only show for authenticated users */}
@@ -382,9 +394,9 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
+      <SafeAnimatePresence>
         {!isDesktop && isMobileMenuOpen && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -527,7 +539,7 @@ const Navbar = () => {
                   </>
                 ) : (
                   <div className="space-y-3">
-                    <motion.button
+                    <MotionButton
                       onClick={() => {
                         setIsMobileMenuOpen(false);
                         navigate('/waitlist');
@@ -538,8 +550,8 @@ const Navbar = () => {
                     >
                       <Star className="w-5 h-5 mr-2" />
                       Join Token Waitlist
-                    </motion.button>
-                    <motion.button
+                    </MotionButton>
+                    <MotionButton
                       onClick={() => {
                         setIsMobileMenuOpen(false);
                         navigate('/waitlist');
@@ -552,14 +564,14 @@ const Navbar = () => {
                         <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
                         Start Free Trial
                       </span>
-                    </motion.button>
+                    </MotionButton>
                   </div>
                 )}
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </SafeAnimatePresence>
     </nav>
   );
 };

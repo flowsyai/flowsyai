@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   X,
   ArrowRight,
@@ -179,14 +190,14 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose, onComp
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
-      <motion.div
+    <SafeAnimatePresence>
+      <MotionDiv
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
       >
-        <motion.div
+        <MotionDiv
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -227,7 +238,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose, onComp
                   </span>
                 </div>
                 <div className="w-full bg-muted/20 rounded-full h-2">
-                  <motion.div
+                  <MotionDiv
                     className="bg-gradient-to-r from-primary to-sapphire h-2 rounded-full"
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
@@ -237,7 +248,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose, onComp
               </div>
 
               {/* Step Content */}
-              <motion.div
+              <MotionDiv
                 key={currentStep}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -292,7 +303,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose, onComp
                     </Button>
                   </div>
                 )}
-              </motion.div>
+              </MotionDiv>
 
               {/* Navigation */}
               <div className="flex items-center justify-between">
@@ -348,9 +359,9 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ isOpen, onClose, onComp
               </div>
             </div>
           </GlassCard>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+        </MotionDiv>
+      </MotionDiv>
+    </SafeAnimatePresence>
   );
 };
 

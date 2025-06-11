@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Clock,
   Users,
@@ -104,19 +115,19 @@ const EnhancedWaitlistCTA: React.FC = () => {
     return (
       <section className="py-20 px-6 bg-gradient-to-br from-emerald-50 via-background to-emerald-50 dark:from-emerald-950/20 dark:via-background dark:to-emerald-950/20">
         <div className="container mx-auto max-w-4xl text-center">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             className="premium-card bg-card/80 backdrop-blur-lg border border-emerald-500/30 rounded-2xl p-12"
           >
-            <motion.div
+            <MotionDiv
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
               className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center"
             >
               <CheckCircle className="w-10 h-10 text-white" />
-            </motion.div>
+            </MotionDiv>
 
             <h2 className="text-3xl font-bold mb-4 text-foreground">Welcome to the Future! 🚀</h2>
             <p className="text-xl text-muted-foreground mb-6">
@@ -138,16 +149,18 @@ const EnhancedWaitlistCTA: React.FC = () => {
               Check your email for confirmation and next steps. Follow us on social media for
               updates!
             </p>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-br from-primary/5 via-background to-gold/5">
-      <div className="container mx-auto max-w-6xl">
-        <motion.div
+    <section className="py-20 px-6 relative">
+      {/* Subtle overlay for text readability */}
+      <div className="absolute inset-0 bg-background/10 z-[5]"></div>
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -164,11 +177,11 @@ const EnhancedWaitlistCTA: React.FC = () => {
             Be part of the exclusive group that gets early access to FlowsyAI and our upcoming
             Solana token launch. Limited spots available with incredible founder benefits.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Countdown & Stats */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -188,32 +201,32 @@ const EnhancedWaitlistCTA: React.FC = () => {
                   { label: 'Minutes', value: countdown.minutes },
                   { label: 'Seconds', value: countdown.seconds },
                 ].map((item, index) => (
-                  <motion.div
+                  <MotionDiv
                     key={item.label}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                     className="text-center p-4 bg-primary/5 rounded-xl border border-primary/10"
                   >
-                    <motion.div
+                    <MotionDiv
                       key={item.value}
                       initial={{ scale: 1.2, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       className="text-2xl font-bold text-primary"
                     >
                       {item.value.toString().padStart(2, '0')}
-                    </motion.div>
+                    </MotionDiv>
                     <div className="text-xs text-muted-foreground uppercase tracking-wide">
                       {item.label}
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
               </div>
             </div>
 
             {/* Waitlist Stats */}
             <div className="grid grid-cols-2 gap-4">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -225,9 +238,9 @@ const EnhancedWaitlistCTA: React.FC = () => {
                   {currentWaitlistSize.toLocaleString()}
                 </div>
                 <div className="text-sm text-muted-foreground">Users Waiting</div>
-              </motion.div>
+              </MotionDiv>
 
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -237,13 +250,13 @@ const EnhancedWaitlistCTA: React.FC = () => {
                 <Zap className="w-8 h-8 text-gold mx-auto mb-3" />
                 <div className="text-2xl font-bold text-foreground">1,000</div>
                 <div className="text-sm text-muted-foreground">Early Access Spots</div>
-              </motion.div>
+              </MotionDiv>
             </div>
 
             {/* Benefits Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {benefits.map((benefit, index) => (
-                <motion.div
+                <MotionDiv
                   key={benefit.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -260,13 +273,13 @@ const EnhancedWaitlistCTA: React.FC = () => {
                     <h4 className="font-semibold text-foreground mb-1">{benefit.title}</h4>
                     <p className="text-sm text-muted-foreground">{benefit.description}</p>
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Signup Form */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -298,7 +311,7 @@ const EnhancedWaitlistCTA: React.FC = () => {
                 className="w-full h-12 text-lg bg-gradient-to-r from-primary via-gold to-primary text-white hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
               >
                 {isSubmitting ? (
-                  <motion.div
+                  <MotionDiv
                     animate={{ rotate: 360 }}
                     transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                     className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
@@ -334,7 +347,7 @@ const EnhancedWaitlistCTA: React.FC = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </section>

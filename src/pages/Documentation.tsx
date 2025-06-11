@@ -51,7 +51,17 @@ import {
   SlidersHorizontal, // Added
   GitFork, // Added
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  MotionAside,
+} from '@/lib/motion-wrapper';
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -158,7 +168,7 @@ const SectionWrapper: React.FC<{
   icon?: React.ElementType;
   children: React.ReactNode;
 }> = ({ title, icon: Icon, children }) => (
-  <motion.div
+  <MotionDiv
     key={title} // Ensure re-render on content change
     className="prose prose-slate dark:prose-invert max-w-none lg:prose-lg xl:prose-xl"
     initial={{ opacity: 0, y: 10 }}
@@ -173,7 +183,7 @@ const SectionWrapper: React.FC<{
       </h2>
     </header>
     {children}
-  </motion.div>
+  </MotionDiv>
 );
 
 const SubSection: React.FC<{
@@ -205,7 +215,7 @@ const OverviewContent = () => (
     {/* Hero Section (already part of the main layout, shown when activeSection is 'overview') */}
     {/* Key Sections Overview (already part of the main layout, shown when activeSection is 'overview') */}
     {/* Optional Interactive Element / Featured Content */}
-    <motion.section
+    <MotionSection
       className="my-12 md:my-16 p-6 bg-card border rounded-lg"
       variants={itemVariants}
       initial="hidden"
@@ -249,10 +259,10 @@ const OverviewContent = () => (
           </CardContent>
         </Card>
       </div>
-    </motion.section>
+    </MotionSection>
 
     {/* Optional Community & Support Links */}
-    <motion.section
+    <MotionSection
       className="my-12 md:my-16 p-6 bg-card border rounded-lg"
       variants={itemVariants}
       initial="hidden"
@@ -276,7 +286,7 @@ const OverviewContent = () => (
           GitHub Repository <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </div>
-    </motion.section>
+    </MotionSection>
   </>
 );
 
@@ -1100,7 +1110,7 @@ const Documentation = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <motion.div
+      <MotionDiv
         className="container mx-auto px-4 py-8 md:py-12 flex-1 max-w-screen-xl"
         initial="initial"
         animate="in"
@@ -1110,7 +1120,7 @@ const Documentation = () => {
       >
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           {/* Sidebar */}
-          <motion.aside
+          <MotionAside
             className="lg:w-64 xl:w-72 flex-shrink-0"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -1126,6 +1136,7 @@ const Documentation = () => {
                     {sidebarNavItems.map(item => (
                       <li key={item.id}>
                         <button
+                          type="button"
                           onClick={() => handleContentNavigation(item.id)}
                           aria-current={activeSection === item.id ? 'page' : undefined}
                           className={`w-full flex items-center gap-2.5 text-sm px-3 py-2 rounded-md transition-colors duration-150 ease-in-out group
@@ -1145,20 +1156,17 @@ const Documentation = () => {
                 </nav>
               </div>
             </div>
-          </motion.aside>
+          </MotionAside>
 
           {/* Main Content */}
           <main
             id="main-doc-content"
-            className="flex-1 min-w-0 overflow-y-auto"
-            style={{
-              maxHeight: 'calc(100vh - 10rem)' /* Approximate height to enable scrolling */,
-            }}
+            className="flex-1 min-w-0 overflow-y-auto max-h-[calc(100vh-10rem)]"
           >
             {activeSection === 'overview' && (
               <>
                 {/* Hero Section */}
-                <motion.section
+                <MotionSection
                   className="mb-12 md:mb-16 text-center"
                   variants={itemVariants}
                   initial="hidden"
@@ -1201,10 +1209,10 @@ const Documentation = () => {
                       <Code className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
-                </motion.section>
+                </MotionSection>
 
                 {/* Key Sections Overview */}
-                <motion.section
+                <MotionSection
                   variants={itemVariants}
                   initial="hidden"
                   animate="visible"
@@ -1212,7 +1220,7 @@ const Documentation = () => {
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                     {keySectionItems.map(cardItem => (
-                      <motion.div
+                      <MotionDiv
                         key={cardItem.id}
                         variants={itemVariants}
                         onClick={() => handleContentNavigation(cardItem.id)}
@@ -1244,10 +1252,10 @@ const Documentation = () => {
                             </span>
                           </CardContent>
                         </Card>
-                      </motion.div>
+                      </MotionDiv>
                     ))}
                   </div>
-                </motion.section>
+                </MotionSection>
               </>
             )}
 
@@ -1255,7 +1263,7 @@ const Documentation = () => {
             {renderActiveSectionContent()}
           </main>
         </div>
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 };

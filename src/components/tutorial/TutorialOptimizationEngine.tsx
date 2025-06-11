@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Brain,
   TrendingUp,
@@ -382,9 +393,9 @@ const TutorialOptimizationEngine: React.FC<TutorialOptimizationEngineProps> = ({
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <AnimatePresence>
+            <SafeAnimatePresence>
               {recommendations.map((recommendation, index) => (
-                <motion.div
+                <MotionDiv
                   key={recommendation.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -430,9 +441,9 @@ const TutorialOptimizationEngine: React.FC<TutorialOptimizationEngineProps> = ({
                       </div>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </MotionDiv>
               ))}
-            </AnimatePresence>
+            </SafeAnimatePresence>
           </div>
         </CardContent>
       </Card>

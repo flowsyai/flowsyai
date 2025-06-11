@@ -1,6 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Smartphone,
   Hand,
@@ -123,7 +134,7 @@ const ARSection = () => {
 
         {/* Floating Holographic Elements */}
         {[...Array(6)].map((_, i) => (
-          <motion.div
+          <MotionDiv
             key={i}
             className="absolute w-32 h-32 border border-primary/30 rounded-lg"
             style={{
@@ -146,7 +157,7 @@ const ARSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -174,11 +185,11 @@ const ARSection = () => {
               Join 2,000+ companies already transforming their operations.
             </span>
           </p>
-        </motion.div>
+        </MotionDiv>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Interactive Workflow Visualization */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -204,7 +215,7 @@ const ARSection = () => {
               {/* AI Workflow Nodes */}
               <div className="absolute inset-0 p-8">
                 {/* Input Node */}
-                <motion.div
+                <MotionDiv
                   className="absolute top-12 left-12 w-24 h-24 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg border border-emerald-400/30"
                   animate={{
                     scale: [1, 1.05, 1],
@@ -220,10 +231,10 @@ const ARSection = () => {
                     <div className="text-lg mb-1">📧</div>
                     <div>Email</div>
                   </div>
-                </motion.div>
+                </MotionDiv>
 
                 {/* Processing Node */}
-                <motion.div
+                <MotionDiv
                   className="absolute top-32 left-1/2 transform -translate-x-1/2 w-28 h-28 bg-gradient-to-r from-primary to-blue-600 rounded-2xl flex items-center justify-center shadow-lg border border-primary/30"
                   animate={{
                     scale: [1, 1.08, 1],
@@ -240,10 +251,10 @@ const ARSection = () => {
                     <div className="text-lg mb-1">🤖</div>
                     <div>AI Process</div>
                   </div>
-                </motion.div>
+                </MotionDiv>
 
                 {/* Decision Node */}
-                <motion.div
+                <MotionDiv
                   className="absolute top-12 right-32 w-24 h-24 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg border border-amber-400/30"
                   animate={{
                     scale: [1, 1.06, 1],
@@ -259,10 +270,10 @@ const ARSection = () => {
                     <div className="text-lg mb-1">⚡</div>
                     <div>Decision</div>
                   </div>
-                </motion.div>
+                </MotionDiv>
 
                 {/* Output Nodes */}
-                <motion.div
+                <MotionDiv
                   className="absolute bottom-16 left-16 w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg border border-purple-400/30"
                   animate={{
                     scale: [1, 1.04, 1],
@@ -278,9 +289,9 @@ const ARSection = () => {
                     <div className="text-sm mb-1">📊</div>
                     <div>Report</div>
                   </div>
-                </motion.div>
+                </MotionDiv>
 
-                <motion.div
+                <MotionDiv
                   className="absolute bottom-16 right-16 w-20 h-20 bg-gradient-to-r from-rose-500 to-red-500 rounded-xl flex items-center justify-center shadow-lg border border-rose-400/30"
                   animate={{
                     scale: [1, 1.04, 1],
@@ -296,13 +307,13 @@ const ARSection = () => {
                     <div className="text-sm mb-1">📱</div>
                     <div>Notify</div>
                   </div>
-                </motion.div>
+                </MotionDiv>
               </div>
 
               {/* Animated Connections */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none">
                 {/* Connection 1: Input to Processing */}
-                <motion.path
+                <MotionPath
                   d="M 120 75 Q 200 75 240 150"
                   stroke="url(#connection1)"
                   strokeWidth="3"
@@ -314,7 +325,7 @@ const ARSection = () => {
                 />
 
                 {/* Connection 2: Processing to Decision */}
-                <motion.path
+                <MotionPath
                   d="M 280 150 Q 350 100 400 75"
                   stroke="url(#connection2)"
                   strokeWidth="3"
@@ -326,7 +337,7 @@ const ARSection = () => {
                 />
 
                 {/* Connection 3: Decision to Outputs */}
-                <motion.path
+                <MotionPath
                   d="M 400 100 Q 350 200 280 350"
                   stroke="url(#connection3)"
                   strokeWidth="3"
@@ -337,7 +348,7 @@ const ARSection = () => {
                   transition={{ duration: 1.5, repeat: Infinity, delay: 1.5 }}
                 />
 
-                <motion.path
+                <MotionPath
                   d="M 420 100 Q 450 200 480 350"
                   stroke="url(#connection4)"
                   strokeWidth="3"
@@ -370,7 +381,7 @@ const ARSection = () => {
 
               {/* Floating Data Particles */}
               {[...Array(8)].map((_, i) => (
-                <motion.div
+                <MotionDiv
                   key={i}
                   className="absolute w-2 h-2 bg-primary rounded-full"
                   style={{
@@ -392,7 +403,7 @@ const ARSection = () => {
               ))}
 
               {/* Status Indicator */}
-              <motion.div
+              <MotionDiv
                 className="absolute top-4 right-4 flex items-center gap-2 bg-emerald-500/20 rounded-full px-3 py-1 border border-emerald-500/30"
                 animate={{
                   opacity: [0.7, 1, 0.7],
@@ -401,12 +412,12 @@ const ARSection = () => {
               >
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
                 <span className="text-xs text-emerald-600 font-semibold">Active</span>
-              </motion.div>
+              </MotionDiv>
             </div>
 
             {/* Floating Enhancement Elements */}
             {[...Array(4)].map((_, i) => (
-              <motion.div
+              <MotionDiv
                 key={i}
                 className="absolute w-6 h-6 bg-gradient-to-r from-primary to-gold rounded-full opacity-60"
                 style={{
@@ -425,10 +436,10 @@ const ARSection = () => {
                 }}
               />
             ))}
-          </motion.div>
+          </MotionDiv>
 
           {/* AR Features & Content */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -476,7 +487,7 @@ const ARSection = () => {
             {/* AR Features Grid - Enhanced Layout */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               {arFeatures.map((feature, index) => (
-                <motion.div
+                <MotionDiv
                   key={feature.title}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -503,7 +514,7 @@ const ARSection = () => {
 
                   <div className="relative p-8">
                     {/* Icon with Enhanced Animation */}
-                    <motion.div
+                    <MotionDiv
                       className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 transition-all duration-300 ${
                         currentDemo === index
                           ? 'bg-gradient-to-r from-primary to-gold text-white shadow-lg'
@@ -513,7 +524,7 @@ const ARSection = () => {
                       transition={{ type: 'spring', stiffness: 300 }}
                     >
                       <feature.icon className="w-8 h-8" />
-                    </motion.div>
+                    </MotionDiv>
 
                     {/* Content */}
                     <h4 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
@@ -531,20 +542,20 @@ const ARSection = () => {
 
                     {/* Active Indicator */}
                     {currentDemo === index && (
-                      <motion.div
+                      <MotionDiv
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         className="absolute top-4 right-4 w-3 h-3 bg-gold rounded-full shadow-lg"
                       />
                     )}
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
 
             {/* Real-World Use Cases Section */}
             <div className="space-y-8">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -558,11 +569,11 @@ const ARSection = () => {
                 <p className="text-muted-foreground max-w-2xl mx-auto">
                   Real companies achieving measurable results with FlowsyAI automation workflows
                 </p>
-              </motion.div>
+              </MotionDiv>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {realWorldUseCases.map((useCase, index) => (
-                  <motion.div
+                  <MotionDiv
                     key={useCase.title}
                     initial={{ opacity: 0, scale: 0.8, y: 20 }}
                     whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -573,13 +584,13 @@ const ARSection = () => {
                   >
                     <div className="p-6">
                       {/* Use Case Icon */}
-                      <motion.div
+                      <MotionDiv
                         className="text-3xl mb-4 inline-block"
                         whileHover={{ scale: 1.2, rotate: 5 }}
                         transition={{ duration: 0.3 }}
                       >
                         {useCase.icon}
-                      </motion.div>
+                      </MotionDiv>
 
                       {/* Use Case Title */}
                       <h5 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
@@ -606,14 +617,14 @@ const ARSection = () => {
                       {/* Hover Glow Effect */}
                       <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
               </div>
             </div>
 
             {/* Call to Action - Enhanced Section */}
             <div className="space-y-8 pt-12">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -627,7 +638,7 @@ const ARSection = () => {
 
                 <div className="relative z-10">
                   <div className="text-center mb-8">
-                    <motion.div
+                    <MotionDiv
                       initial={{ scale: 0.8, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
                       viewport={{ once: true }}
@@ -635,7 +646,7 @@ const ARSection = () => {
                       className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-primary to-gold rounded-3xl mb-6 shadow-lg"
                     >
                       <Target className="w-10 h-10 text-white" />
-                    </motion.div>
+                    </MotionDiv>
 
                     <h4 className="text-3xl font-bold text-foreground mb-4">
                       Start Automating Your Business Today
@@ -651,7 +662,7 @@ const ARSection = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-6 justify-center max-w-lg mx-auto">
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <MotionDiv whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                       <Button
                         size="lg"
                         className="bg-gradient-to-r from-primary to-gold text-white hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 px-8 py-4 text-lg font-semibold"
@@ -663,9 +674,9 @@ const ARSection = () => {
                           <ArrowRight className="ml-3 h-6 w-6" />
                         </a>
                       </Button>
-                    </motion.div>
+                    </MotionDiv>
 
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <MotionDiv whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                       <Button
                         size="lg"
                         variant="outline"
@@ -677,13 +688,13 @@ const ARSection = () => {
                           Try Free Demo
                         </a>
                       </Button>
-                    </motion.div>
+                    </MotionDiv>
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
 
               {/* Business Value Proposition - Enhanced */}
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -715,9 +726,9 @@ const ARSection = () => {
                     SOC 2 compliant with 99.9% uptime guarantee
                   </p>
                 </div>
-              </motion.div>
+              </MotionDiv>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </section>

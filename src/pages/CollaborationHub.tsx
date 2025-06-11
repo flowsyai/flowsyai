@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Users,
   MessageSquare,
@@ -206,14 +217,14 @@ const CollaborationHub: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <motion.div
+        <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="space-y-8"
         >
           {/* Header */}
-          <motion.div
+          <MotionDiv
             variants={itemVariants}
             className="flex flex-col md:flex-row md:items-center justify-between gap-4"
           >
@@ -236,10 +247,10 @@ const CollaborationHub: React.FC = () => {
                 Start Live Session
               </Button>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Live Collaborators Indicator */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <GlassCard className="premium-card bg-card/80 backdrop-blur-lg border border-border-alt shadow-xl">
               <div className="p-4">
                 <div className="flex items-center justify-between">
@@ -285,10 +296,10 @@ const CollaborationHub: React.FC = () => {
                 </div>
               </div>
             </GlassCard>
-          </motion.div>
+          </MotionDiv>
 
           {/* Navigation Tabs */}
-          <motion.div variants={itemVariants}>
+          <MotionDiv variants={itemVariants}>
             <div className="flex flex-wrap gap-2">
               {tabs.map(tab => (
                 <Button
@@ -302,12 +313,12 @@ const CollaborationHub: React.FC = () => {
                 </Button>
               ))}
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Content based on active tab */}
-          <AnimatePresence mode="wait">
+          <SafeAnimatePresence mode="wait">
             {activeTab === 'projects' && (
-              <motion.div
+              <MotionDiv
                 key="projects"
                 variants={itemVariants}
                 initial="hidden"
@@ -417,11 +428,11 @@ const CollaborationHub: React.FC = () => {
                     </GlassCard>
                   ))}
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {activeTab === 'activity' && (
-              <motion.div
+              <MotionDiv
                 key="activity"
                 variants={itemVariants}
                 initial="hidden"
@@ -468,11 +479,11 @@ const CollaborationHub: React.FC = () => {
                     </div>
                   </div>
                 </GlassCard>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {activeTab === 'team' && (
-              <motion.div
+              <MotionDiv
                 key="team"
                 variants={itemVariants}
                 initial="hidden"
@@ -534,11 +545,11 @@ const CollaborationHub: React.FC = () => {
                     </div>
                   </div>
                 </GlassCard>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {activeTab === 'settings' && (
-              <motion.div
+              <MotionDiv
                 key="settings"
                 variants={itemVariants}
                 initial="hidden"
@@ -591,21 +602,21 @@ const CollaborationHub: React.FC = () => {
                     </div>
                   </div>
                 </GlassCard>
-              </motion.div>
+              </MotionDiv>
             )}
-          </AnimatePresence>
+          </SafeAnimatePresence>
 
           {/* Invite Modal */}
-          <AnimatePresence>
+          <SafeAnimatePresence>
             {showInviteModal && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-lg"
                 onClick={() => setShowInviteModal(false)}
               >
-                <motion.div
+                <MotionDiv
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
@@ -654,11 +665,11 @@ const CollaborationHub: React.FC = () => {
                       Send Invite
                     </Button>
                   </div>
-                </motion.div>
-              </motion.div>
+                </MotionDiv>
+              </MotionDiv>
             )}
-          </AnimatePresence>
-        </motion.div>
+          </SafeAnimatePresence>
+        </MotionDiv>
       </div>
     </div>
   );

@@ -1,5 +1,15 @@
 import { useState, useCallback, memo, MouseEvent } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Button } from '@/components/ui/button';
 import {
   X,
@@ -203,7 +213,7 @@ const WorkflowNodeComponent = ({
           />
         </>
       )}
-      <motion.div
+      <MotionDiv
         className={cn('workflow-node-rf group rounded-lg border bg-card shadow-md', {
           'ring-2 ring-sky-500 ring-offset-1 ring-offset-background': selected && !isTeaser,
           'glow-effect shadow-primary/20': isActive && !isTeaser,
@@ -300,7 +310,7 @@ const WorkflowNodeComponent = ({
             </Badge>
           )}
           {!isTeaser && (
-            <motion.div
+            <MotionDiv
               className="mt-2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -324,10 +334,10 @@ const WorkflowNodeComponent = ({
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-            </motion.div>
+            </MotionDiv>
           )}
         </CardContent>
-      </motion.div>
+      </MotionDiv>
 
       {!isTeaser && (
         <>

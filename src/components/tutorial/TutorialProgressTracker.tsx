@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Trophy,
   Star,
@@ -283,9 +294,9 @@ const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = ({
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
+    <SafeAnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -424,7 +435,7 @@ const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = ({
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {userAchievements.map(achievement => (
-                      <motion.div
+                      <MotionDiv
                         key={achievement.id}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -483,7 +494,7 @@ const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = ({
                             </p>
                           </div>
                         )}
-                      </motion.div>
+                      </MotionDiv>
                     ))}
                   </div>
                 </div>
@@ -702,9 +713,9 @@ const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = ({
               )}
             </CardContent>
           </Card>
-        </motion.div>
+        </MotionDiv>
       </div>
-    </AnimatePresence>
+    </SafeAnimatePresence>
   );
 };
 

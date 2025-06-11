@@ -1,0 +1,50 @@
+{
+  "cssAccessibility": {
+    "/assets/style.wiMu6h_B.css": {
+      "url": "https://aiflow-robialexz-robialexzs-projects.vercel.app/assets/style.wiMu6h_B.css",
+      "status": 200,
+      "statusText": "OK",
+      "contentType": "text/css; charset=utf-8",
+      "contentLength": 41207,
+      "accessible": true,
+      "content": "@import\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap\";@import\"https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap\";@tailwind base;@tailwind components;@tailwind utilities;.css-force-inclusion-marker{display:none!important;content:\"FLOWSYAI_CSS_LOADED\"}.index-page-container-fullscreen{margin:0;box-sizing:border-box;padding-top:3rem;padding-bottom:0;width:100%}@layer utilities{.shadow-top{box-shadow:0 -4px 6px -1px #0000001a,0 -2px 4px -2px #0000001a}.pulsating-gradient-bg{background:linear-gradient(-45deg,rgba(var(--background),.98),rgba(var(--primary),.05),rgba(var(--background),.98),rgba(var(--secondary),.07));background-size:400% 400%;animation:gradient 15s ease infinite}.subtle-pulsating-gradient-bg{background:linear-gradient(-45deg,rgba(var(--background),.99),rgba(var(--primary),.02),rgba(var(--background),.99),rgba(var(--secondary),.03));background-size:400% 400%;animation:gradient 20s ease infinite}@keyframes "
+    }
+  },
+  "cssContent": {
+    "local": {
+      "file": "style.NSpQlRoC.css",
+      "size": 213875,
+      "checks": {
+        "tailwindBase": true,
+        "customAnimations": true,
+        "colorVariables": true,
+        "floatingDots": true,
+        "luxuryEffects": true,
+        "responsiveDesign": true
+      }
+    },
+    "production": {
+      "size": 41207,
+      "checks": {
+        "tailwindBase": true,
+        "customAnimations": true,
+        "colorVariables": false,
+        "floatingDots": false,
+        "luxuryEffects": false
+      }
+    }
+  },
+  "htmlAnalysis": {},
+  "comparison": {
+    "localCSSRefs": ["href=\"/assets/style.NSpQlRoC.css\""],
+    "prodCSSRefs": ["href=\"/assets/style.wiMu6h_B.css\""],
+    "referencesMatch": false
+  },
+  "recommendations": [
+    "GENERAL IMPROVEMENTS:",
+    "- Add CSS preload hints for better performance",
+    "- Verify critical CSS is inlined in HTML head",
+    "- Test with browser dev tools for CSS loading"
+  ],
+  "issues": []
+}

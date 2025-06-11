@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Store,
   Star,
@@ -506,7 +516,7 @@ const FeaturedWorkflowCard: React.FC<FeaturedWorkflowCardProps> = ({
   onViewDetails,
   getDifficultyColor,
 }) => (
-  <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
+  <MotionDiv whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
     <Card className="h-full hover:shadow-xl transition-shadow duration-200 border-2 border-yellow-200 bg-gradient-to-br from-yellow-50 to-orange-50">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between mb-2">
@@ -588,7 +598,7 @@ const FeaturedWorkflowCard: React.FC<FeaturedWorkflowCardProps> = ({
         </div>
       </CardContent>
     </Card>
-  </motion.div>
+  </MotionDiv>
 );
 
 // Regular Workflow Card Component
@@ -609,7 +619,7 @@ const WorkflowCard: React.FC<WorkflowCardProps> = ({
   onViewDetails,
   getDifficultyColor,
 }) => (
-  <motion.div
+  <MotionDiv
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: index * 0.1 }}
@@ -696,7 +706,7 @@ const WorkflowCard: React.FC<WorkflowCardProps> = ({
         </div>
       </CardContent>
     </Card>
-  </motion.div>
+  </MotionDiv>
 );
 
 // Workflow Details Modal Component

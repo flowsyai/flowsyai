@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowsyAI Production Layout Debug</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .debug-section {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .success { color: #00ff00; }
+        .warning { color: #ffaa00; }
+        .error { color: #ff0000; }
+        .info { color: #00aaff; }
+        pre {
+            background: #000;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .test-element {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        button {
+            background: #0099ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0077cc;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 FlowsyAI Production Layout Diagnostic Tool</h1>
+    
+    <div class="debug-section">
+        <h2>Environment Detection</h2>
+        <div id="environment-info"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>CSS Custom Properties Test</h2>
+        <div id="css-properties-test"></div>
+        <div class="test-element" id="test-primary" style="background-color: hsl(var(--primary));">Primary</div>
+        <div class="test-element" id="test-gold" style="background-color: hsl(var(--gold));">Gold</div>
+        <div class="test-element" id="test-card" style="background-color: hsl(var(--card));">Card</div>
+    </div>
+
+    <div class="debug-section">
+        <h2>Tailwind CSS Classes Test</h2>
+        <div id="tailwind-test"></div>
+        <div class="bg-primary text-white p-4 rounded-lg">Tailwind Primary</div>
+        <div class="premium-card p-4 m-2">Premium Card</div>
+    </div>
+
+    <div class="debug-section">
+        <h2>Font Loading Test</h2>
+        <div id="font-test"></div>
+        <div style="font-family: 'Poppins', sans-serif; font-size: 24px;">Poppins Font Test</div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 24px;">Inter Font Test</div>
+    </div>
+
+    <div class="debug-section">
+        <h2>Animation Test</h2>
+        <div id="animation-test"></div>
+        <div class="animate-pulse" style="width: 100px; height: 100px; background: #0099ff; margin: 10px;">Pulse</div>
+        <div class="animate-float" style="width: 100px; height: 100px; background: #ffd700; margin: 10px;">Float</div>
+    </div>
+
+    <div class="debug-section">
+        <h2>Layout Measurements</h2>
+        <div id="layout-measurements"></div>
+        <button onclick="measureLayout()">Measure Layout</button>
+    </div>
+
+    <div class="debug-section">
+        <h2>Network Resources</h2>
+        <div id="network-resources"></div>
+        <button onclick="checkResources()">Check Resources</button>
+    </div>
+
+    <div class="debug-section">
+        <h2>Console Errors</h2>
+        <div id="console-errors"></div>
+    </div>
+
+    <script>
+        // Capture console errors
+        const consoleErrors = [];
+        const originalError = console.error;
+        console.error = function(...args) {
+            consoleErrors.push(args.join(' '));
+            originalError.apply(console, arguments);
+        };
+
+        function updateEnvironmentInfo() {
+            const info = document.getElementById('environment-info');
+            const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+            const userAgent = navigator.userAgent;
+            const viewport = `${window.innerWidth}x${window.innerHeight}`;
+            
+            info.innerHTML = `
+                <pre class="${isProduction ? 'warning' : 'info'}">
+Environment: ${isProduction ? 'PRODUCTION (Vercel)' : 'DEVELOPMENT (Localhost)'}
+Hostname: ${window.location.hostname}
+User Agent: ${userAgent}
+Viewport: ${viewport}
+Device Pixel Ratio: ${window.devicePixelRatio}
+                </pre>
+            `;
+        }
+
+        function testCSSProperties() {
+            const test = document.getElementById('css-properties-test');
+            const rootStyle = getComputedStyle(document.documentElement);
+
+            const properties = [
+                '--primary', '--gold', '--sapphire', '--background', '--foreground',
+                '--card', '--border', '--muted', '--accent'
+            ];
+
+            let results = 'CSS Custom Properties:\n';
+            let hasIssues = false;
+
+            properties.forEach(prop => {
+                const value = rootStyle.getPropertyValue(prop).trim();
+                const status = value ? 'success' : 'error';
+                if (!value) hasIssues = true;
+                results += `${prop}: ${value || 'NOT FOUND'}\n`;
+            });
+
+            // Additional check: test if CSS custom properties work in practice
+            const testDiv = document.createElement('div');
+            testDiv.style.cssText = 'background-color: hsl(var(--primary)); color: hsl(var(--gold)); position: absolute; top: -9999px;';
+            document.body.appendChild(testDiv);
+
+            const computedBg = getComputedStyle(testDiv).backgroundColor;
+            const computedColor = getComputedStyle(testDiv).color;
+
+            document.body.removeChild(testDiv);
+
+            const practicalTest = computedBg !== 'rgba(0, 0, 0, 0)' && computedBg !== 'transparent';
+
+            results += `\nPractical Test:\n`;
+            results += `Background (hsl(var(--primary))): ${computedBg}\n`;
+            results += `Color (hsl(var(--gold))): ${computedColor}\n`;
+            results += `Working in practice: ${practicalTest ? 'YES' : 'NO'}\n`;
+
+            if (practicalTest) hasIssues = false; // Override if practical test passes
+
+            test.innerHTML = `<pre class="${hasIssues ? 'error' : 'success'}">${results}</pre>`;
+        }
+
+        function testTailwindClasses() {
+            const test = document.getElementById('tailwind-test');
+            const testElement = document.createElement('div');
+            testElement.className = 'bg-primary text-white p-4';
+            testElement.style.position = 'absolute';
+            testElement.style.top = '-9999px';
+            document.body.appendChild(testElement);
+            
+            const styles = getComputedStyle(testElement);
+            const bgColor = styles.backgroundColor;
+            const padding = styles.padding;
+            const color = styles.color;
+            
+            document.body.removeChild(testElement);
+            
+            const hasStyles = bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent';
+            
+            test.innerHTML = `
+                <pre class="${hasStyles ? 'success' : 'error'}">
+Tailwind Classes Test:
+Background Color: ${bgColor}
+Text Color: ${color}
+Padding: ${padding}
+Status: ${hasStyles ? 'WORKING' : 'FAILED - Tailwind not loaded properly'}
+                </pre>
+            `;
+        }
+
+        function testFonts() {
+            const test = document.getElementById('font-test');
+            const testElement = document.createElement('div');
+            testElement.style.fontFamily = "'Poppins', sans-serif";
+            testElement.style.position = 'absolute';
+            testElement.style.top = '-9999px';
+            testElement.textContent = 'Test';
+            document.body.appendChild(testElement);
+            
+            const computedFont = getComputedStyle(testElement).fontFamily;
+            document.body.removeChild(testElement);
+            
+            const poppinsLoaded = computedFont.includes('Poppins');
+            
+            test.innerHTML = `
+                <pre class="${poppinsLoaded ? 'success' : 'warning'}">
+Font Family: ${computedFont}
+Poppins Loaded: ${poppinsLoaded ? 'YES' : 'NO - Using fallback'}
+                </pre>
+            `;
+        }
+
+        function testAnimations() {
+            const test = document.getElementById('animation-test');
+            const testElement = document.createElement('div');
+            testElement.className = 'animate-pulse';
+            testElement.style.position = 'absolute';
+            testElement.style.top = '-9999px';
+            document.body.appendChild(testElement);
+            
+            const animation = getComputedStyle(testElement).animation;
+            document.body.removeChild(testElement);
+            
+            const hasAnimation = animation && animation !== 'none';
+            
+            test.innerHTML = `
+                <pre class="${hasAnimation ? 'success' : 'error'}">
+Animation Property: ${animation || 'NONE'}
+Status: ${hasAnimation ? 'WORKING' : 'FAILED - Animations not working'}
+                </pre>
+            `;
+        }
+
+        function measureLayout() {
+            const measurements = document.getElementById('layout-measurements');
+            const body = document.body;
+            const html = document.documentElement;
+            
+            measurements.innerHTML = `
+                <pre class="info">
+Layout Measurements:
+Body Width: ${body.offsetWidth}px
+Body Height: ${body.offsetHeight}px
+HTML Width: ${html.offsetWidth}px
+HTML Height: ${html.offsetHeight}px
+Scroll Width: ${html.scrollWidth}px
+Scroll Height: ${html.scrollHeight}px
+Client Width: ${html.clientWidth}px
+Client Height: ${html.clientHeight}px
+                </pre>
+            `;
+        }
+
+        function checkResources() {
+            const resources = document.getElementById('network-resources');
+            const performanceEntries = performance.getEntriesByType('resource');
+            
+            let cssFiles = [];
+            let jsFiles = [];
+            let fontFiles = [];
+            let failedResources = [];
+            
+            performanceEntries.forEach(entry => {
+                if (entry.name.includes('.css')) {
+                    cssFiles.push({
+                        name: entry.name.split('/').pop(),
+                        size: entry.transferSize,
+                        duration: entry.duration
+                    });
+                } else if (entry.name.includes('.js')) {
+                    jsFiles.push({
+                        name: entry.name.split('/').pop(),
+                        size: entry.transferSize,
+                        duration: entry.duration
+                    });
+                } else if (entry.name.includes('font') || entry.name.includes('.woff')) {
+                    fontFiles.push({
+                        name: entry.name.split('/').pop(),
+                        size: entry.transferSize,
+                        duration: entry.duration
+                    });
+                }
+                
+                if (entry.transferSize === 0 && entry.duration === 0) {
+                    failedResources.push(entry.name);
+                }
+            });
+            
+            resources.innerHTML = `
+                <pre class="info">
+CSS Files Loaded: ${cssFiles.length}
+${cssFiles.map(f => `  ${f.name} (${f.size} bytes, ${f.duration.toFixed(2)}ms)`).join('\n')}
+
+JS Files Loaded: ${jsFiles.length}
+${jsFiles.map(f => `  ${f.name} (${f.size} bytes, ${f.duration.toFixed(2)}ms)`).join('\n')}
+
+Font Files Loaded: ${fontFiles.length}
+${fontFiles.map(f => `  ${f.name} (${f.size} bytes, ${f.duration.toFixed(2)}ms)`).join('\n')}
+
+${failedResources.length > 0 ? `Failed Resources: ${failedResources.length}\n${failedResources.join('\n')}` : 'No failed resources detected'}
+                </pre>
+            `;
+        }
+
+        function updateConsoleErrors() {
+            const errors = document.getElementById('console-errors');
+            if (consoleErrors.length > 0) {
+                errors.innerHTML = `<pre class="error">Console Errors:\n${consoleErrors.join('\n')}</pre>`;
+            } else {
+                errors.innerHTML = `<pre class="success">No console errors detected</pre>`;
+            }
+        }
+
+        // Run all tests
+        function runAllTests() {
+            updateEnvironmentInfo();
+            testCSSProperties();
+            testTailwindClasses();
+            testFonts();
+            testAnimations();
+            updateConsoleErrors();
+        }
+
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', runAllTests);
+
+        // Run tests again after delays to catch late-loading resources
+        setTimeout(runAllTests, 1000);
+        setTimeout(runAllTests, 3000);
+        setTimeout(runAllTests, 5000);
+
+        // Update console errors periodically
+        setInterval(updateConsoleErrors, 1000);
+
+        // Force CSS reload if needed
+        setTimeout(() => {
+            const rootStyle = getComputedStyle(document.documentElement);
+            const primaryVar = rootStyle.getPropertyValue('--primary').trim();
+
+            if (!primaryVar) {
+                console.warn('🔄 CSS custom properties not detected, forcing CSS reload...');
+
+                // Try to find and reload the CSS file
+                const cssLinks = document.querySelectorAll('link[rel="stylesheet"]');
+                cssLinks.forEach(link => {
+                    if (link.href.includes('style.') || link.href.includes('assets/')) {
+                        const newLink = link.cloneNode();
+                        newLink.href = link.href + '?reload=' + Date.now();
+                        link.parentNode.insertBefore(newLink, link.nextSibling);
+                        setTimeout(() => link.remove(), 1000);
+                    }
+                });
+
+                // Run tests again after reload
+                setTimeout(runAllTests, 2000);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

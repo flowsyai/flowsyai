@@ -71,39 +71,17 @@ export const LazyWorkflowCanvas = createLazyComponent(
   'Workflow Canvas'
 );
 
-// Lazy load AI components
-export const LazyAIAgentTester = createLazyComponent(
-  () => import('@/components/AIAgentTester'),
-  'AI Agent Tester'
-);
+// Note: Removed lazy loading for components that are statically imported elsewhere
+// This prevents Vite warnings about dynamic/static import conflicts
 
-export const LazyAIModelConfigWizard = createLazyComponent(
-  () => import('@/components/AIModelConfigWizard'),
-  'AI Model Config Wizard'
-);
-
-export const LazyVoiceCommandsPanel = createLazyComponent(
-  () => import('@/components/VoiceCommandsPanel'),
-  'Voice Commands Panel'
-);
-
-// Lazy load complex forms and modals
-export const LazyCreateAgentModal = createLazyComponent(
-  () => import('@/components/CreateAgentModal'),
-  'Create Agent Modal'
-);
+// Keep only components that are truly lazy-loaded
 
 export const LazyAIAgentModal = createLazyComponent(
   () => import('@/components/AIAgentModal'),
   'AI Agent Modal'
 );
 
-// Lazy load dashboard components
-export const LazyDashboardSkeleton = createLazyComponent(
-  () => import('@/components/DashboardSkeleton'),
-  'Dashboard Skeleton'
-);
-
+// Lazy load dashboard components (only truly lazy ones)
 export const LazyAchievementSystem = createLazyComponent(
   () => import('@/components/AchievementSystem'),
   'Achievement System'
@@ -114,16 +92,8 @@ export const LazyDailyChallenges = createLazyComponent(
   'Daily Challenges'
 );
 
-export const LazyTokenManager = createLazyComponent(
-  () => import('@/components/TokenManager'),
-  'Token Manager'
-);
-
-// Lazy load feedback and onboarding
-export const LazyFeedbackSystem = createLazyComponent(
-  () => import('@/components/FeedbackSystem'),
-  'Feedback System'
-);
+// Note: Removed LazyDashboardSkeleton, LazyTokenManager, LazyFeedbackSystem
+// as they are statically imported elsewhere
 
 export const LazyOnboardingFlow = createLazyComponent(
   () => import('@/components/OnboardingFlow'),
@@ -135,21 +105,14 @@ export const LazyWorkflowOnboarding = createLazyComponent(
   'Workflow Onboarding'
 );
 
-// Lazy load crypto and token components
-export const LazySolanaTokenWidget = createLazyComponent(
-  () => import('@/components/crypto/SolanaTokenWidget'),
-  'Solana Token Widget'
-);
-
-export const LazyTokenBanner = createLazyComponent(
-  () => import('@/components/crypto/TokenBanner'),
-  'Token Banner'
-);
-
+// Lazy load crypto and token components (only truly lazy ones)
 export const LazyInteractiveTokenDemo = createLazyComponent(
   () => import('@/components/crypto/InteractiveTokenDemo'),
   'Interactive Token Demo'
 );
+
+// Note: Removed LazySolanaTokenWidget and LazyTokenBanner
+// as they are statically imported elsewhere
 
 // Lazy load 3D and visualization components (largest contributors to bundle size)
 export const LazyNexusAssistantUI = createLazyComponent(
@@ -244,11 +207,10 @@ export const preloadCriticalComponents = () => {
   preloadComponent(() => import('@/components/workflow/WorkflowCanvas'));
   preloadComponent(() => import('@/components/EnhancedWorkflowBuilder'));
 
-  // Preload token components for landing page
-  preloadComponent(() => import('@/components/crypto/TokenBanner'));
-
   // Preload hero section components
   preloadComponent(() => import('@/components/landing/HeroSection'));
+
+  // Note: Removed TokenBanner preload as it's now statically imported
 };
 
 // Preload components for specific routes

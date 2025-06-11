@@ -1,5 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -32,7 +42,7 @@ const RoadmapPage: React.FC = () => {
       {/* Additional Details Section */}
       <section className="py-20 bg-gradient-to-br from-muted/30 to-background">
         <div className="container mx-auto px-6">
-          <motion.div
+          <MotionDiv
             className="max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -93,7 +103,7 @@ const RoadmapPage: React.FC = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
     </div>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowsyAI Production Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+        .success { border-color: #22c55e; }
+        .error { border-color: #ef4444; }
+        .warning { border-color: #f59e0b; }
+        .log {
+            background: #000;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        button {
+            background: #0099ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0077cc;
+        }
+    </style>
+</head>
+<body>
+    <h1>FlowsyAI Production Debug Tool</h1>
+    
+    <div class="test-section">
+        <h2>Environment Check</h2>
+        <div id="env-check"></div>
+        <button onclick="checkEnvironment()">Check Environment</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Asset Loading Test</h2>
+        <div id="asset-check"></div>
+        <button onclick="checkAssets()">Check Assets</button>
+    </div>
+
+    <div class="test-section">
+        <h2>CSS Variables Test</h2>
+        <div id="css-check"></div>
+        <button onclick="checkCSS()">Check CSS</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Component Loading Test</h2>
+        <div id="component-check"></div>
+        <button onclick="checkComponents()">Check Components</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Console Logs</h2>
+        <div id="console-logs" class="log"></div>
+        <button onclick="clearLogs()">Clear Logs</button>
+    </div>
+
+    <script>
+        // Capture console logs
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        let logs = [];
+
+        function addLog(type, message) {
+            const timestamp = new Date().toLocaleTimeString();
+            logs.push(`[${timestamp}] ${type.toUpperCase()}: ${message}`);
+            updateLogDisplay();
+        }
+
+        console.log = function(...args) {
+            addLog('log', args.join(' '));
+            originalLog.apply(console, args);
+        };
+
+        console.error = function(...args) {
+            addLog('error', args.join(' '));
+            originalError.apply(console, args);
+        };
+
+        console.warn = function(...args) {
+            addLog('warn', args.join(' '));
+            originalWarn.apply(console, args);
+        };
+
+        function updateLogDisplay() {
+            document.getElementById('console-logs').textContent = logs.join('\n');
+        }
+
+        function clearLogs() {
+            logs = [];
+            updateLogDisplay();
+        }
+
+        function checkEnvironment() {
+            const envDiv = document.getElementById('env-check');
+            let status = '✅ Environment Check:\n';
+            
+            status += `- User Agent: ${navigator.userAgent}\n`;
+            status += `- URL: ${window.location.href}\n`;
+            status += `- Protocol: ${window.location.protocol}\n`;
+            status += `- Host: ${window.location.host}\n`;
+            
+            envDiv.innerHTML = `<pre>${status}</pre>`;
+            envDiv.className = 'test-section success';
+        }
+
+        function checkAssets() {
+            const assetDiv = document.getElementById('asset-check');
+            let status = '🔍 Asset Check:\n';
+            
+            const assets = [
+                '/background-animation.mp4',
+                '/videoclip-1.mp4',
+                '/videoclip-2.mp4',
+                '/flowsy-logo.svg',
+                '/flowsy-new-logo.png'
+            ];
+
+            let checkedCount = 0;
+            let results = [];
+
+            assets.forEach(asset => {
+                fetch(asset, { method: 'HEAD' })
+                    .then(response => {
+                        results.push(`${response.ok ? '✅' : '❌'} ${asset} (${response.status})`);
+                        checkedCount++;
+                        if (checkedCount === assets.length) {
+                            status += results.join('\n');
+                            assetDiv.innerHTML = `<pre>${status}</pre>`;
+                            assetDiv.className = 'test-section success';
+                        }
+                    })
+                    .catch(error => {
+                        results.push(`❌ ${asset} (Error: ${error.message})`);
+                        checkedCount++;
+                        if (checkedCount === assets.length) {
+                            status += results.join('\n');
+                            assetDiv.innerHTML = `<pre>${status}</pre>`;
+                            assetDiv.className = 'test-section error';
+                        }
+                    });
+            });
+
+            status += 'Checking assets...\n';
+            assetDiv.innerHTML = `<pre>${status}</pre>`;
+        }
+
+        function checkCSS() {
+            const cssDiv = document.getElementById('css-check');
+            let status = '🎨 CSS Variables Check:\n';
+            
+            const testElement = document.createElement('div');
+            testElement.style.position = 'absolute';
+            testElement.style.top = '-9999px';
+            testElement.className = 'bg-primary text-foreground';
+            document.body.appendChild(testElement);
+
+            const computedStyle = window.getComputedStyle(testElement);
+            const bgColor = computedStyle.backgroundColor;
+            const textColor = computedStyle.color;
+
+            document.body.removeChild(testElement);
+
+            status += `- Background Color: ${bgColor}\n`;
+            status += `- Text Color: ${textColor}\n`;
+            
+            // Check CSS custom properties
+            const rootStyle = getComputedStyle(document.documentElement);
+            const primary = rootStyle.getPropertyValue('--primary');
+            const gold = rootStyle.getPropertyValue('--gold');
+            const sapphire = rootStyle.getPropertyValue('--sapphire');
+
+            status += `- --primary: ${primary}\n`;
+            status += `- --gold: ${gold}\n`;
+            status += `- --sapphire: ${sapphire}\n`;
+
+            const hasStyles = bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent';
+            
+            cssDiv.innerHTML = `<pre>${status}</pre>`;
+            cssDiv.className = hasStyles ? 'test-section success' : 'test-section error';
+        }
+
+        function checkComponents() {
+            const compDiv = document.getElementById('component-check');
+            let status = '⚛️ Component Check:\n';
+            
+            // Check if React is loaded
+            status += `- React: ${typeof window.React !== 'undefined' ? '✅' : '❌'}\n`;
+            
+            // Check if main app container exists
+            const appContainer = document.getElementById('root');
+            status += `- App Container: ${appContainer ? '✅' : '❌'}\n`;
+            
+            if (appContainer) {
+                status += `- Container Children: ${appContainer.children.length}\n`;
+                status += `- Container HTML Length: ${appContainer.innerHTML.length}\n`;
+            }
+
+            // Check for common class names
+            const commonClasses = [
+                'hero-floating-dot',
+                'pipeline-canvas',
+                'luxury-glow',
+                'animate-pulse'
+            ];
+
+            commonClasses.forEach(className => {
+                const elements = document.getElementsByClassName(className);
+                status += `- .${className}: ${elements.length} elements\n`;
+            });
+
+            compDiv.innerHTML = `<pre>${status}</pre>`;
+            compDiv.className = 'test-section success';
+        }
+
+        // Auto-run checks on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                checkEnvironment();
+                checkAssets();
+                checkCSS();
+                checkComponents();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

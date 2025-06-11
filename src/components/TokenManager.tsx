@@ -1,5 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   Coins,
   TrendingUp,
@@ -189,7 +199,7 @@ const TokenManager: React.FC<TokenManagerProps> = ({
           <h3 className="text-xl font-bold text-foreground mb-4">Purchase Tokens</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {tokenPackages.map((pkg, index) => (
-              <motion.div
+              <MotionDiv
                 key={pkg.amount}
                 whileHover={{ y: -2 }}
                 className={`relative p-4 rounded-lg border-2 transition-all duration-300 ${
@@ -223,7 +233,7 @@ const TokenManager: React.FC<TokenManagerProps> = ({
                     Purchase
                   </Button>
                 </div>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </GlassCard>

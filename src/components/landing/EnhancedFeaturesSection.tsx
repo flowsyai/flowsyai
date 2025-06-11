@@ -1,5 +1,17 @@
 import React, { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  useScroll,
+  useTransform,
+} from '@/lib/motion-wrapper';
+
 import AnimatedFeatureCard from './AnimatedFeatureCard';
 import { useScrollProgress } from '@/hooks/useAnimatedScroll';
 import { Bot, BrainCircuit, Layers, Workflow, Zap, Shield, BarChart, Sparkles } from 'lucide-react';
@@ -147,11 +159,11 @@ const EnhancedFeaturesSection: React.FC = () => {
     <section id="features" ref={sectionRef} className="py-20 md:py-32 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 z-0">
-        <motion.div
+        <MotionDiv
           style={{ y: y1 }}
           className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
         />
-        <motion.div
+        <MotionDiv
           style={{ y: y2 }}
           className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent"
         />
@@ -162,7 +174,7 @@ const EnhancedFeaturesSection: React.FC = () => {
         {/* Particle effect */}
         <div className="absolute inset-0">
           {[...Array(20)].map((_, i) => (
-            <motion.div
+            <MotionDiv
               key={i}
               className={`absolute rounded-full ${
                 i % 3 === 0 ? 'bg-primary/10' : i % 3 === 1 ? 'bg-gold/10' : 'bg-platinum/10'
@@ -190,23 +202,23 @@ const EnhancedFeaturesSection: React.FC = () => {
       {/* Section Content */}
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 md:mb-24">
-          <motion.h2
+          <MotionH2
             ref={titleRef}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
             style={{ opacity: opacity }}
           >
             <span className="block">Powerful</span>
             <span className="premium-gradient-text">Integration Features</span>
-          </motion.h2>
+          </MotionH2>
 
-          <motion.p
+          <MotionP
             ref={subtitleRef}
             className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto"
             style={{ opacity: opacity }}
           >
             Our platform offers a comprehensive suite of tools designed to maximize the potential of
             your AI ecosystem.
-          </motion.p>
+          </MotionP>
         </div>
 
         {/* Features Grid */}
@@ -229,7 +241,7 @@ const EnhancedFeaturesSection: React.FC = () => {
 
         {/* Central Integration Visualization */}
         <div className="mt-20 md:mt-32 relative">
-          <motion.div
+          <MotionDiv
             className="max-w-4xl mx-auto bg-card/50 backdrop-blur-sm rounded-xl p-8 border border-border relative overflow-hidden"
             style={{
               scale: useTransform(scrollYProgress, [0.3, 0.6], [0.9, 1]),
@@ -251,7 +263,7 @@ const EnhancedFeaturesSection: React.FC = () => {
               {/* Connected Systems */}
               <div className="flex flex-wrap justify-center gap-6 md:gap-10">
                 {['AI Bot 1', 'AI Bot 2', 'AI Bot 3', 'AI Bot 4'].map((bot, index) => (
-                  <motion.div
+                  <MotionDiv
                     key={index}
                     className="w-16 h-16 rounded-lg bg-card border border-border flex items-center justify-center relative"
                     animate={{
@@ -271,7 +283,7 @@ const EnhancedFeaturesSection: React.FC = () => {
                   >
                     <Bot className="w-8 h-8 text-primary" />
                     <span className="absolute -bottom-6 text-xs text-muted-foreground">{bot}</span>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
               </div>
             </div>
@@ -293,7 +305,7 @@ const EnhancedFeaturesSection: React.FC = () => {
                 strokeLinecap="round"
               />
             </svg>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </section>

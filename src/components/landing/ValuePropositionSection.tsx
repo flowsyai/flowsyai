@@ -1,5 +1,16 @@
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+import { useInView } from 'framer-motion';
+
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Layers, Zap, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -69,40 +80,40 @@ const ValuePropositionSection: React.FC = () => {
       className="py-24 md:py-32 relative overflow-hidden premium-hero-bg"
     >
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
+        <MotionDiv
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
           className="text-center mb-16 md:mb-24"
         >
-          <motion.div variants={itemVariants} className="mb-4">
+          <MotionDiv variants={itemVariants} className="mb-4">
             <span className="px-4 py-1.5 text-xs font-medium rounded-full border border-gold/30 text-gold bg-gold/10 inline-block">
               EXCLUSIVE BENEFITS
             </span>
-          </motion.div>
-          <motion.h2
+          </MotionDiv>
+          <MotionH2
             variants={itemVariants}
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground font-serif"
           >
             Elevate Your <span className="premium-gradient-text">Digital Experience</span>
-          </motion.h2>
-          <motion.p
+          </MotionH2>
+          <MotionP
             variants={itemVariants}
             className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
           >
             Discover how our sophisticated platform transforms your AI capabilities and delivers
             exceptional value through intelligent integration.
-          </motion.p>
-        </motion.div>
+          </MotionP>
+        </MotionDiv>
 
-        <motion.div
+        <MotionDiv
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
           className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16"
         >
           {valueProps.map((prop, index) => (
-            <motion.div
+            <MotionDiv
               key={index}
               variants={itemVariants}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
@@ -123,11 +134,11 @@ const ValuePropositionSection: React.FC = () => {
               </p>
 
               <div className="h-1 w-16 bg-gradient-to-r from-primary to-accent opacity-50 group-hover:w-full transition-all duration-500 ease-in-out"></div>
-            </motion.div>
+            </MotionDiv>
           ))}
-        </motion.div>
+        </MotionDiv>
 
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -144,7 +155,7 @@ const ValuePropositionSection: React.FC = () => {
               </span>
             </Link>
           </Button>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

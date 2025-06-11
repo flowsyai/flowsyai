@@ -42,7 +42,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     hasRedirected.current = false;
   }, [location.pathname]);
 
-  // Show loading spinner while authentication is initializing
+  // For public routes (landing pages), show content immediately without waiting for auth
+  if (!requireAuth) {
+    console.log('✅ PublicRoute: Showing content immediately for landing page');
+    return <>{children}</>;
+  }
+
+  // Show loading spinner while authentication is initializing (only for protected routes)
   if (!isInitialized || isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -72,7 +78,9 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   // Handle reverse protection (redirect authenticated users away from auth pages)
   // Only redirect if we have a confirmed authenticated user and this is a public route
-  if (!requireAuth && isAuthenticated && user && !hasRedirected.current) {
+  // BUT allow authenticated users to view landing pages (/, /simple, /interactive, /minimalist)
+  const isLandingPage = ['/', '/simple', '/interactive', '/minimalist'].includes(location.pathname);
+  if (!requireAuth && isAuthenticated && user && !hasRedirected.current && !isLandingPage) {
     hasRedirected.current = true;
     const redirectUrl = redirectTo || '/account';
     console.log(

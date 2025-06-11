@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  SafeAnimatePresence,
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import {
   ArrowRight,
   ArrowLeft,
@@ -268,7 +279,7 @@ const AIModelConfigWizard: React.FC<AIModelConfigWizardProps> = ({
 
   return (
     <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
@@ -291,8 +302,8 @@ const AIModelConfigWizard: React.FC<AIModelConfigWizardProps> = ({
           </CardHeader>
 
           <CardContent className="max-h-[60vh] overflow-y-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
+            <SafeAnimatePresence mode="wait">
+              <MotionDiv
                 key={currentStep}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -300,8 +311,8 @@ const AIModelConfigWizard: React.FC<AIModelConfigWizardProps> = ({
                 transition={{ duration: 0.3 }}
               >
                 {renderStepContent()}
-              </motion.div>
-            </AnimatePresence>
+              </MotionDiv>
+            </SafeAnimatePresence>
 
             {/* Navigation */}
             <div className="flex justify-between items-center mt-8 pt-6 border-t">
@@ -346,7 +357,7 @@ const AIModelConfigWizard: React.FC<AIModelConfigWizardProps> = ({
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 };
@@ -375,7 +386,7 @@ interface ProviderStepProps {
 const ProviderStep: React.FC<ProviderStepProps> = ({ providers, selectedProvider, onSelect }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
     {providers.map(provider => (
-      <motion.div key={provider.id} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+      <MotionDiv key={provider.id} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
         <Card
           className={`cursor-pointer transition-all duration-200 ${
             selectedProvider === provider.id ? 'ring-2 ring-primary shadow-lg' : 'hover:shadow-md'
@@ -406,7 +417,7 @@ const ProviderStep: React.FC<ProviderStepProps> = ({ providers, selectedProvider
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </MotionDiv>
     ))}
   </div>
 );

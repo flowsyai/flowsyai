@@ -1,5 +1,15 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -207,7 +217,7 @@ const Tutorials = () => {
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -234,7 +244,7 @@ const Tutorials = () => {
                 Take Assessment
               </Button>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
 
@@ -250,7 +260,7 @@ const Tutorials = () => {
 
           <div className="space-y-12">
             {tutorialCategories.map((category, categoryIndex) => (
-              <motion.div
+              <MotionDiv
                 key={category.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -315,7 +325,7 @@ const Tutorials = () => {
                     })}
                   </div>
                 </GlassCard>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </div>
@@ -324,7 +334,7 @@ const Tutorials = () => {
       {/* Progress Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -345,7 +355,7 @@ const Tutorials = () => {
                 View Certificates
               </Button>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
     </div>

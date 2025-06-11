@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { ArrowLeft, Mail, CheckCircle, Star, Rocket, Zap, Gift, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -143,7 +153,7 @@ const WaitlistPage: React.FC = () => {
       <div className="container mx-auto px-6 py-20 relative z-10">
         <div className="max-w-4xl mx-auto">
           {!isSubmitted ? (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -151,14 +161,14 @@ const WaitlistPage: React.FC = () => {
             >
               {/* Hero Section */}
               <div className="mb-12">
-                <motion.div
+                <MotionDiv
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-primary to-gold rounded-full flex items-center justify-center"
                 >
                   <Rocket className="w-12 h-12 text-white" />
-                </motion.div>
+                </MotionDiv>
 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                   <span className="block text-foreground">Be the First to Experience</span>
@@ -175,7 +185,7 @@ const WaitlistPage: React.FC = () => {
 
               {/* Benefits Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
@@ -186,9 +196,9 @@ const WaitlistPage: React.FC = () => {
                   <p className="text-sm text-muted-foreground">
                     Be among the first 1000 users to access the platform
                   </p>
-                </motion.div>
+                </MotionDiv>
 
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
@@ -199,9 +209,9 @@ const WaitlistPage: React.FC = () => {
                   <p className="text-sm text-muted-foreground">
                     Free FlowsyAI tokens and premium features for early adopters
                   </p>
-                </motion.div>
+                </MotionDiv>
 
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
@@ -212,11 +222,11 @@ const WaitlistPage: React.FC = () => {
                   <p className="text-sm text-muted-foreground">
                     Direct access to our team and priority customer support
                   </p>
-                </motion.div>
+                </MotionDiv>
               </div>
 
               {/* Email Form */}
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
@@ -240,14 +250,14 @@ const WaitlistPage: React.FC = () => {
 
                   {/* Error Message */}
                   {error && (
-                    <motion.div
+                    <MotionDiv
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="flex items-center gap-2 text-red-500 text-sm bg-red-50 dark:bg-red-900/20 p-3 rounded-lg"
                     >
                       <AlertCircle className="w-4 h-4 flex-shrink-0" />
                       <span>{error}</span>
-                    </motion.div>
+                    </MotionDiv>
                   )}
 
                   <Button
@@ -257,7 +267,7 @@ const WaitlistPage: React.FC = () => {
                     className="w-full bg-gradient-to-r from-primary to-gold text-white hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 h-12 text-lg font-semibold disabled:opacity-50"
                   >
                     {isLoading ? (
-                      <motion.div
+                      <MotionDiv
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                         className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
@@ -274,10 +284,10 @@ const WaitlistPage: React.FC = () => {
                 <p className="text-xs text-muted-foreground mt-4">
                   We respect your privacy. No spam, unsubscribe at any time.
                 </p>
-              </motion.div>
+              </MotionDiv>
 
               {/* Social Proof */}
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
@@ -285,7 +295,7 @@ const WaitlistPage: React.FC = () => {
               >
                 <div className="flex items-center justify-center gap-8 mb-4">
                   <div className="text-center">
-                    <motion.div
+                    <MotionDiv
                       className="text-3xl font-bold text-primary"
                       key={counters.waiting}
                       initial={{ scale: 1.5, opacity: 0, y: -20 }}
@@ -305,17 +315,17 @@ const WaitlistPage: React.FC = () => {
                       }}
                     >
                       {counters.waiting.toLocaleString()}
-                    </motion.div>
-                    <motion.div
+                    </MotionDiv>
+                    <MotionDiv
                       className="text-sm text-muted-foreground"
                       animate={{ opacity: [0.7, 1, 0.7] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
                       People Waiting
-                    </motion.div>
+                    </MotionDiv>
                   </div>
                   <div className="text-center">
-                    <motion.div
+                    <MotionDiv
                       className="text-3xl font-bold text-gold"
                       key={counters.today}
                       initial={{ scale: 1.5, opacity: 0, y: -20 }}
@@ -336,17 +346,17 @@ const WaitlistPage: React.FC = () => {
                       }}
                     >
                       +{counters.today}
-                    </motion.div>
-                    <motion.div
+                    </MotionDiv>
+                    <MotionDiv
                       className="text-sm text-muted-foreground"
                       animate={{ opacity: [0.7, 1, 0.7] }}
                       transition={{ duration: 2.5, repeat: Infinity }}
                     >
                       Joined Today
-                    </motion.div>
+                    </MotionDiv>
                   </div>
                   <div className="text-center">
-                    <motion.div
+                    <MotionDiv
                       className="text-3xl font-bold text-emerald-500"
                       key={counters.satisfaction}
                       initial={{ scale: 1.5, opacity: 0, y: -20 }}
@@ -367,23 +377,23 @@ const WaitlistPage: React.FC = () => {
                       }}
                     >
                       {counters.satisfaction}%
-                    </motion.div>
-                    <motion.div
+                    </MotionDiv>
+                    <MotionDiv
                       className="text-sm text-muted-foreground"
                       animate={{ opacity: [0.7, 1, 0.7] }}
                       transition={{ duration: 3, repeat: Infinity }}
                     >
                       Satisfaction Rate
-                    </motion.div>
+                    </MotionDiv>
                   </div>
                 </div>
                 <p className="text-xs text-muted-foreground">
                   Join hundreds of professionals already waiting for the future of AI automation
                 </p>
-              </motion.div>
+              </MotionDiv>
 
               {/* Timeline */}
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9 }}
@@ -407,24 +417,24 @@ const WaitlistPage: React.FC = () => {
                     <div className="text-muted-foreground">Public Launch</div>
                   </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           ) : (
             // Success State
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <motion.div
+              <MotionDiv
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
                 className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-emerald-500 to-green-600 rounded-full flex items-center justify-center"
               >
                 <CheckCircle className="w-12 h-12 text-white" />
-              </motion.div>
+              </MotionDiv>
 
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="block text-foreground">You're In!</span>
@@ -452,7 +462,7 @@ const WaitlistPage: React.FC = () => {
                   </Link>
                 </Button>
               </div>
-            </motion.div>
+            </MotionDiv>
           )}
         </div>
       </div>

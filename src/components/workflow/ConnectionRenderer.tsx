@@ -1,5 +1,19 @@
 import { memo, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+  MotionPath,
+  MotionLinearGradient,
+  MotionCircle,
+  MotionSvg,
+} from '@/lib/motion-wrapper';
+
 import { type WorkflowNode, type Connection } from '@/types/workflow';
 import { type ConnectionRendererProps } from './types';
 
@@ -53,7 +67,7 @@ const SingleConnectionLine = memo(
     }, [fromAgent, toAgent, flowDirection, isRunning, activeNodeId, agents]);
 
     return (
-      <motion.svg
+      <MotionSvg
         key={`conn-${conn.id}`}
         className="absolute inset-0 pointer-events-none"
         initial={{ opacity: 0 }}
@@ -61,12 +75,12 @@ const SingleConnectionLine = memo(
         transition={{ duration: 0.5 }}
       >
         <defs>
-          <motion.linearGradient id={`gradient-${conn.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
+          <MotionLinearGradient id={`gradient-${conn.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor={isActive ? '#9b87f5' : 'currentColor'} />
             <stop offset="100%" stopColor={isActive ? '#7E69AB' : 'currentColor'} />
-          </motion.linearGradient>
+          </MotionLinearGradient>
         </defs>
-        <motion.path
+        <MotionPath
           className={`connection-line ${isActive ? 'stroke-[3px] pulse' : ''}`}
           d={`M${from.x},${from.y} Q${midX},${midY} ${to.x},${to.y}`}
           fill="none"
@@ -80,7 +94,7 @@ const SingleConnectionLine = memo(
           markerEnd="url(#arrowhead)" // Assuming #arrowhead is defined globally by ReactFlow or parent
         />
         {isRunning && isActive && (
-          <motion.circle
+          <MotionCircle
             cx={0}
             cy={0}
             r={4}
@@ -94,7 +108,7 @@ const SingleConnectionLine = memo(
             style={{ offsetPath: `path('M${from.x},${from.y} Q${midX},${midY} ${to.x},${to.y}')` }}
           />
         )}
-      </motion.svg>
+      </MotionSvg>
     );
   }
 );

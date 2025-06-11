@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import {
+  MotionDiv,
+  MotionSection,
+  MotionH1,
+  MotionH2,
+  MotionP,
+  MotionButton,
+  MotionLi,
+  MotionTr,
+} from '@/lib/motion-wrapper';
+
 import { ArrowLeft, Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -84,7 +94,7 @@ const WaitlistUnsubscribe: React.FC = () => {
       <div className="container mx-auto px-6 py-20 relative z-10">
         <div className="max-w-2xl mx-auto">
           {!isUnsubscribed ? (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -92,14 +102,14 @@ const WaitlistUnsubscribe: React.FC = () => {
             >
               {/* Hero Section */}
               <div className="mb-12">
-                <motion.div
+                <MotionDiv
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center"
                 >
                   <Mail className="w-12 h-12 text-white" />
-                </motion.div>
+                </MotionDiv>
 
                 <h1 className="text-4xl md:text-5xl font-bold mb-6">
                   <span className="block text-foreground">Unsubscribe from</span>
@@ -115,7 +125,7 @@ const WaitlistUnsubscribe: React.FC = () => {
               </div>
 
               {/* Unsubscribe Form */}
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
@@ -139,14 +149,14 @@ const WaitlistUnsubscribe: React.FC = () => {
 
                   {/* Error Message */}
                   {error && (
-                    <motion.div
+                    <MotionDiv
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="flex items-center gap-2 text-red-500 text-sm bg-red-50 dark:bg-red-900/20 p-3 rounded-lg"
                     >
                       <AlertCircle className="w-4 h-4 flex-shrink-0" />
                       <span>{error}</span>
-                    </motion.div>
+                    </MotionDiv>
                   )}
 
                   <Button
@@ -156,7 +166,7 @@ const WaitlistUnsubscribe: React.FC = () => {
                     className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:shadow-xl hover:shadow-yellow-500/30 transition-all duration-300 h-12 text-lg font-semibold disabled:opacity-50"
                   >
                     {isLoading ? (
-                      <motion.div
+                      <MotionDiv
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                         className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
@@ -173,10 +183,10 @@ const WaitlistUnsubscribe: React.FC = () => {
                 <p className="text-xs text-muted-foreground mt-4">
                   This action will remove your email from our waitlist. You can rejoin at any time.
                 </p>
-              </motion.div>
+              </MotionDiv>
 
               {/* Information */}
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
@@ -203,24 +213,24 @@ const WaitlistUnsubscribe: React.FC = () => {
                     </span>
                   </li>
                 </ul>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           ) : (
             /* Success State */
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <motion.div
+              <MotionDiv
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center"
               >
                 <CheckCircle className="w-12 h-12 text-white" />
-              </motion.div>
+              </MotionDiv>
 
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="block text-foreground">Successfully</span>
@@ -252,7 +262,7 @@ const WaitlistUnsubscribe: React.FC = () => {
                   </Link>
                 </Button>
               </div>
-            </motion.div>
+            </MotionDiv>
           )}
         </div>
       </div>
